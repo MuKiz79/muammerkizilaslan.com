@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M. Kizilaslan | Executive Signature Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #1d4ed8;
+            --bg: #f5f5f4;
+            --surface: #ffffff;
+            --text-main: #1c1917;
+            --text-muted: #78716c;
+            /* Apple-inspired System Font Stack */
+            --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            --font-serif: "Playfair Display", serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.45;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .serif { font-family: var(--font-serif); }
+
+        /* Typography Refinements for that "Apple" feel */
+        h1, h2, h3, h4 {
+            letter-spacing: -0.02em;
+        }
+
+        .tracking-executive {
+            letter-spacing: 0.4em;
+        }
+
+        .grain {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 380px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card {
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .project-card:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.01) translateY(-5px);
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.06);
+        }
+
+        .cursor-glow {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(29, 78, 216, 0.03) 0%, rgba(29, 78, 216, 0) 70%);
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #e7e5e4; border-radius: 10px; }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-100 selection:text-blue-900">
+
+    <div class="grain"></div>
+    <div class="cursor-glow" id="cursor"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-[100] px-8 md:px-20 py-10 transition-all duration-1000" id="navbar">
+        <div class="max-w-[2000px] mx-auto flex justify-between items-center">
+            <div class="flex flex-col group cursor-pointer">
+                <span class="text-[9px] tracking-executive uppercase text-blue-700 font-black mb-1 transition-all group-hover:tracking-[0.5em]">Signature Portfolio</span>
+                <span class="text-2xl font-serif italic tracking-tighter">Muammer Kizilaslan.</span>
+            </div>
+            <div class="hidden lg:flex gap-16 text-[10px] font-black tracking-executive uppercase text-stone-400 items-center">
+                <a href="#philosophy" class="hover:text-stone-900 transition-colors">Philosophie</a>
+                <a href="#projects" class="hover:text-stone-900 transition-colors">Dossier</a>
+                <a href="#impact" class="hover:text-stone-900 transition-colors">Evidenz</a>
+                <a href="#contact" class="px-10 py-3 bg-stone-900 text-white rounded-full hover:bg-blue-700 transition-all shadow-xl shadow-stone-900/10">Connect</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Section 1: Hero -->
+        <section class="min-h-screen flex items-center px-8 md:px-20 relative pt-20">
+            <div class="max-w-[2000px] mx-auto w-full grid lg:grid-cols-12 gap-16 items-center">
+                <div class="lg:col-span-11 xl:col-span-10 z-10">
+                    <div class="mb-16 overflow-hidden">
+                        <span class="inline-block text-[11px] tracking-executive uppercase text-stone-400 font-bold border-l-2 border-blue-700 pl-8 reveal active">
+                            Architekt der Unsichtbarkeit
+                        </span>
+                    </div>
+                    <h1 class="text-[13vw] lg:text-[11vw] font-serif italic leading-[0.8] tracking-tighter mb-16 reveal active text-stone-900">
+                        Stille <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-stone-900 via-stone-400 to-stone-100 ml-[10vw]">Skalieren.</span>
+                    </h1>
+                    <div class="max-w-4xl mt-24 reveal active" style="transition-delay: 0.5s">
+                        <p class="text-3xl md:text-5xl text-stone-400 leading-[1.05] font-light italic tracking-tight">
+                            „Technologie erreicht ihre Vollendung, wenn sie lautlos wird. Mein Ziel als CIO ist die Befreiung des <span class="text-stone-900 border-b-2 border-blue-700/30 pb-1">analogen Moments</span> von der Last des Digitalen."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Framework -->
+        <section id="philosophy" class="py-72 px-8 md:px-20 bg-white relative">
+            <div class="max-w-[2000px] mx-auto grid lg:grid-cols-2 gap-40 items-start">
+                <div class="reveal">
+                    <h2 class="text-[10px] font-black tracking-executive uppercase text-blue-700 mb-20 flex items-center gap-8">
+                        <span class="w-20 h-[1px] bg-blue-700"></span> Die Methode
+                    </h2>
+                    <h3 class="text-6xl md:text-8xl font-serif italic mb-16 tracking-tighter leading-[0.9] text-stone-900">
+                        Das Signal <br> im <span class="text-stone-200">Rauschen.</span>
+                    </h3>
+                    <div class="space-y-12 text-2xl text-stone-500 font-light leading-relaxed max-w-xl italic">
+                        <p>
+                            Management bedeutet für mich die radikale Priorisierung der Aufmerksamkeit. Komplexe IT-Infrastrukturen müssen sich wie Sauerstoff verhalten: präsent, aber unbemerkt.
+                        </p>
+                        <p>
+                            Ich nenne dies <strong>„Operational Silence"</strong>. Eine IT, die so präzise läuft, dass der Fokus wieder auf der Strategie liegt.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-stone-100 border border-stone-100 rounded-[2.5rem] overflow-hidden shadow-[0_60px_100px_-30px_rgba(0,0,0,0.05)] reveal" style="transition-delay: 0.4s">
+                    <div class="bg-white p-16 hover:bg-stone-50 transition-colors group">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-10 text-blue-700 font-serif italic text-2xl group-hover:bg-blue-700 group-hover:text-white transition-all">01</div>
+                        <h4 class="text-xs font-black uppercase tracking-executive mb-6 text-stone-900">Complexity Debt</h4>
+                        <p class="text-sm text-stone-400 leading-relaxed font-light">Konsequenter Abbau technischer Verschuldung zur Rückgewinnung von Agilität.</p>
+                    </div>
+                    <div class="bg-white p-16 hover:bg-stone-50 transition-colors border-l border-stone-100 group">
+                        <div class="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center mb-10 text-blue-700 font-serif italic text-2xl group-hover:bg-blue-700 group-hover:text-white transition-all">02</div>
+                        <h4 class="text-xs font-black uppercase tracking-executive mb-6 text-stone-900">Human Efficiency</h4>
+                        <p class="text-sm text-stone-400 leading-relaxed font-light">Technik, die kognitive Last reduziert, statt sie durch Überfrachtung zu erhöhen.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Project Dossier (inimma) -->
+        <section id="projects" class="py-72 px-8 md:px-20 relative">
+            <div class="max-w-[2000px] mx-auto">
+                <div class="mb-48 reveal flex flex-col lg:flex-row lg:items-end justify-between gap-20">
+                    <div class="relative">
+                        <h2 class="text-[10px] font-black tracking-executive uppercase text-blue-700 mb-12 italic">Strategic Evidence</h2>
+                        <h3 class="text-8xl md:text-[11rem] font-black tracking-tighter leading-none text-stone-900">Dossier.</h3>
+                    </div>
+                    <p class="max-w-md text-stone-400 text-xl font-light italic leading-snug">
+                        Eine Auswahl von Transformationen, die IT von einem Kostenfaktor in einen strategischen Marktvorteil verwandelt haben.
+                    </p>
+                </div>
+
+                <div class="project-card relative p-12 md:p-24 rounded-[3.5rem] border border-white reveal overflow-hidden">
+                    <div class="grid lg:grid-cols-2 gap-32 items-center">
+                        <div>
+                            <div class="flex items-center gap-10 mb-20">
+                                <div class="w-20 h-20 bg-stone-900 rounded-[1.8rem] flex items-center justify-center font-black italic text-4xl text-white shadow-2xl">I</div>
+                                <div>
+                                    <span class="text-[11px] font-black tracking-executive uppercase text-blue-700">Flagship Case Study</span>
+                                    <p class="text-xs text-stone-400 mt-1 uppercase font-bold">Infrastruktur & Moderne</p>
+                                </div>
+                            </div>
+                            <h4 class="text-8xl md:text-[10rem] font-serif italic mb-14 tracking-tighter leading-none text-stone-900">inimma.</h4>
+                            <p class="text-3xl text-stone-400 font-light italic leading-relaxed mb-24 max-w-xl">
+                                „Die vollständige Entkopplung und Neugestaltung des digitalen Nervensystems eines globalen Konzerns. Flüssig, skalierbar, resilient."
+                            </p>
+
+                            <div class="grid grid-cols-2 gap-16 py-16 border-y border-stone-100">
+                                <div>
+                                    <span class="text-[9px] uppercase tracking-executive font-black text-stone-300 mb-4 block text-xs">EBITDA Impact</span>
+                                    <span class="text-6xl font-black text-blue-700 mb-2 tracking-tighter leading-none">60%</span>
+                                    <p class="text-[11px] font-bold text-stone-400 uppercase mt-2">TCO Optimierung</p>
+                                </div>
+                                <div>
+                                    <span class="text-[9px] uppercase tracking-executive font-black text-stone-300 mb-4 block text-xs">Technologie</span>
+                                    <span class="text-6xl font-black text-stone-900 mb-2 tracking-tighter leading-none">Cloud</span>
+                                    <p class="text-[11px] font-bold text-stone-400 uppercase mt-2">Liquid Arch. Model</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative bg-[#0a0a0a] rounded-[3rem] overflow-hidden h-[700px] shadow-3xl">
+                            <div class="absolute inset-0 p-16 flex flex-col justify-between text-white/40">
+                                <div class="flex justify-between items-start">
+                                    <span class="text-[10px] font-mono tracking-executive uppercase">Status: Live</span>
+                                    <span class="text-[10px] font-mono tracking-executive uppercase italic">Global Nodes: 45</span>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="h-[1px] w-full bg-white/10 relative overflow-hidden">
+                                        <div class="absolute inset-0 bg-blue-500 w-2/3 animate-pulse"></div>
+                                    </div>
+                                    <p class="text-[9px] font-mono uppercase tracking-executive text-center">Architecture Visualization v4.2</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Results -->
+        <section id="impact" class="py-72 px-8 md:px-20 bg-stone-900 text-white rounded-[5rem] md:rounded-[12rem] mx-4 relative overflow-hidden shadow-2xl">
+            <div class="max-w-[2000px] mx-auto relative z-10">
+                <div class="grid lg:grid-cols-12 gap-40 items-center mb-60">
+                    <div class="lg:col-span-5 reveal">
+                        <h2 class="text-[10px] font-black tracking-executive uppercase text-blue-400 mb-16 italic">Quantitative Analysis</h2>
+                        <h3 class="text-8xl md:text-[11rem] font-black tracking-tighter leading-[0.85] mb-16">The <br> <span class="italic font-serif font-medium text-blue-400 underline decoration-white/10 decoration-8 underline-offset-8">Metric.</span></h3>
+                        <p class="text-3xl text-white/40 font-light leading-tight max-w-md italic mb-16">
+                            IT-Exzellenz ist keine Meinung. Sie ist das mathematische Produkt aus Effizienz und Agilität.
+                        </p>
+                        <button class="px-14 py-6 bg-blue-600 text-white rounded-full text-[11px] font-black tracking-executive uppercase hover:bg-white hover:text-black transition-all shadow-2xl shadow-blue-600/20">Executive Summary PDF</button>
+                    </div>
+                    <div class="lg:col-span-7 reveal" style="transition-delay: 0.3s">
+                        <div class="bg-white/5 p-16 rounded-[3.5rem] border border-white/5 backdrop-blur-3xl shadow-2xl">
+                            <div class="chart-container">
+                                <canvas id="impactChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-32 border-t border-white/5 pt-32 reveal">
+                    <div class="group border-l-2 border-transparent hover:border-blue-400 pl-12 transition-all duration-1000">
+                        <p class="text-9xl font-black tracking-tighter mb-6 text-white group-hover:text-blue-400 transition-all leading-none">50M&euro;+</p>
+                        <p class="text-sm font-black uppercase tracking-executive text-blue-400 mb-4 italic">P&amp;L Management</p>
+                        <p class="text-[11px] text-white/30 font-bold uppercase tracking-executive leading-relaxed">Global IT Budget Responsibility</p>
+                    </div>
+                    <div class="group border-l-2 border-transparent hover:border-blue-400 pl-12 transition-all duration-1000">
+                        <p class="text-9xl font-black tracking-tighter mb-6 text-white group-hover:text-blue-400 transition-all leading-none">100%</p>
+                        <p class="text-sm font-black uppercase tracking-executive text-blue-400 mb-4 italic">Resilience</p>
+                        <p class="text-[11px] text-white/30 font-bold uppercase tracking-executive leading-relaxed">Zero-Downtime Infrastructure</p>
+                    </div>
+                    <div class="group border-l-2 border-transparent hover:border-blue-400 pl-12 transition-all duration-1000">
+                        <p class="text-9xl font-black tracking-tighter mb-6 text-white group-hover:text-blue-400 transition-all leading-none">-45%</p>
+                        <p class="text-sm font-black uppercase tracking-executive text-blue-400 mb-4 italic">Complexity</p>
+                        <p class="text-[11px] text-white/30 font-bold uppercase tracking-executive leading-relaxed">Reduction of Technical Debt</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute -bottom-40 -right-40 text-[50vw] font-black text-white/[0.015] select-none pointer-events-none tracking-tighter italic uppercase">ROI</div>
+        </section>
+
+        <!-- Section 5: Signature -->
+        <section id="contact" class="py-80 px-8 md:px-20 text-center bg-white relative">
+            <div class="max-w-6xl mx-auto reveal">
+                <span class="text-[11px] tracking-executive uppercase text-blue-700 font-black block mb-24 italic">A Dialogue</span>
+                <h2 class="text-7xl md:text-[9vw] font-serif italic mb-28 tracking-tighter leading-none text-stone-900">
+                    „Lassen Sie uns über <br> <span class="text-blue-700">Strategie</span> sprechen."
+                </h2>
+
+                <div class="flex flex-col lg:flex-row justify-center items-center gap-16 mt-20">
+                    <a href="mailto:contact@mustermann.de" class="project-card px-16 py-12 border border-stone-100 rounded-[2rem] flex items-center gap-10 group shadow-sm">
+                        <div class="w-16 h-16 bg-stone-900 rounded-2xl flex items-center justify-center shadow-xl group-hover:bg-blue-700 transition-all">
+                            <span class="text-2xl">&#x1F4E7;</span>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-[10px] font-black uppercase tracking-executive text-stone-300 mb-2">Direct Channel</p>
+                            <p class="text-2xl font-bold text-stone-900 tracking-tight">m.kizilaslan@executive.de</p>
+                        </div>
+                    </a>
+                    <a href="#" class="project-card px-16 py-12 border border-stone-100 rounded-[2rem] flex items-center gap-10 group shadow-sm">
+                        <div class="w-16 h-16 bg-stone-900 rounded-2xl flex items-center justify-center shadow-xl group-hover:bg-blue-700 transition-all">
+                            <span class="text-2xl">&#x1F517;</span>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-[10px] font-black uppercase tracking-executive text-stone-300 mb-2">Professional Network</p>
+                            <p class="text-2xl font-bold text-stone-900 tracking-tight">LinkedIn Profile</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-24 border-t border-stone-100 px-8 md:px-20 flex flex-col md:flex-row justify-between items-center text-stone-300 text-[10px] font-black tracking-executive uppercase gap-12">
+            <div class="flex items-center gap-8">
+                <div class="w-16 h-[1px] bg-stone-200"></div>
+                <p>M. KIZILASLAN // CIO SIGNATURE // 2026</p>
+            </div>
+            <div class="flex gap-20 font-bold tracking-executive text-[11px] text-stone-400">
+                <a href="#" class="hover:text-stone-900 transition-all">Impressum</a>
+                <a href="#" class="hover:text-stone-900 transition-all">Datenschutz</a>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            const cursor = document.getElementById('cursor');
+            window.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+
+            const ctx = document.getElementById('impactChart').getContext('2d');
+            const grad = ctx.createLinearGradient(0, 0, 0, 350);
+            grad.addColorStop(0, 'rgba(30, 64, 175, 0.5)');
+            grad.addColorStop(1, 'rgba(30, 64, 175, 0)');
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Start', 'Transition', 'Scale', 'Optimized', 'Strategic Peak'],
+                    datasets: [{
+                        data: [25, 45, 60, 85, 98],
+                        borderColor: '#1d4ed8',
+                        borderWidth: 6,
+                        fill: true,
+                        backgroundColor: grad,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 10,
+                        pointHoverBackgroundColor: '#ffffff',
+                        pointHoverBorderColor: '#1d4ed8',
+                        pointHoverBorderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { display: true, grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.3)', font: { size: 10, family: 'Inter', weight: '800' }, padding: 20 } },
+                        y: { display: false }
+                    }
+                }
+            });
+
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 80) {
+                    nav.classList.add('bg-[#f5f5f4]/90', 'backdrop-blur-2xl', 'py-8', 'border-b', 'border-stone-200', 'shadow-sm');
+                } else {
+                    nav.classList.remove('bg-[#f5f5f4]/90', 'backdrop-blur-2xl', 'py-8', 'border-b', 'border-stone-200', 'shadow-sm');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
