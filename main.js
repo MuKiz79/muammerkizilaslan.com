@@ -20,11 +20,12 @@ function toggleStation(id) {
         icon.classList.add('rotate-90');
         card.classList.add('active-station');
 
-        // Auf Mobile: zur angeklickten Card scrollen (nicht zum Panel)
+        // Auf Mobile: zum Detail-Panel scrollen mit Offset
         if (window.innerWidth < 768) {
             setTimeout(function() {
-                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
+                var panelTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                window.scrollTo({ top: panelTop, behavior: 'smooth' });
+            }, 150);
         }
     }
 }
