@@ -463,6 +463,7 @@
     #contact {
         text-align: left !important;
         padding: 48px var(--pad) 40px !important;
+        background: var(--bg) !important;
     }
     #contact > div > span:first-child {
         margin-bottom: 8px !important;
@@ -482,9 +483,9 @@
         gap: 16px !important;
         margin-top: 0 !important;
     }
-    /* Cards — linksbündig, keine Glassmorphism */
+    /* Cards — linksbündig, flach, volle Breite */
     #contact .project-card {
-        padding: 0 !important;
+        padding: 16px 0 !important;
         border-radius: 0 !important;
         gap: 14px !important;
         border: none !important;
@@ -493,11 +494,11 @@
         background: transparent !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
-        padding-bottom: 16px !important;
+        width: 100% !important;
+        justify-content: flex-start !important;
     }
     #contact .project-card:last-child {
         border-bottom: none !important;
-        padding-bottom: 0 !important;
     }
     #contact .project-card:hover {
         transform: none !important;
