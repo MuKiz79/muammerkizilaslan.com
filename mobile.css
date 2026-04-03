@@ -477,7 +477,9 @@
     }
     #contact > div > div.flex {
         flex-direction: column !important;
-        gap: 10px !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        gap: 16px !important;
         margin-top: 0 !important;
     }
     /* Cards — linksbündig, keine Glassmorphism */
