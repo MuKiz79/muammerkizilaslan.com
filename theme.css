@@ -1,0 +1,325 @@
+/* ══════════════════════════════════════════
+   ProfilWebseite — Theme & Custom Styles
+   ══════════════════════════════════════════ */
+
+/* ── Design Tokens ── */
+:root {
+    --accent: #1d4ed8;
+    --bg: #f5f5f4;
+    --surface: #ffffff;
+    --text-main: #1c1917;
+    --text-muted: #78716c;
+    --font-sans: "SF Pro Display", "SF Pro Text", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Base ── */
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.47059;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+}
+
+/* ── Typography Utilities ── */
+.tracking-executive {
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.tracking-editorial {
+    letter-spacing: 0.5em;
+}
+
+/* ── Reveal Animations ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.6s var(--ease-out-expo),
+                transform 1.6s var(--ease-out-expo);
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stagger-1 { transition-delay: 0.15s; }
+.stagger-2 { transition-delay: 0.3s; }
+.stagger-3 { transition-delay: 0.45s; }
+.stagger-4 { transition-delay: 0.6s; }
+.stagger-5 { transition-delay: 0.75s; }
+.stagger-6 { transition-delay: 0.9s; }
+
+/* ── Progress Bar ── */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--accent);
+    z-index: 200;
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: #e7e5e4; }
+
+/* ── Scroll Pulse ── */
+@keyframes scroll-pulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+}
+.scroll-line { animation: scroll-pulse 2s ease-in-out infinite; }
+
+/* ── Shadow Utility ── */
+.shadow-3xl {
+    box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Mobile Menu ── */
+#mobile-menu.open { opacity: 1; pointer-events: auto; }
+#mobile-menu-btn.open #bar1 { transform: rotate(45deg) translate(2px, 2px); }
+#mobile-menu-btn.open #bar2 { transform: rotate(-45deg) translate(2px, -2px); }
+
+/* ── Project Cards ── */
+.project-card {
+    transition: all 0.8s var(--ease-out-expo);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.project-card:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: scale(1.005) translateY(-8px);
+    box-shadow: 0 50px 100px -30px rgba(0, 0, 0, 0.06);
+    border-color: rgba(29, 78, 216, 0.1);
+}
+
+/* ── Skill Tags ── */
+.skill-tag {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.5s ease;
+}
+.skill-tag:hover {
+    border-color: rgba(37, 99, 235, 0.4);
+    color: #60a5fa;
+}
+
+/* ── Expertise Proof Points ── */
+.proof-point {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    opacity: 0.4;
+    transition: all 0.5s ease;
+}
+.proof-point:hover {
+    opacity: 1;
+}
+.proof-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #3b82f6;
+    flex-shrink: 0;
+}
+.expertise-card {
+    transition: all 0.6s var(--ease-out-expo);
+}
+.expertise-card:hover .expertise-number {
+    opacity: 1;
+}
+.expertise-card:hover .proof-point {
+    opacity: 0.7;
+}
+.expertise-card:hover .proof-point:hover {
+    opacity: 1;
+}
+
+/* ── Career Timeline ── */
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #1d4ed8;
+    background: var(--bg);
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+}
+.timeline-dot.active {
+    background: #1d4ed8;
+    box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.15);
+}
+
+/* ── Language Bars ── */
+.lang-bar {
+    height: 3px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, #1d4ed8, #60a5fa);
+    transition: width 1.5s var(--ease-out-expo);
+}
+
+/* ── Detail Panels ── */
+.detail-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.6s var(--ease-out-expo), opacity 0.4s ease;
+    opacity: 0;
+}
+.detail-panel.active {
+    max-height: 500px;
+    opacity: 1;
+}
+.expand-icon {
+    font-size: 14px;
+    line-height: 1;
+    transition: transform 0.3s ease;
+}
+.rotate-90 {
+    transform: rotate(90deg);
+}
+.station-card {
+    transition: all 0.5s ease;
+}
+.station-card.active-station {
+    background: #f8fafc;
+}
+
+/* ── Profile Image ── */
+.profile-img-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    aspect-ratio: 3 / 4;
+}
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 3rem;
+    transition: filter 0.8s ease;
+}
+.profile-img-fallback {
+    width: 100%;
+    height: 100%;
+    border-radius: 3rem;
+    background: linear-gradient(135deg, #1c1917, #292524);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.04em;
+}
+
+/* ── Philosophy Cards ── */
+.philosophy-card {
+    position: relative;
+    padding: 3rem 2.5rem;
+    border-radius: 2rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.8s var(--ease-out-expo);
+}
+.philosophy-card:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-6px);
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.06);
+    border-color: rgba(29, 78, 216, 0.1);
+}
+.philosophy-number {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: rgba(29, 78, 216, 0.08);
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    transition: color 0.5s ease;
+}
+.philosophy-card:hover .philosophy-number {
+    color: rgba(29, 78, 216, 0.2);
+}
+
+/* ── Station Journey Line ── */
+.journey-line {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+.journey-line::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    right: 30px;
+    height: 1px;
+    background: linear-gradient(90deg, #d6d3d1 0%, #1d4ed8 50%, #d6d3d1 100%);
+    z-index: 0;
+}
+.journey-stop {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.journey-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #d6d3d1;
+    border: 2px solid #d6d3d1;
+    transition: all 0.5s ease;
+}
+.journey-stop:hover .journey-dot {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.15);
+}
+.journey-stop.active .journey-dot {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    width: 14px;
+    height: 14px;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
