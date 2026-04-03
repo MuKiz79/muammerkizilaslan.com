@@ -1,209 +1,175 @@
 /* ══════════════════════════════════════════════════════════
-   Mobile Design System v2 — Apple-Level
-   Designed for 375px–767px
+   Mobile — Final
+   375px–767px
 
-   10 Prinzipien:
-   1. Hero als Statement — Bild groß, Headline sofort
-   2. Rhythmus durch Weißraum — Sektionen atmen
-   3. Zitat als eigenständiger Moment
-   4. Aktuelle Station visuell hervorheben
-   5. Kontakt-Cards als tappbare Elemente
-   6. Fakten mit Hierarchie
-   7. Expertise full-bleed
-   8. Kristallklare Typografie-Hierarchie
-   9. Micro-Details (Nav, Progress, Labels)
-   10. Footer minimal
+   Jedes Pixel ist eine Entscheidung.
    ══════════════════════════════════════════════════════════ */
 
 @media (max-width: 767px) {
 
-    /* ── Design Tokens ── */
+    /* ── Tokens ── */
     :root {
-        --m-pad: 24px;
-        --m-section: 80px;
+        --pad: 24px;
     }
 
-    body {
-        font-size: 16px;
-        line-height: 1.5;
+    /* ══════════════════════════
+       GLOBAL
+       ══════════════════════════ */
+
+    body { font-size: 16px; line-height: 1.5; }
+
+    /* Progress bar: weg */
+    #progress-bar { display: none !important; }
+
+    /* Section label lines (die w-24 Striche): weg */
+    h2.flex span.w-24,
+    h2.tracking-executive span.w-24 { display: none !important; }
+    h2.flex.tracking-executive,
+    h2.flex { gap: 0 !important; }
+
+    /* Section labels: flüstern */
+    h2.text-\[10px\], h2.text-\[11px\] {
+        font-size: 9px !important;
+        opacity: 0.4;
+        margin-bottom: 16px !important;
+        letter-spacing: 0.14em;
     }
 
-    /* ═══════════════════════════════════════════
-       9. MICRO-DETAILS — Nav, Progress, Labels
-       ═══════════════════════════════════════════ */
+    /* Hover-Effekte: weg auf Touch */
+    .project-card:hover,
+    .philosophy-card:hover,
+    .station-card:hover,
+    .expertise-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
 
-    /* Nav: subtiler Scroll-Effekt */
+    /* Reveal: subtiler */
+    .reveal { transform: translateY(12px); transition-duration: 0.5s; }
+
+    /* ══════════════════════════
+       NAV
+       ══════════════════════════ */
+
     #navbar {
-        padding: 14px var(--m-pad) !important;
-        transition: all 0.3s ease;
+        padding: 12px var(--pad) !important;
     }
     #navbar.shadow-2xl {
-        box-shadow: 0 1px 0 rgba(0,0,0,0.06) !important;
+        box-shadow: 0 0.5px 0 rgba(0,0,0,0.08) !important;
+        background: rgba(245,245,244,0.98) !important;
     }
     #navbar a > span:first-child {
         font-size: 7px;
-        letter-spacing: 0.2em;
-        opacity: 0.6;
+        opacity: 0.5;
     }
     #navbar a > span:last-child {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
     }
 
-    /* Progress bar: unsichtbar auf Mobile — lenkt ab */
-    #progress-bar {
-        display: none !important;
-    }
-
-    /* Section-Labels: ohne die dünne Linie */
-    .tracking-executive {
-        letter-spacing: 0.14em;
-    }
-    h2.tracking-executive span.w-24,
-    h2.flex span.w-24 {
-        display: none !important;
-    }
-    h2.tracking-executive,
-    h2.flex.tracking-executive {
-        gap: 0 !important;
-    }
-
-    /* ═══════════════════════════════════════════
-       1. HERO — Bild groß, Headline sofort
-       ═══════════════════════════════════════════ */
+    /* ══════════════════════════
+       HERO
+       ══════════════════════════ */
 
     .min-h-screen {
         min-height: auto;
-        padding: 72px var(--m-pad) 32px !important;
+        padding: 64px var(--pad) 24px !important;
+        align-items: flex-start !important;
     }
 
-    /* Bild: edge-to-edge Feeling, volle Breite */
+    /* Grid */
+    .min-h-screen > div:first-child {
+        gap: 16px !important;
+    }
+
+    /* Bild */
     .profile-img-wrapper {
         max-width: 100% !important;
         width: 100% !important;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 5 / 4;
     }
     .profile-img {
-        border-radius: 20px;
-        object-position: center 20%;
+        border-radius: 16px;
+        object-position: center 15%;
     }
     .profile-img-fallback {
-        border-radius: 20px;
-        font-size: 4rem;
+        border-radius: 16px;
     }
 
-    /* Tagline über dem Bild */
+    /* Tagline */
     main > section:first-child .mb-6 {
-        margin-bottom: 16px !important;
+        margin-bottom: 8px !important;
     }
     main > section:first-child .tracking-editorial {
-        font-size: 9px;
-        letter-spacing: 0.3em;
+        font-size: 8px;
+        letter-spacing: 0.25em;
         padding-left: 0 !important;
         border-left: none !important;
-        opacity: 0.5;
+        opacity: 0.35;
     }
 
-    /* Headline: mutig, direkt unter dem Bild */
+    /* H1 */
     main > section:first-child h1 {
-        font-size: 13vw;
-        margin-bottom: 20px !important;
+        font-size: 14vw;
+        margin-bottom: 24px !important;
         margin-left: 0 !important;
+        line-height: 0.9;
     }
     main > section:first-child h1 span {
         margin-left: 0 !important;
     }
 
-    /* CTAs — nur der primäre Button. "Gespräch vereinbaren" ausblenden auf Mobile */
+    /* CTA */
     main > section:first-child .flex.flex-col {
         gap: 0 !important;
+        width: 100%;
     }
     main > section:first-child a[href="#career"] {
-        padding: 18px 36px;
+        padding: 16px 0;
         font-size: 10px;
         width: 100%;
         text-align: center;
         justify-content: center;
         display: flex;
+        border-radius: 14px;
     }
     main > section:first-child a[href="#contact"] {
         display: none !important;
     }
 
-    /* Grid: kein Gap zwischen Bild und Content */
-    .min-h-screen > div:first-child {
-        gap: 20px !important;
-    }
-
-    /* ═══════════════════════════════════════════
-       2. RHYTHMUS — Sektionen atmen
-       ═══════════════════════════════════════════ */
+    /* ══════════════════════════
+       PROFIL
+       ══════════════════════════ */
 
     #profil {
-        padding: var(--m-section) var(--m-pad) 48px !important;
+        padding: 56px var(--pad) 40px !important;
     }
-    #career {
-        padding: 48px var(--m-pad) 60px !important;
-    }
-    #impact {
-        padding: 60px var(--m-pad) !important;
-    }
-    #contact {
-        padding: var(--m-section) var(--m-pad) 60px !important;
-    }
-
-    /* Führungsphilosophie (1. Sibling nach #career) */
-    #career + section {
-        padding: 60px var(--m-pad) !important;
-    }
-
-    /* Int. Stationen (2. Sibling nach #career) */
-    #career + section + section {
-        padding: 32px var(--m-pad) !important;
-    }
-
-    /* ═══════════════════════════════════════════
-       8. TYPOGRAFIE-HIERARCHIE
-       Headlines schreien. Body flüstert. Labels verschwinden fast.
-       ═══════════════════════════════════════════ */
-
-    /* Section Labels — fast unsichtbar */
-    h2.text-\[10px\],
-    h2.text-\[11px\] {
-        font-size: 8px !important;
-        opacity: 0.45;
-        margin-bottom: 20px !important;
-    }
-
-    /* ═══════════════════════════════════════════
-       PROFIL + 3. ZITAT als eigener Moment
-       ═══════════════════════════════════════════ */
-
     #profil .grid {
-        gap: 32px !important;
+        gap: 24px !important;
     }
     #profil h3 {
-        font-size: 2.25rem;
-        line-height: 1.0;
-        margin-bottom: 20px !important;
+        font-size: 2rem;
+        line-height: 1.02;
+        margin-bottom: 16px !important;
+        letter-spacing: -0.03em;
     }
     #profil > div > div > div:first-child p {
         font-size: 15px;
-        line-height: 1.65;
+        line-height: 1.6;
         font-weight: 400;
         color: #57534e;
     }
 
-    /* Zitat — eigener visueller Moment */
+    /* Zitat */
     #profil blockquote {
-        padding: 24px 20px !important;
-        margin: 0 calc(var(--m-pad) * -1);
-        background: linear-gradient(135deg, #fafaf9, #f5f5f4);
+        padding: 20px var(--pad) !important;
+        margin: 0 calc(var(--pad) * -1);
+        background: #f5f5f4;
         border-left: 3px solid #1d4ed8 !important;
         border-radius: 0;
     }
     #profil blockquote p {
-        font-size: 17px !important;
-        line-height: 1.4 !important;
+        font-size: 16px !important;
+        line-height: 1.45 !important;
         font-weight: 400 !important;
         color: #44403c !important;
     }
@@ -212,61 +178,92 @@
         font-weight: 600 !important;
     }
 
-    /* ═══════════════════════════════════════════
-       4. KARRIERE — flach, clean, kein schwerer Container
-       ═══════════════════════════════════════════ */
+    /* ══════════════════════════
+       KARRIERE
+       ══════════════════════════ */
 
-    /* Container: kein Radius, kein Shadow auf Mobile */
+    #career {
+        padding: 40px var(--pad) 48px !important;
+    }
+
+    /* Container: flach */
     #career .bg-stone-100 {
         border-radius: 0 !important;
         box-shadow: none !important;
         border: none !important;
         background: transparent !important;
-        margin: 0 calc(var(--m-pad) * -1);
+        margin: 0 calc(var(--pad) * -1);
+        overflow: visible !important;
+    }
+    #career .grid.md\:grid-cols-3 {
+        gap: 0 !important;
     }
 
     .station-card {
-        padding: 24px var(--m-pad) !important;
+        padding: 24px var(--pad) 20px !important;
         border-top: 1px solid #e7e5e4 !important;
         border-left: none !important;
         border-right: none !important;
+        border-bottom: none !important;
+        background: transparent !important;
     }
-    /* Erste Card (Hansgrohe = aktuell) hervorheben */
+    .station-card:last-child {
+        border-bottom: 1px solid #e7e5e4 !important;
+    }
     .station-card[data-station="hansgrohe"] {
         border-left: 3px solid #1d4ed8 !important;
-        padding-left: calc(var(--m-pad) - 3px) !important;
+        padding-left: calc(var(--pad) - 3px) !important;
+        background: rgba(29,78,216,0.02) !important;
+    }
+
+    .station-card .flex.justify-between {
+        margin-bottom: 8px !important;
     }
     .station-card .text-4xl {
-        font-size: 1.5rem;
-        opacity: 0.1;
+        font-size: 1.25rem;
+        opacity: 0.08;
     }
     .station-card h4 {
         font-size: 11px;
-        margin-bottom: 8px !important;
+        margin-bottom: 6px !important;
+        letter-spacing: 0.12em;
     }
     .station-card > p {
         font-size: 14px;
-        line-height: 1.65;
+        line-height: 1.6;
         font-weight: 400;
         color: #78716c;
     }
+    .station-card .mt-auto {
+        padding-top: 12px !important;
+    }
+
     .detail-panel > div {
-        padding: 20px var(--m-pad) !important;
+        padding: 16px var(--pad) 20px !important;
+        background: #fafaf9 !important;
     }
     .detail-panel .text-sm {
         font-size: 13px;
         font-weight: 400;
     }
 
-    /* Philosophie-Section Headline */
+    /* ══════════════════════════
+       PHILOSOPHIE
+       ══════════════════════════ */
+
+    #career + section {
+        padding: 48px var(--pad) !important;
+    }
     #career + section h3 {
-        font-size: 2.25rem !important;
-        padding: 0 !important;
+        font-size: 2rem !important;
+        margin-bottom: 24px !important;
+    }
+    #career + section .grid {
+        gap: 0 !important;
     }
 
-    /* Führungsphilosophie — flach, nur Border-Top als Trenner */
     .philosophy-card {
-        padding: 24px 0 !important;
+        padding: 20px 0 !important;
         border-radius: 0 !important;
         background: transparent !important;
         backdrop-filter: none !important;
@@ -274,23 +271,23 @@
         border: none !important;
         border-top: 1px solid #e7e5e4 !important;
     }
-    .philosophy-card:hover {
-        transform: none !important;
-        box-shadow: none !important;
+    .philosophy-card:last-child {
+        border-bottom: 1px solid #e7e5e4 !important;
+        padding-bottom: 0 !important;
     }
     .philosophy-card h4 {
-        font-size: 9px;
-        margin-bottom: 10px !important;
-        opacity: 0.5;
+        font-size: 8px;
+        margin-bottom: 8px !important;
+        opacity: 0.4;
     }
     .philosophy-card > p:nth-child(3) {
-        font-size: 17px;
-        line-height: 1.25;
-        margin-bottom: 10px !important;
+        font-size: 16px;
+        line-height: 1.3;
+        margin-bottom: 8px !important;
     }
     .philosophy-card > p:last-child {
         font-size: 14px;
-        line-height: 1.6;
+        line-height: 1.55;
         font-weight: 400;
         color: #78716c;
     }
@@ -298,233 +295,250 @@
         display: none !important;
     }
 
-    /* Int. Stationen */
+    /* ══════════════════════════
+       INTERNATIONALE STATIONEN
+       ══════════════════════════ */
+
+    #career + section + section {
+        padding: 24px var(--pad) 32px !important;
+    }
     .journey-line {
         display: none !important;
     }
 
-    /* ═══════════════════════════════════════════
-       7. EXPERTISE — Full-bleed, kein Radius
-       ═══════════════════════════════════════════ */
+    /* ══════════════════════════
+       EXPERTISE
+       ══════════════════════════ */
 
     #expertise {
-        padding: var(--m-section) var(--m-pad) !important;
+        padding: 56px var(--pad) !important;
         margin: 0 !important;
         border-radius: 0 !important;
+        box-shadow: none !important;
     }
-
     #expertise h2 {
-        font-size: 8px !important;
-        opacity: 0.4;
+        font-size: 9px !important;
+        opacity: 0.35;
+        margin-bottom: 12px !important;
     }
     #expertise h3 {
-        font-size: 2.25rem;
-        margin-bottom: 12px !important;
+        font-size: 2rem;
+        margin-bottom: 10px !important;
     }
     #expertise .mb-10 > p,
     #expertise > div > div:first-child > p {
-        font-size: 15px;
+        font-size: 14px;
         line-height: 1.55;
         font-weight: 400;
+        opacity: 0.4;
+    }
+    #expertise .mb-10,
+    #expertise > div > div:first-child {
+        margin-bottom: 32px !important;
     }
 
-    /* Expertise Cards Grid */
+    /* Cards */
     #expertise .grid.md\:grid-cols-2 {
-        gap: 8px !important;
-        margin-bottom: 40px !important;
+        gap: 0 !important;
+        margin-bottom: 32px !important;
     }
-
     .expertise-card {
-        padding-top: 24px !important;
+        padding-top: 20px !important;
+        padding-bottom: 4px;
         border-top-color: rgba(255,255,255,0.06) !important;
     }
+    .expertise-card .flex.items-center {
+        margin-bottom: 10px !important;
+    }
     .expertise-card .expertise-number {
-        font-size: 1.5rem;
-        opacity: 0.2;
+        font-size: 1.25rem;
+        opacity: 0.15;
     }
     .expertise-card h4 {
-        font-size: 9px;
-        opacity: 0.5;
+        font-size: 8px;
+        opacity: 0.45;
     }
     .expertise-card > p {
-        font-size: 15px;
+        font-size: 14px;
         line-height: 1.55;
         font-weight: 400;
-        margin-bottom: 16px !important;
+        margin-bottom: 12px !important;
     }
 
     .proof-point {
-        opacity: 0.75;
-        padding: 5px 0;
+        opacity: 0.7;
+        padding: 4px 0;
     }
     .proof-point span:last-child {
-        font-size: 13px;
+        font-size: 12px;
         font-weight: 400;
     }
 
     .skill-tag {
-        padding: 7px 14px;
-        font-size: 8px;
+        padding: 6px 12px;
+        font-size: 7px;
         letter-spacing: 0.1em;
-        border-color: rgba(255,255,255,0.1);
-        color: rgba(255,255,255,0.4);
+        border-color: rgba(255,255,255,0.08);
+        color: rgba(255,255,255,0.35);
+    }
+    .flex-wrap.gap-2 {
+        gap: 6px !important;
+        margin-bottom: 8px !important;
+    }
+
+    /* Unternehmen-Labels */
+    .expertise-card > span:last-child {
+        font-size: 7px !important;
+        opacity: 0.15;
     }
 
     /* Sprachen */
     #expertise .border-t.border-white\/5 {
-        padding-top: 40px !important;
-    }
-    #expertise .border-t.border-white\/5 h4 {
-        margin-bottom: 20px !important;
-        opacity: 0.5;
-    }
-    #expertise .border-t.border-white\/5 .text-xl {
-        font-size: 1.05rem;
-    }
-
-    /* ═══════════════════════════════════════════
-       6. FAKTEN — Hierarchie, nicht Inventar
-       ═══════════════════════════════════════════ */
-
-    #impact .grid {
-        gap: 24px 16px !important;
         padding-top: 32px !important;
     }
-    /* Alle Zahlen */
+    #expertise .border-t.border-white\/5 h4 {
+        margin-bottom: 16px !important;
+        opacity: 0.4;
+        font-size: 9px !important;
+    }
+    #expertise .border-t.border-white\/5 .text-xl {
+        font-size: 1rem;
+    }
+    #expertise .border-t.border-white\/5 .grid {
+        gap: 16px 12px !important;
+    }
+    #expertise .border-t.border-white\/5 .mb-4 {
+        margin-bottom: 6px !important;
+    }
+    #expertise .border-t.border-white\/5 .text-\[10px\] {
+        font-size: 8px;
+        opacity: 0.3;
+    }
+
+    /* ══════════════════════════
+       FAKTEN
+       ══════════════════════════ */
+
+    #impact {
+        padding: 48px var(--pad) !important;
+    }
+    #impact .grid {
+        gap: 20px 12px !important;
+        padding-top: 24px !important;
+        border-top: none !important;
+    }
     #impact .text-4xl {
-        font-size: 2rem;
-        color: #1c1917;
+        font-size: 1.75rem;
     }
     #impact .text-\[10px\] {
         font-size: 8px;
-        opacity: 0.7;
+        opacity: 0.6;
     }
     #impact .text-\[11px\] {
         font-size: 10px;
         color: #a8a29e;
     }
-    /* Letztes Element zentriert */
-    #impact .col-span-2 {
-        justify-self: center;
-    }
-    /* Die wichtigste Zahl hervorheben: 160+ Mitarbeiter */
-    #impact .col-span-2 .text-4xl {
-        font-size: 2.5rem;
-        color: #1d4ed8;
-    }
-    /* Border-left dezenter */
     #impact .group {
         border-left-width: 0 !important;
         padding-left: 0 !important;
     }
+    #impact .col-span-2 {
+        justify-self: center;
+    }
+    #impact .col-span-2 .text-4xl {
+        font-size: 2rem;
+        color: #1d4ed8;
+    }
 
-    /* ═══════════════════════════════════════════
-       5. KONTAKT — tappbare Cards mit Tiefe
-       ═══════════════════════════════════════════ */
+    /* ══════════════════════════
+       KONTAKT
+       ══════════════════════════ */
 
     #contact {
         text-align: left !important;
+        padding: 48px var(--pad) 40px !important;
     }
     #contact > div > span:first-child {
-        margin-bottom: 12px !important;
-        opacity: 0.5;
+        margin-bottom: 8px !important;
+        opacity: 0.4;
         font-size: 8px !important;
     }
     #contact h2 {
         font-size: 1.75rem;
         line-height: 1.15;
-        margin-bottom: 32px !important;
+        margin-bottom: 28px !important;
         text-align: left;
     }
     #contact .flex-col {
-        gap: 12px !important;
+        gap: 10px !important;
         margin-top: 0 !important;
     }
-
-    /* Cards: tappbar mit Tiefe */
     #contact a.flex {
-        padding: 18px 16px !important;
-        border-radius: 16px !important;
-        gap: 14px !important;
-        border-color: #e7e5e4 !important;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02);
+        padding: 14px !important;
+        border-radius: 14px !important;
+        gap: 12px !important;
+        border: 1px solid #e7e5e4 !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
         background: white !important;
     }
     #contact a.flex > div:first-child {
-        width: 48px !important;
-        height: 48px !important;
-        min-width: 48px;
-        border-radius: 14px !important;
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px;
+        border-radius: 12px !important;
     }
     #contact a.flex svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
     }
     #contact a.flex p:first-child {
         font-size: 8px;
-        margin-bottom: 3px !important;
-        opacity: 0.4;
+        margin-bottom: 2px !important;
+        opacity: 0.35;
     }
     #contact a.flex p:last-child {
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 600;
         word-break: break-all;
     }
 
-    /* ═══════════════════════════════════════════
-       10. FOOTER — minimal, sauber
-       ═══════════════════════════════════════════ */
+    /* ══════════════════════════
+       FOOTER
+       ══════════════════════════ */
 
     footer {
-        padding: 24px var(--m-pad) !important;
-        gap: 12px !important;
+        padding: 20px var(--pad) !important;
+        gap: 0 !important;
         text-align: center;
+        border-top: none !important;
     }
-    /* Name/Titel ausblenden — steht schon im Nav */
     footer > div:first-child {
         display: none !important;
     }
     footer > div:last-child {
-        gap: 32px !important;
+        gap: 28px !important;
         width: 100%;
         justify-content: center;
     }
     footer button {
-        font-size: 10px;
+        font-size: 9px;
         letter-spacing: 0.12em;
         color: #a8a29e;
     }
 
-    /* ═══════════════════════════════════════════
+    /* ══════════════════════════
        MODALS
-       ═══════════════════════════════════════════ */
+       ══════════════════════════ */
 
     #impressum-modal > div,
     #datenschutz-modal > div {
-        padding: 28px !important;
-        border-radius: 20px !important;
-        margin: 16px;
+        padding: 24px !important;
+        border-radius: 16px !important;
+        margin: 12px;
     }
     #impressum-modal h3,
     #datenschutz-modal h3 {
-        font-size: 1.25rem;
-        margin-bottom: 16px !important;
-    }
-
-    /* ═══════════════════════════════════════════
-       GLOBAL OVERRIDES
-       ═══════════════════════════════════════════ */
-
-    #profil .grid {
-        gap: 32px !important;
-    }
-    #career .grid.md\:grid-cols-3 {
-        gap: 0 !important;
-    }
-
-    /* Reveal: schneller, subtiler */
-    .reveal {
-        transform: translateY(16px);
-        transition-duration: 0.6s;
+        font-size: 1.125rem;
+        margin-bottom: 12px !important;
     }
 }
