@@ -1,8 +1,9 @@
 /* ══════════════════════════════════════════════════════════
-   Mobile — Final
+   Mobile Design System — eigenständig
    375px–767px
 
-   Jedes Pixel ist eine Entscheidung.
+   Regel: Diese Datei kontrolliert ALLES auf Mobile.
+   Die index.html wird NICHT verändert.
    ══════════════════════════════════════════════════════════ */
 
 @media (max-width: 767px) {
@@ -21,13 +22,13 @@
     /* Progress bar: weg */
     #progress-bar { display: none !important; }
 
-    /* Section label lines (die w-24 Striche): weg */
+    /* Section label lines (w-24 Striche): weg */
     h2.flex span.w-24,
     h2.tracking-executive span.w-24 { display: none !important; }
     h2.flex.tracking-executive,
     h2.flex { gap: 0 !important; }
 
-    /* Section labels: flüstern */
+    /* Section labels */
     h2.text-\[10px\], h2.text-\[11px\] {
         font-size: 9px !important;
         opacity: 0.4;
@@ -35,7 +36,7 @@
         letter-spacing: 0.14em;
     }
 
-    /* Hover-Effekte: weg auf Touch */
+    /* Hover: weg auf Touch */
     .project-card:hover,
     .philosophy-card:hover,
     .station-card:hover,
@@ -75,13 +76,11 @@
         padding: 64px var(--pad) 24px !important;
         align-items: flex-start !important;
     }
-
-    /* Grid */
     .min-h-screen > div:first-child {
         gap: 16px !important;
     }
 
-    /* Bild */
+    /* Bild: volle Breite */
     .profile-img-wrapper {
         max-width: 100% !important;
         width: 100% !important;
@@ -96,7 +95,8 @@
     }
 
     /* Tagline */
-    main > section:first-child .mb-6 {
+    main > section:first-child .mb-20:first-child,
+    main > section:first-child .overflow-hidden:first-child {
         margin-bottom: 8px !important;
     }
     main > section:first-child .tracking-editorial {
@@ -109,7 +109,7 @@
 
     /* H1 */
     main > section:first-child h1 {
-        font-size: 14vw;
+        font-size: 14vw !important;
         margin-bottom: 24px !important;
         margin-left: 0 !important;
         line-height: 0.9;
@@ -118,8 +118,10 @@
         margin-left: 0 !important;
     }
 
-    /* CTA */
-    main > section:first-child .flex.flex-col {
+    /* CTA: ein Button, volle Breite */
+    main > section:first-child .flex.flex-col,
+    main > section:first-child .flex.sm\:flex-row {
+        flex-direction: column !important;
         gap: 0 !important;
         width: 100%;
     }
@@ -136,6 +138,11 @@
         display: none !important;
     }
 
+    /* Scroll-Indicator: weg */
+    main > section:first-child > div:last-child[aria-hidden] {
+        display: none !important;
+    }
+
     /* ══════════════════════════
        PROFIL
        ══════════════════════════ */
@@ -147,19 +154,19 @@
         gap: 24px !important;
     }
     #profil h3 {
-        font-size: 2rem;
+        font-size: 2rem !important;
         line-height: 1.02;
         margin-bottom: 16px !important;
         letter-spacing: -0.03em;
     }
-    #profil > div > div > div:first-child p {
+    #profil .lg\:col-span-7 p {
         font-size: 15px;
         line-height: 1.6;
         font-weight: 400;
         color: #57534e;
     }
 
-    /* Zitat */
+    /* Zitat — eigener Block */
     #profil blockquote {
         padding: 20px var(--pad) !important;
         margin: 0 calc(var(--pad) * -1);
@@ -186,7 +193,7 @@
         padding: 40px var(--pad) 48px !important;
     }
 
-    /* Container: flach */
+    /* Container: flach, kein Radius, kein Shadow */
     #career .bg-stone-100 {
         border-radius: 0 !important;
         box-shadow: none !important;
@@ -210,17 +217,18 @@
     .station-card:last-child {
         border-bottom: 1px solid #e7e5e4 !important;
     }
+    /* Hansgrohe = aktuell: hervorheben */
     .station-card[data-station="hansgrohe"] {
         border-left: 3px solid #1d4ed8 !important;
         padding-left: calc(var(--pad) - 3px) !important;
         background: rgba(29,78,216,0.02) !important;
     }
-
     .station-card .flex.justify-between {
         margin-bottom: 8px !important;
     }
-    .station-card .text-4xl {
-        font-size: 1.25rem;
+    /* Nummern 01/02/03 */
+    .station-card .text-6xl {
+        font-size: 1.25rem !important;
         opacity: 0.08;
     }
     .station-card h4 {
@@ -237,7 +245,6 @@
     .station-card .mt-auto {
         padding-top: 12px !important;
     }
-
     .detail-panel > div {
         padding: 16px var(--pad) 20px !important;
         background: #fafaf9 !important;
@@ -322,22 +329,21 @@
         margin-bottom: 12px !important;
     }
     #expertise h3 {
-        font-size: 2rem;
+        font-size: 2rem !important;
         margin-bottom: 10px !important;
     }
-    #expertise .mb-10 > p,
+    /* Intro-Text */
+    #expertise > div > div:first-child {
+        margin-bottom: 32px !important;
+    }
     #expertise > div > div:first-child > p {
         font-size: 14px;
         line-height: 1.55;
         font-weight: 400;
         opacity: 0.4;
     }
-    #expertise .mb-10,
-    #expertise > div > div:first-child {
-        margin-bottom: 32px !important;
-    }
 
-    /* Cards */
+    /* Cards Grid */
     #expertise .grid.md\:grid-cols-2 {
         gap: 0 !important;
         margin-bottom: 32px !important;
@@ -351,7 +357,7 @@
         margin-bottom: 10px !important;
     }
     .expertise-card .expertise-number {
-        font-size: 1.25rem;
+        font-size: 1.25rem !important;
         opacity: 0.15;
     }
     .expertise-card h4 {
@@ -364,7 +370,6 @@
         font-weight: 400;
         margin-bottom: 12px !important;
     }
-
     .proof-point {
         opacity: 0.7;
         padding: 4px 0;
@@ -373,7 +378,6 @@
         font-size: 12px;
         font-weight: 400;
     }
-
     .skill-tag {
         padding: 6px 12px;
         font-size: 7px;
@@ -381,12 +385,10 @@
         border-color: rgba(255,255,255,0.08);
         color: rgba(255,255,255,0.35);
     }
-    .flex-wrap.gap-2 {
+    .expertise-card .flex-wrap {
         gap: 6px !important;
         margin-bottom: 8px !important;
     }
-
-    /* Unternehmen-Labels */
     .expertise-card > span:last-child {
         font-size: 7px !important;
         opacity: 0.15;
@@ -401,13 +403,15 @@
         opacity: 0.4;
         font-size: 9px !important;
     }
-    #expertise .border-t.border-white\/5 .text-xl {
-        font-size: 1rem;
-    }
+    /* Sprach-Grid: 2 Spalten */
     #expertise .border-t.border-white\/5 .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 16px 12px !important;
     }
-    #expertise .border-t.border-white\/5 .mb-4 {
+    #expertise .border-t.border-white\/5 .text-3xl {
+        font-size: 1.125rem !important;
+    }
+    #expertise .border-t.border-white\/5 .flex-col {
         margin-bottom: 6px !important;
     }
     #expertise .border-t.border-white\/5 .text-\[10px\] {
@@ -427,8 +431,9 @@
         padding-top: 24px !important;
         border-top: none !important;
     }
-    #impact .text-4xl {
-        font-size: 1.75rem;
+    /* Counter-Zahlen */
+    #impact .text-5xl {
+        font-size: 1.75rem !important;
     }
     #impact .text-\[10px\] {
         font-size: 8px;
@@ -442,11 +447,12 @@
         border-left-width: 0 !important;
         padding-left: 0 !important;
     }
+    /* 160+ hervorheben */
     #impact .col-span-2 {
         justify-self: center;
     }
-    #impact .col-span-2 .text-4xl {
-        font-size: 2rem;
+    #impact .col-span-2 .text-5xl {
+        font-size: 2rem !important;
         color: #1d4ed8;
     }
 
@@ -464,20 +470,18 @@
         font-size: 8px !important;
     }
     #contact h2 {
-        font-size: 1.75rem;
+        font-size: 1.75rem !important;
         line-height: 1.15;
         margin-bottom: 28px !important;
         text-align: left;
     }
-    #contact .flex-col,
     #contact > div > div.flex {
+        flex-direction: column !important;
         gap: 10px !important;
         margin-top: 0 !important;
     }
-
-    /* Kontakt Cards */
-    #contact .project-card,
-    #contact a.project-card {
+    /* Cards */
+    #contact .project-card {
         padding: 14px !important;
         border-radius: 14px !important;
         gap: 12px !important;
@@ -487,12 +491,10 @@
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
     }
-    #contact .project-card:hover,
-    #contact a.project-card:hover {
+    #contact .project-card:hover {
         transform: none !important;
     }
-    #contact .project-card > div:first-child,
-    #contact a.project-card > div:first-child {
+    #contact .project-card > div:first-child {
         width: 44px !important;
         height: 44px !important;
         min-width: 44px;
