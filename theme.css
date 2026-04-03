@@ -241,8 +241,8 @@ h1, h2, h3 {
 /* ── Philosophy Cards ── */
 .philosophy-card {
     position: relative;
-    padding: 3rem 2.5rem;
-    border-radius: 2rem;
+    padding: 2rem 1.5rem;
+    border-radius: 1.5rem;
     background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(0, 0, 0, 0.04);
@@ -313,6 +313,14 @@ h1, h2, h3 {
     border-color: #1d4ed8;
     width: 14px;
     height: 14px;
+}
+
+/* ── Responsive Overrides ── */
+@media (min-width: 768px) {
+    .philosophy-card {
+        padding: 3rem 2.5rem;
+        border-radius: 2rem;
+    }
 }
 
 /* ── Reduced Motion ── */
