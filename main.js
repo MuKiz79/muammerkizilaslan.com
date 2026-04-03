@@ -73,7 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     const progress = Math.min(elapsed / duration, 1);
                     const current = Math.round(easeOutQuart(progress) * target);
                     entry.target.textContent = current + suffix;
-                    if (progress < 1) requestAnimationFrame(update);
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    } else {
+                        entry.target.textContent = target + suffix;
+                    }
                 }
                 requestAnimationFrame(update);
             }
