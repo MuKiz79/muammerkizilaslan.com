@@ -113,7 +113,7 @@ h1, h2, h3 {
 /* ── Skill Tags ── */
 .skill-tag {
     display: inline-block;
-    padding: 0.5rem 1.25rem;
+    padding: 0.4rem 0.9rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 9999px;
     font-size: 0.7rem;
@@ -134,7 +134,7 @@ h1, h2, h3 {
     align-items: center;
     gap: 0.75rem;
     padding: 0.5rem 0;
-    opacity: 0.4;
+    opacity: 0.7;
     transition: all 0.5s ease;
 }
 .proof-point:hover {
@@ -214,20 +214,20 @@ h1, h2, h3 {
 .profile-img-wrapper {
     position: relative;
     width: 100%;
-    max-width: 380px;
+    max-width: 260px;
     aspect-ratio: 3 / 4;
 }
 .profile-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 3rem;
+    border-radius: 2rem;
     transition: filter 0.8s ease;
 }
 .profile-img-fallback {
     width: 100%;
     height: 100%;
-    border-radius: 3rem;
+    border-radius: 2rem;
     background: linear-gradient(135deg, #1c1917, #292524);
     display: flex;
     align-items: center;
@@ -255,7 +255,7 @@ h1, h2, h3 {
     border-color: rgba(29, 78, 216, 0.1);
 }
 .philosophy-number {
-    font-size: 5rem;
+    font-size: 3.5rem;
     font-weight: 900;
     line-height: 1;
     letter-spacing: -0.04em;
@@ -317,9 +317,24 @@ h1, h2, h3 {
 
 /* ── Responsive Overrides ── */
 @media (min-width: 768px) {
+    .profile-img-wrapper {
+        max-width: 380px;
+    }
+    .profile-img {
+        border-radius: 3rem;
+    }
+    .profile-img-fallback {
+        border-radius: 3rem;
+    }
     .philosophy-card {
         padding: 3rem 2.5rem;
         border-radius: 2rem;
+    }
+    .philosophy-number {
+        font-size: 5rem;
+    }
+    .skill-tag {
+        padding: 0.5rem 1.25rem;
     }
 }
 
