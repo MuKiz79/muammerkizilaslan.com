@@ -49,9 +49,9 @@
         font-size: 1.15rem;
     }
 
-    /* Progress bar etwas dicker auf Mobile */
+    /* Progress bar: unsichtbar auf Mobile — lenkt ab */
     #progress-bar {
-        height: 3px !important;
+        display: none !important;
     }
 
     /* Section-Labels: ohne die dünne Linie */
@@ -113,21 +113,20 @@
         margin-left: 0 !important;
     }
 
-    /* CTAs */
+    /* CTAs — nur der primäre Button. "Gespräch vereinbaren" ausblenden auf Mobile */
     main > section:first-child .flex.flex-col {
-        gap: 4px !important;
+        gap: 0 !important;
     }
     main > section:first-child a[href="#career"] {
-        padding: 16px 36px;
+        padding: 18px 36px;
         font-size: 10px;
         width: 100%;
         text-align: center;
         justify-content: center;
+        display: flex;
     }
     main > section:first-child a[href="#contact"] {
-        padding: 12px 0;
-        font-size: 10px;
-        justify-content: center;
+        display: none !important;
     }
 
     /* Grid: kein Gap zwischen Bild und Content */
@@ -140,10 +139,10 @@
        ═══════════════════════════════════════════ */
 
     #profil {
-        padding: var(--m-section) var(--m-pad) !important;
+        padding: var(--m-section) var(--m-pad) 48px !important;
     }
     #career {
-        padding: 60px var(--m-pad) var(--m-section) !important;
+        padding: 48px var(--m-pad) 60px !important;
     }
     #impact {
         padding: 60px var(--m-pad) !important;
@@ -152,14 +151,14 @@
         padding: var(--m-section) var(--m-pad) 60px !important;
     }
 
-    /* Philosophie-Sektion */
-    #career + section + section {
+    /* Führungsphilosophie (1. Sibling nach #career) */
+    #career + section {
         padding: 60px var(--m-pad) !important;
     }
 
-    /* Int. Stationen */
-    #career + section + section + section {
-        padding: 40px var(--m-pad) !important;
+    /* Int. Stationen (2. Sibling nach #career) */
+    #career + section + section {
+        padding: 32px var(--m-pad) !important;
     }
 
     /* ═══════════════════════════════════════════
@@ -214,24 +213,36 @@
     }
 
     /* ═══════════════════════════════════════════
-       4. KARRIERE — Aktuelle Station hervorheben
+       4. KARRIERE — flach, clean, kein schwerer Container
        ═══════════════════════════════════════════ */
 
+    /* Container: kein Radius, kein Shadow auf Mobile */
+    #career .bg-stone-100 {
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: transparent !important;
+        margin: 0 calc(var(--m-pad) * -1);
+    }
+
     .station-card {
-        padding: 24px !important;
+        padding: 24px var(--m-pad) !important;
+        border-top: 1px solid #e7e5e4 !important;
+        border-left: none !important;
+        border-right: none !important;
     }
     /* Erste Card (Hansgrohe = aktuell) hervorheben */
     .station-card[data-station="hansgrohe"] {
-        background: #fefefe;
         border-left: 3px solid #1d4ed8 !important;
+        padding-left: calc(var(--m-pad) - 3px) !important;
     }
     .station-card .text-4xl {
-        font-size: 1.75rem;
-        opacity: 0.12;
+        font-size: 1.5rem;
+        opacity: 0.1;
     }
     .station-card h4 {
         font-size: 11px;
-        margin-bottom: 10px !important;
+        margin-bottom: 8px !important;
     }
     .station-card > p {
         font-size: 14px;
@@ -240,18 +251,32 @@
         color: #78716c;
     }
     .detail-panel > div {
-        padding: 24px !important;
+        padding: 20px var(--m-pad) !important;
     }
     .detail-panel .text-sm {
         font-size: 13px;
         font-weight: 400;
     }
 
-    /* Führungsphilosophie */
+    /* Philosophie-Section Headline */
+    #career + section h3 {
+        font-size: 2.25rem !important;
+        padding: 0 !important;
+    }
+
+    /* Führungsphilosophie — flach, nur Border-Top als Trenner */
     .philosophy-card {
-        padding: 24px !important;
-        border-radius: 16px !important;
-        border: 1px solid rgba(0,0,0,0.04);
+        padding: 24px 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border: none !important;
+        border-top: 1px solid #e7e5e4 !important;
+    }
+    .philosophy-card:hover {
+        transform: none !important;
+        box-shadow: none !important;
     }
     .philosophy-card h4 {
         font-size: 9px;
