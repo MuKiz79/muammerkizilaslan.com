@@ -214,8 +214,8 @@ h1, h2, h3 {
 .profile-img-wrapper {
     position: relative;
     width: 100%;
-    max-width: 260px;
-    aspect-ratio: 3 / 4;
+    max-width: 200px;
+    aspect-ratio: 1 / 1;
 }
 .profile-img {
     width: 100%;
@@ -261,9 +261,15 @@ h1, h2, h3 {
     letter-spacing: -0.04em;
     color: rgba(29, 78, 216, 0.08);
     position: absolute;
-    top: 1.5rem;
-    right: 2rem;
+    top: 1rem;
+    right: 1rem;
     transition: color 0.5s ease;
+    display: none;
+}
+@media (min-width: 640px) {
+    .philosophy-number {
+        display: block;
+    }
 }
 .philosophy-card:hover .philosophy-number {
     color: rgba(29, 78, 216, 0.2);
@@ -272,7 +278,6 @@ h1, h2, h3 {
 /* ── Station Journey Line ── */
 .journey-line {
     position: relative;
-    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 10px;
@@ -319,6 +324,7 @@ h1, h2, h3 {
 @media (min-width: 768px) {
     .profile-img-wrapper {
         max-width: 380px;
+        aspect-ratio: 3 / 4;
     }
     .profile-img {
         border-radius: 3rem;
