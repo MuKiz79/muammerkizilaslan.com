@@ -1,274 +1,414 @@
 /* ══════════════════════════════════════════════════════════
-   Mobile Design System — Eigenständig, nicht komprimiert
+   Mobile Design System v2 — Apple-Level
    Designed for 375px–767px
 
-   Philosophie: Mobile ist kein kleiner Desktop.
-   Mobile ist ein eigenes Medium mit eigenen Regeln.
+   10 Prinzipien:
+   1. Hero als Statement — Bild groß, Headline sofort
+   2. Rhythmus durch Weißraum — Sektionen atmen
+   3. Zitat als eigenständiger Moment
+   4. Aktuelle Station visuell hervorheben
+   5. Kontakt-Cards als tappbare Elemente
+   6. Fakten mit Hierarchie
+   7. Expertise full-bleed
+   8. Kristallklare Typografie-Hierarchie
+   9. Micro-Details (Nav, Progress, Labels)
+   10. Footer minimal
    ══════════════════════════════════════════════════════════ */
 
 @media (max-width: 767px) {
 
     /* ── Design Tokens ── */
     :root {
-        --mobile-pad: 20px;        /* Seitenrand — konsistent überall */
-        --mobile-section: 64px;    /* Vertikaler Abstand zwischen Sektionen */
-        --mobile-gap-sm: 8px;
-        --mobile-gap-md: 16px;
-        --mobile-gap-lg: 24px;
+        --m-pad: 24px;
+        --m-section: 80px;
     }
 
-    /* ── Typografie-Skala ──
-       Apple Human Interface:
-       Body 17px, Subhead 15px, Footnote 13px, Caption 11px
-       Wir adaptieren das für Editorial-Kontext.
-    */
     body {
         font-size: 16px;
         line-height: 1.5;
     }
 
-    /* ── Navigation ── */
+    /* ═══════════════════════════════════════════
+       9. MICRO-DETAILS — Nav, Progress, Labels
+       ═══════════════════════════════════════════ */
+
+    /* Nav: subtiler Scroll-Effekt */
     #navbar {
-        padding: 12px var(--mobile-pad) !important;
+        padding: 14px var(--m-pad) !important;
+        transition: all 0.3s ease;
+    }
+    #navbar.shadow-2xl {
+        box-shadow: 0 1px 0 rgba(0,0,0,0.06) !important;
     }
     #navbar a > span:first-child {
-        font-size: 8px;
+        font-size: 7px;
+        letter-spacing: 0.2em;
+        opacity: 0.6;
     }
     #navbar a > span:last-child {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
     }
 
-    /* ── HERO ── */
-    /* Das Bild soll kompakt sein, die Headline sofort sichtbar */
+    /* Progress bar etwas dicker auf Mobile */
+    #progress-bar {
+        height: 3px !important;
+    }
+
+    /* Section-Labels: ohne die dünne Linie */
+    .tracking-executive {
+        letter-spacing: 0.14em;
+    }
+    h2.tracking-executive span.w-24,
+    h2.flex span.w-24 {
+        display: none !important;
+    }
+    h2.tracking-executive,
+    h2.flex.tracking-executive {
+        gap: 0 !important;
+    }
+
+    /* ═══════════════════════════════════════════
+       1. HERO — Bild groß, Headline sofort
+       ═══════════════════════════════════════════ */
+
     .min-h-screen {
         min-height: auto;
-        padding-top: 80px !important;
-        padding-bottom: 40px !important;
-        padding-left: var(--mobile-pad) !important;
-        padding-right: var(--mobile-pad) !important;
+        padding: 72px var(--m-pad) 32px !important;
     }
 
+    /* Bild: edge-to-edge Feeling, volle Breite */
     .profile-img-wrapper {
-        max-width: 140px;
-        aspect-ratio: 1;
+        max-width: 100% !important;
+        width: 100% !important;
+        aspect-ratio: 4 / 3;
     }
     .profile-img {
-        border-radius: 1.5rem;
+        border-radius: 20px;
+        object-position: center 20%;
     }
     .profile-img-fallback {
-        border-radius: 1.5rem;
-        font-size: 3rem;
+        border-radius: 20px;
+        font-size: 4rem;
     }
 
-    /* Hero H1 */
-    main > section:first-child h1 {
-        font-size: 11vw;
-        margin-bottom: 24px !important;
-    }
-
-    /* Hero subtitle tagline */
-    main > section:first-child h1 + div,
+    /* Tagline über dem Bild */
     main > section:first-child .mb-6 {
-        margin-bottom: 12px !important;
-    }
-
-    /* Hero CTAs */
-    main > section:first-child a[href="#career"] {
-        padding: 14px 32px;
-        font-size: 10px;
-    }
-
-    /* ── Alle Sektionen: Konsistentes Padding ── */
-    #profil,
-    #career,
-    #impact,
-    #contact {
-        padding-left: var(--mobile-pad) !important;
-        padding-right: var(--mobile-pad) !important;
-        padding-top: var(--mobile-section) !important;
-        padding-bottom: var(--mobile-section) !important;
-    }
-
-    /* Führungsphilosophie & Int. Stationen */
-    #profil + section + section,
-    #career + section + section {
-        padding-left: var(--mobile-pad) !important;
-        padding-right: var(--mobile-pad) !important;
-    }
-
-    /* ── Sektion-Überschriften ── */
-    /* Die kleinen "DAS PROFIL", "DIE STATIONEN" Labels */
-    .tracking-executive {
-        letter-spacing: 0.12em;
-    }
-
-    /* ── PROFIL ── */
-    #profil h3 {
-        font-size: 2rem;
-        line-height: 1.05;
         margin-bottom: 16px !important;
     }
-    #profil p {
-        font-size: 15px;
-        line-height: 1.6;
-        font-weight: 400;
-    }
-    #profil blockquote {
-        padding-left: 16px !important;
-        margin-top: 24px;
-    }
-    #profil blockquote p {
-        font-size: 18px;
-        line-height: 1.35;
+    main > section:first-child .tracking-editorial {
+        font-size: 9px;
+        letter-spacing: 0.3em;
+        padding-left: 0 !important;
+        border-left: none !important;
+        opacity: 0.5;
     }
 
-    /* ── KARRIERE ── */
+    /* Headline: mutig, direkt unter dem Bild */
+    main > section:first-child h1 {
+        font-size: 13vw;
+        margin-bottom: 20px !important;
+        margin-left: 0 !important;
+    }
+    main > section:first-child h1 span {
+        margin-left: 0 !important;
+    }
+
+    /* CTAs */
+    main > section:first-child .flex.flex-col {
+        gap: 4px !important;
+    }
+    main > section:first-child a[href="#career"] {
+        padding: 16px 36px;
+        font-size: 10px;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    main > section:first-child a[href="#contact"] {
+        padding: 12px 0;
+        font-size: 10px;
+        justify-content: center;
+    }
+
+    /* Grid: kein Gap zwischen Bild und Content */
+    .min-h-screen > div:first-child {
+        gap: 20px !important;
+    }
+
+    /* ═══════════════════════════════════════════
+       2. RHYTHMUS — Sektionen atmen
+       ═══════════════════════════════════════════ */
+
+    #profil {
+        padding: var(--m-section) var(--m-pad) !important;
+    }
+    #career {
+        padding: 60px var(--m-pad) var(--m-section) !important;
+    }
+    #impact {
+        padding: 60px var(--m-pad) !important;
+    }
+    #contact {
+        padding: var(--m-section) var(--m-pad) 60px !important;
+    }
+
+    /* Philosophie-Sektion */
+    #career + section + section {
+        padding: 60px var(--m-pad) !important;
+    }
+
+    /* Int. Stationen */
+    #career + section + section + section {
+        padding: 40px var(--m-pad) !important;
+    }
+
+    /* ═══════════════════════════════════════════
+       8. TYPOGRAFIE-HIERARCHIE
+       Headlines schreien. Body flüstert. Labels verschwinden fast.
+       ═══════════════════════════════════════════ */
+
+    /* Section Labels — fast unsichtbar */
+    h2.text-\[10px\],
+    h2.text-\[11px\] {
+        font-size: 8px !important;
+        opacity: 0.45;
+        margin-bottom: 20px !important;
+    }
+
+    /* ═══════════════════════════════════════════
+       PROFIL + 3. ZITAT als eigener Moment
+       ═══════════════════════════════════════════ */
+
+    #profil .grid {
+        gap: 32px !important;
+    }
+    #profil h3 {
+        font-size: 2.25rem;
+        line-height: 1.0;
+        margin-bottom: 20px !important;
+    }
+    #profil > div > div > div:first-child p {
+        font-size: 15px;
+        line-height: 1.65;
+        font-weight: 400;
+        color: #57534e;
+    }
+
+    /* Zitat — eigener visueller Moment */
+    #profil blockquote {
+        padding: 24px 20px !important;
+        margin: 0 calc(var(--m-pad) * -1);
+        background: linear-gradient(135deg, #fafaf9, #f5f5f4);
+        border-left: 3px solid #1d4ed8 !important;
+        border-radius: 0;
+    }
+    #profil blockquote p {
+        font-size: 17px !important;
+        line-height: 1.4 !important;
+        font-weight: 400 !important;
+        color: #44403c !important;
+    }
+    #profil blockquote p span {
+        color: #1c1917 !important;
+        font-weight: 600 !important;
+    }
+
+    /* ═══════════════════════════════════════════
+       4. KARRIERE — Aktuelle Station hervorheben
+       ═══════════════════════════════════════════ */
+
     .station-card {
-        padding: 20px !important;
+        padding: 24px !important;
+    }
+    /* Erste Card (Hansgrohe = aktuell) hervorheben */
+    .station-card[data-station="hansgrohe"] {
+        background: #fefefe;
+        border-left: 3px solid #1d4ed8 !important;
     }
     .station-card .text-4xl {
-        font-size: 2rem;
+        font-size: 1.75rem;
+        opacity: 0.12;
     }
     .station-card h4 {
-        margin-bottom: 12px !important;
+        font-size: 11px;
+        margin-bottom: 10px !important;
     }
     .station-card > p {
         font-size: 14px;
-        line-height: 1.6;
+        line-height: 1.65;
         font-weight: 400;
+        color: #78716c;
     }
     .detail-panel > div {
-        padding: 20px !important;
+        padding: 24px !important;
     }
     .detail-panel .text-sm {
         font-size: 13px;
         font-weight: 400;
     }
 
-    /* ── FÜHRUNGSPHILOSOPHIE ── */
+    /* Führungsphilosophie */
     .philosophy-card {
-        padding: 20px !important;
+        padding: 24px !important;
         border-radius: 16px !important;
+        border: 1px solid rgba(0,0,0,0.04);
     }
     .philosophy-card h4 {
-        font-size: 10px;
-        margin-bottom: 8px !important;
+        font-size: 9px;
+        margin-bottom: 10px !important;
+        opacity: 0.5;
     }
     .philosophy-card > p:nth-child(3) {
-        font-size: 18px;
-        line-height: 1.2;
-        margin-bottom: 8px !important;
+        font-size: 17px;
+        line-height: 1.25;
+        margin-bottom: 10px !important;
     }
     .philosophy-card > p:last-child {
         font-size: 14px;
-        line-height: 1.55;
+        line-height: 1.6;
         font-weight: 400;
+        color: #78716c;
     }
     .philosophy-number {
         display: none !important;
     }
 
-    /* ── INTERNATIONALE STATIONEN ── */
-    /* Mobile-vertical list: kompakt, sauber */
+    /* Int. Stationen */
     .journey-line {
         display: none !important;
     }
 
-    /* ── EXPERTISE ── */
+    /* ═══════════════════════════════════════════
+       7. EXPERTISE — Full-bleed, kein Radius
+       ═══════════════════════════════════════════ */
+
     #expertise {
-        padding: var(--mobile-section) var(--mobile-pad) !important;
+        padding: var(--m-section) var(--m-pad) !important;
         margin: 0 !important;
-        border-radius: 24px !important;
+        border-radius: 0 !important;
     }
 
-    /* Expertise Heading */
+    #expertise h2 {
+        font-size: 8px !important;
+        opacity: 0.4;
+    }
     #expertise h3 {
         font-size: 2.25rem;
         margin-bottom: 12px !important;
     }
-    #expertise .mb-10 > p {
-        font-size: 16px;
-        line-height: 1.5;
+    #expertise .mb-10 > p,
+    #expertise > div > div:first-child > p {
+        font-size: 15px;
+        line-height: 1.55;
         font-weight: 400;
     }
 
-    /* Expertise Cards */
+    /* Expertise Cards Grid */
+    #expertise .grid.md\:grid-cols-2 {
+        gap: 8px !important;
+        margin-bottom: 40px !important;
+    }
+
     .expertise-card {
-        padding-top: 20px !important;
+        padding-top: 24px !important;
+        border-top-color: rgba(255,255,255,0.06) !important;
     }
     .expertise-card .expertise-number {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
+        opacity: 0.2;
     }
     .expertise-card h4 {
-        font-size: 10px;
+        font-size: 9px;
+        opacity: 0.5;
     }
     .expertise-card > p {
         font-size: 15px;
-        line-height: 1.5;
+        line-height: 1.55;
         font-weight: 400;
         margin-bottom: 16px !important;
     }
 
-    /* Proof Points — auf Touch-Devices immer sichtbar */
     .proof-point {
-        opacity: 0.8;
-        padding: 6px 0;
+        opacity: 0.75;
+        padding: 5px 0;
     }
     .proof-point span:last-child {
         font-size: 13px;
         font-weight: 400;
     }
 
-    /* Skill Tags */
     .skill-tag {
-        padding: 6px 12px;
-        font-size: 9px;
-        letter-spacing: 0.08em;
+        padding: 7px 14px;
+        font-size: 8px;
+        letter-spacing: 0.1em;
+        border-color: rgba(255,255,255,0.1);
+        color: rgba(255,255,255,0.4);
     }
 
-    /* ── SPRACHEN ── */
+    /* Sprachen */
     #expertise .border-t.border-white\/5 {
-        padding-top: 32px !important;
+        padding-top: 40px !important;
     }
     #expertise .border-t.border-white\/5 h4 {
         margin-bottom: 20px !important;
+        opacity: 0.5;
     }
     #expertise .border-t.border-white\/5 .text-xl {
-        font-size: 1.125rem;
+        font-size: 1.05rem;
     }
 
-    /* ── FAKTEN ── */
+    /* ═══════════════════════════════════════════
+       6. FAKTEN — Hierarchie, nicht Inventar
+       ═══════════════════════════════════════════ */
+
     #impact .grid {
-        gap: 20px !important;
+        gap: 24px 16px !important;
         padding-top: 32px !important;
     }
+    /* Alle Zahlen */
     #impact .text-4xl {
         font-size: 2rem;
+        color: #1c1917;
     }
     #impact .text-\[10px\] {
-        font-size: 9px;
+        font-size: 8px;
+        opacity: 0.7;
     }
     #impact .text-\[11px\] {
         font-size: 10px;
+        color: #a8a29e;
     }
-    /* Letztes Element (col-span-2) auf volle Breite zentriert */
+    /* Letztes Element zentriert */
     #impact .col-span-2 {
         justify-self: center;
     }
+    /* Die wichtigste Zahl hervorheben: 160+ Mitarbeiter */
+    #impact .col-span-2 .text-4xl {
+        font-size: 2.5rem;
+        color: #1d4ed8;
+    }
+    /* Border-left dezenter */
+    #impact .group {
+        border-left-width: 0 !important;
+        padding-left: 0 !important;
+    }
 
-    /* ── KONTAKT ── */
+    /* ═══════════════════════════════════════════
+       5. KONTAKT — tappbare Cards mit Tiefe
+       ═══════════════════════════════════════════ */
+
     #contact {
         text-align: left !important;
-        padding-top: 48px !important;
-        padding-bottom: 48px !important;
     }
     #contact > div > span:first-child {
-        margin-bottom: 16px !important;
+        margin-bottom: 12px !important;
+        opacity: 0.5;
+        font-size: 8px !important;
     }
     #contact h2 {
         font-size: 1.75rem;
         line-height: 1.15;
-        margin-bottom: 24px !important;
+        margin-bottom: 32px !important;
         text-align: left;
     }
     #contact .flex-col {
@@ -276,60 +416,68 @@
         margin-top: 0 !important;
     }
 
-    /* Kontakt-Cards */
+    /* Cards: tappbar mit Tiefe */
     #contact a.flex {
-        padding: 16px !important;
+        padding: 18px 16px !important;
         border-radius: 16px !important;
-        gap: 12px !important;
+        gap: 14px !important;
+        border-color: #e7e5e4 !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02);
+        background: white !important;
     }
     #contact a.flex > div:first-child {
-        width: 44px !important;
-        height: 44px !important;
-        min-width: 44px;
-        border-radius: 12px !important;
+        width: 48px !important;
+        height: 48px !important;
+        min-width: 48px;
+        border-radius: 14px !important;
     }
     #contact a.flex svg {
         width: 20px;
         height: 20px;
     }
     #contact a.flex p:first-child {
-        font-size: 9px;
-        margin-bottom: 2px !important;
+        font-size: 8px;
+        margin-bottom: 3px !important;
+        opacity: 0.4;
     }
     #contact a.flex p:last-child {
-        font-size: 14px;
+        font-size: 15px;
+        font-weight: 600;
         word-break: break-all;
     }
 
-    /* ── FOOTER ── */
+    /* ═══════════════════════════════════════════
+       10. FOOTER — minimal, sauber
+       ═══════════════════════════════════════════ */
+
     footer {
-        padding: 32px var(--mobile-pad) !important;
-        gap: 16px !important;
+        padding: 24px var(--m-pad) !important;
+        gap: 12px !important;
         text-align: center;
     }
+    /* Name/Titel ausblenden — steht schon im Nav */
     footer > div:first-child {
-        gap: 8px !important;
-    }
-    footer > div:first-child .w-12 {
-        display: none;
-    }
-    footer p {
-        font-size: 9px;
-        letter-spacing: 0.15em;
+        display: none !important;
     }
     footer > div:last-child {
-        gap: 24px !important;
+        gap: 32px !important;
+        width: 100%;
+        justify-content: center;
     }
     footer button {
         font-size: 10px;
         letter-spacing: 0.12em;
+        color: #a8a29e;
     }
 
-    /* ── MODALS ── */
+    /* ═══════════════════════════════════════════
+       MODALS
+       ═══════════════════════════════════════════ */
+
     #impressum-modal > div,
     #datenschutz-modal > div {
-        padding: 24px !important;
-        border-radius: 16px !important;
+        padding: 28px !important;
+        border-radius: 20px !important;
         margin: 16px;
     }
     #impressum-modal h3,
@@ -338,23 +486,20 @@
         margin-bottom: 16px !important;
     }
 
-    /* ── Global Spacing Reset ──
-       Überschreibt alle gap-X Klassen die auf Mobile zu groß sind */
+    /* ═══════════════════════════════════════════
+       GLOBAL OVERRIDES
+       ═══════════════════════════════════════════ */
 
-    /* Grids auf Mobile: konsistente Gaps */
     #profil .grid {
-        gap: 20px !important;
+        gap: 32px !important;
     }
     #career .grid.md\:grid-cols-3 {
         gap: 0 !important;
     }
-    .philosophy-card + .philosophy-card {
-        margin-top: 0;
-    }
 
-    /* ── Reveal Animations: schneller auf Mobile ── */
+    /* Reveal: schneller, subtiler */
     .reveal {
-        transform: translateY(20px);
-        transition-duration: 0.8s;
+        transform: translateY(16px);
+        transition-duration: 0.6s;
     }
 }
