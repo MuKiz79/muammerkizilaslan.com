@@ -1,0 +1,360 @@
+/* ══════════════════════════════════════════════════════════
+   Mobile Design System — Eigenständig, nicht komprimiert
+   Designed for 375px–767px
+
+   Philosophie: Mobile ist kein kleiner Desktop.
+   Mobile ist ein eigenes Medium mit eigenen Regeln.
+   ══════════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+
+    /* ── Design Tokens ── */
+    :root {
+        --mobile-pad: 20px;        /* Seitenrand — konsistent überall */
+        --mobile-section: 64px;    /* Vertikaler Abstand zwischen Sektionen */
+        --mobile-gap-sm: 8px;
+        --mobile-gap-md: 16px;
+        --mobile-gap-lg: 24px;
+    }
+
+    /* ── Typografie-Skala ──
+       Apple Human Interface:
+       Body 17px, Subhead 15px, Footnote 13px, Caption 11px
+       Wir adaptieren das für Editorial-Kontext.
+    */
+    body {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    /* ── Navigation ── */
+    #navbar {
+        padding: 12px var(--mobile-pad) !important;
+    }
+    #navbar a > span:first-child {
+        font-size: 8px;
+    }
+    #navbar a > span:last-child {
+        font-size: 1.25rem;
+    }
+
+    /* ── HERO ── */
+    /* Das Bild soll kompakt sein, die Headline sofort sichtbar */
+    .min-h-screen {
+        min-height: auto;
+        padding-top: 80px !important;
+        padding-bottom: 40px !important;
+        padding-left: var(--mobile-pad) !important;
+        padding-right: var(--mobile-pad) !important;
+    }
+
+    .profile-img-wrapper {
+        max-width: 140px;
+        aspect-ratio: 1;
+    }
+    .profile-img {
+        border-radius: 1.5rem;
+    }
+    .profile-img-fallback {
+        border-radius: 1.5rem;
+        font-size: 3rem;
+    }
+
+    /* Hero H1 */
+    main > section:first-child h1 {
+        font-size: 11vw;
+        margin-bottom: 24px !important;
+    }
+
+    /* Hero subtitle tagline */
+    main > section:first-child h1 + div,
+    main > section:first-child .mb-6 {
+        margin-bottom: 12px !important;
+    }
+
+    /* Hero CTAs */
+    main > section:first-child a[href="#career"] {
+        padding: 14px 32px;
+        font-size: 10px;
+    }
+
+    /* ── Alle Sektionen: Konsistentes Padding ── */
+    #profil,
+    #career,
+    #impact,
+    #contact {
+        padding-left: var(--mobile-pad) !important;
+        padding-right: var(--mobile-pad) !important;
+        padding-top: var(--mobile-section) !important;
+        padding-bottom: var(--mobile-section) !important;
+    }
+
+    /* Führungsphilosophie & Int. Stationen */
+    #profil + section + section,
+    #career + section + section {
+        padding-left: var(--mobile-pad) !important;
+        padding-right: var(--mobile-pad) !important;
+    }
+
+    /* ── Sektion-Überschriften ── */
+    /* Die kleinen "DAS PROFIL", "DIE STATIONEN" Labels */
+    .tracking-executive {
+        letter-spacing: 0.12em;
+    }
+
+    /* ── PROFIL ── */
+    #profil h3 {
+        font-size: 2rem;
+        line-height: 1.05;
+        margin-bottom: 16px !important;
+    }
+    #profil p {
+        font-size: 15px;
+        line-height: 1.6;
+        font-weight: 400;
+    }
+    #profil blockquote {
+        padding-left: 16px !important;
+        margin-top: 24px;
+    }
+    #profil blockquote p {
+        font-size: 18px;
+        line-height: 1.35;
+    }
+
+    /* ── KARRIERE ── */
+    .station-card {
+        padding: 20px !important;
+    }
+    .station-card .text-4xl {
+        font-size: 2rem;
+    }
+    .station-card h4 {
+        margin-bottom: 12px !important;
+    }
+    .station-card > p {
+        font-size: 14px;
+        line-height: 1.6;
+        font-weight: 400;
+    }
+    .detail-panel > div {
+        padding: 20px !important;
+    }
+    .detail-panel .text-sm {
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    /* ── FÜHRUNGSPHILOSOPHIE ── */
+    .philosophy-card {
+        padding: 20px !important;
+        border-radius: 16px !important;
+    }
+    .philosophy-card h4 {
+        font-size: 10px;
+        margin-bottom: 8px !important;
+    }
+    .philosophy-card > p:nth-child(3) {
+        font-size: 18px;
+        line-height: 1.2;
+        margin-bottom: 8px !important;
+    }
+    .philosophy-card > p:last-child {
+        font-size: 14px;
+        line-height: 1.55;
+        font-weight: 400;
+    }
+    .philosophy-number {
+        display: none !important;
+    }
+
+    /* ── INTERNATIONALE STATIONEN ── */
+    /* Mobile-vertical list: kompakt, sauber */
+    .journey-line {
+        display: none !important;
+    }
+
+    /* ── EXPERTISE ── */
+    #expertise {
+        padding: var(--mobile-section) var(--mobile-pad) !important;
+        margin: 0 !important;
+        border-radius: 24px !important;
+    }
+
+    /* Expertise Heading */
+    #expertise h3 {
+        font-size: 2.25rem;
+        margin-bottom: 12px !important;
+    }
+    #expertise .mb-10 > p {
+        font-size: 16px;
+        line-height: 1.5;
+        font-weight: 400;
+    }
+
+    /* Expertise Cards */
+    .expertise-card {
+        padding-top: 20px !important;
+    }
+    .expertise-card .expertise-number {
+        font-size: 1.75rem;
+    }
+    .expertise-card h4 {
+        font-size: 10px;
+    }
+    .expertise-card > p {
+        font-size: 15px;
+        line-height: 1.5;
+        font-weight: 400;
+        margin-bottom: 16px !important;
+    }
+
+    /* Proof Points — auf Touch-Devices immer sichtbar */
+    .proof-point {
+        opacity: 0.8;
+        padding: 6px 0;
+    }
+    .proof-point span:last-child {
+        font-size: 13px;
+        font-weight: 400;
+    }
+
+    /* Skill Tags */
+    .skill-tag {
+        padding: 6px 12px;
+        font-size: 9px;
+        letter-spacing: 0.08em;
+    }
+
+    /* ── SPRACHEN ── */
+    #expertise .border-t.border-white\/5 {
+        padding-top: 32px !important;
+    }
+    #expertise .border-t.border-white\/5 h4 {
+        margin-bottom: 20px !important;
+    }
+    #expertise .border-t.border-white\/5 .text-xl {
+        font-size: 1.125rem;
+    }
+
+    /* ── FAKTEN ── */
+    #impact .grid {
+        gap: 20px !important;
+        padding-top: 32px !important;
+    }
+    #impact .text-4xl {
+        font-size: 2rem;
+    }
+    #impact .text-\[10px\] {
+        font-size: 9px;
+    }
+    #impact .text-\[11px\] {
+        font-size: 10px;
+    }
+    /* Letztes Element (col-span-2) auf volle Breite zentriert */
+    #impact .col-span-2 {
+        justify-self: center;
+    }
+
+    /* ── KONTAKT ── */
+    #contact {
+        text-align: left !important;
+        padding-top: 48px !important;
+        padding-bottom: 48px !important;
+    }
+    #contact > div > span:first-child {
+        margin-bottom: 16px !important;
+    }
+    #contact h2 {
+        font-size: 1.75rem;
+        line-height: 1.15;
+        margin-bottom: 24px !important;
+        text-align: left;
+    }
+    #contact .flex-col {
+        gap: 12px !important;
+        margin-top: 0 !important;
+    }
+
+    /* Kontakt-Cards */
+    #contact a.flex {
+        padding: 16px !important;
+        border-radius: 16px !important;
+        gap: 12px !important;
+    }
+    #contact a.flex > div:first-child {
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px;
+        border-radius: 12px !important;
+    }
+    #contact a.flex svg {
+        width: 20px;
+        height: 20px;
+    }
+    #contact a.flex p:first-child {
+        font-size: 9px;
+        margin-bottom: 2px !important;
+    }
+    #contact a.flex p:last-child {
+        font-size: 14px;
+        word-break: break-all;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+        padding: 32px var(--mobile-pad) !important;
+        gap: 16px !important;
+        text-align: center;
+    }
+    footer > div:first-child {
+        gap: 8px !important;
+    }
+    footer > div:first-child .w-12 {
+        display: none;
+    }
+    footer p {
+        font-size: 9px;
+        letter-spacing: 0.15em;
+    }
+    footer > div:last-child {
+        gap: 24px !important;
+    }
+    footer button {
+        font-size: 10px;
+        letter-spacing: 0.12em;
+    }
+
+    /* ── MODALS ── */
+    #impressum-modal > div,
+    #datenschutz-modal > div {
+        padding: 24px !important;
+        border-radius: 16px !important;
+        margin: 16px;
+    }
+    #impressum-modal h3,
+    #datenschutz-modal h3 {
+        font-size: 1.25rem;
+        margin-bottom: 16px !important;
+    }
+
+    /* ── Global Spacing Reset ──
+       Überschreibt alle gap-X Klassen die auf Mobile zu groß sind */
+
+    /* Grids auf Mobile: konsistente Gaps */
+    #profil .grid {
+        gap: 20px !important;
+    }
+    #career .grid.md\:grid-cols-3 {
+        gap: 0 !important;
+    }
+    .philosophy-card + .philosophy-card {
+        margin-top: 0;
+    }
+
+    /* ── Reveal Animations: schneller auf Mobile ── */
+    .reveal {
+        transform: translateY(20px);
+        transition-duration: 0.8s;
+    }
+}
