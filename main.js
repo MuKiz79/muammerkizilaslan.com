@@ -20,10 +20,10 @@ function toggleStation(id) {
         icon.classList.add('rotate-90');
         card.classList.add('active-station');
 
-        // Auf Mobile: zum geöffneten Panel scrollen
+        // Auf Mobile: zur angeklickten Card scrollen (nicht zum Panel)
         if (window.innerWidth < 768) {
             setTimeout(function() {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 100);
         }
     }
