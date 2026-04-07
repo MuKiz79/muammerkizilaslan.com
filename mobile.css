@@ -5,8 +5,8 @@
    Regel: Diese Datei kontrolliert ALLES auf Mobile.
    Die index.html wird NICHT verändert.
 
-   Apple-Minimum: 11px Schrift, 44px Touch-Targets,
-   konsistenter 8px-Spacing-Rhythmus.
+   Apple-Prinzipien: 11px min. Schrift, 44px Touch-Targets,
+   großzügiger Weißraum, konsistenter Rhythmus.
    ══════════════════════════════════════════════════════════ */
 
 @media (max-width: 767px) {
@@ -14,7 +14,7 @@
     /* ── Tokens ── */
     :root {
         --pad: 24px;
-        --section-gap: 56px;
+        --section-gap: 80px;
     }
 
     /* ══════════════════════════
@@ -44,7 +44,7 @@
     h2.text-\[10px\], h2.text-\[11px\] {
         font-size: 11px !important;
         opacity: 0.5;
-        margin-bottom: 16px !important;
+        margin-bottom: 20px !important;
         letter-spacing: 0.14em;
     }
 
@@ -65,7 +65,7 @@
        ══════════════════════════ */
 
     #navbar {
-        padding: 12px var(--pad) !important;
+        padding: 14px var(--pad) !important;
     }
     /* backdrop-filter erzeugt einen Containing Block der fixed-Kinder
        (mobile-menu) auf die Navbar beschränkt — auf Mobile deaktivieren */
@@ -91,11 +91,11 @@
 
     .min-h-screen {
         min-height: auto;
-        padding: var(--section-gap) var(--pad) 24px !important;
+        padding: 72px var(--pad) 48px !important;
         align-items: flex-start !important;
     }
     .min-h-screen > div:first-child {
-        gap: 16px !important;
+        gap: 24px !important;
     }
 
     /* Bild: volle Breite */
@@ -115,7 +115,7 @@
     /* Tagline */
     main > section:first-child .mb-20:first-child,
     main > section:first-child .overflow-hidden:first-child {
-        margin-bottom: 8px !important;
+        margin-bottom: 16px !important;
     }
     main > section:first-child .tracking-editorial {
         font-size: 11px;
@@ -128,7 +128,7 @@
     /* H1 */
     main > section:first-child h1 {
         font-size: 14vw !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 32px !important;
         margin-left: 0 !important;
         line-height: 0.9;
     }
@@ -140,7 +140,7 @@
     main > section:first-child .flex.flex-col,
     main > section:first-child .flex.sm\:flex-row {
         flex-direction: column !important;
-        gap: 0 !important;
+        gap: 12px !important;
         width: 100%;
     }
     main > section:first-child a[href="#career"] {
@@ -174,35 +174,35 @@
        ══════════════════════════ */
 
     #profil {
-        padding: var(--section-gap) var(--pad) 40px !important;
+        padding: var(--section-gap) var(--pad) !important;
     }
     #profil .grid {
-        gap: 24px !important;
+        gap: 32px !important;
     }
     #profil h3 {
         font-size: 2rem !important;
         line-height: 1.02;
-        margin-bottom: 16px !important;
+        margin-bottom: 20px !important;
         letter-spacing: -0.03em;
     }
     #profil .lg\:col-span-7 p {
         font-size: 15px;
-        line-height: 1.6;
+        line-height: 1.65;
         font-weight: 400;
         color: #57534e;
     }
 
     /* Zitat — eigener Block */
     #profil blockquote {
-        padding: 20px var(--pad) !important;
-        margin: 0 calc(var(--pad) * -1);
+        padding: 24px var(--pad) !important;
+        margin: 16px calc(var(--pad) * -1) 0;
         background: #f5f5f4;
         border-left: 3px solid #1d4ed8 !important;
         border-radius: 0;
     }
     #profil blockquote p {
         font-size: 16px !important;
-        line-height: 1.45 !important;
+        line-height: 1.5 !important;
         font-weight: 400 !important;
         color: #44403c !important;
     }
@@ -233,7 +233,7 @@
     }
 
     .station-card {
-        padding: 24px var(--pad) 20px !important;
+        padding: 28px var(--pad) 24px !important;
         border-top: 1px solid #e7e5e4 !important;
         border-left: none !important;
         border-right: none !important;
@@ -250,7 +250,7 @@
         background: rgba(29,78,216,0.02) !important;
     }
     .station-card .flex.justify-between {
-        margin-bottom: 8px !important;
+        margin-bottom: 10px !important;
     }
     /* Nummern 01/02/03 */
     .station-card .text-6xl {
@@ -259,25 +259,26 @@
     }
     .station-card h4 {
         font-size: 11px;
-        margin-bottom: 6px !important;
+        margin-bottom: 8px !important;
         letter-spacing: 0.12em;
     }
     .station-card > p {
         font-size: 14px;
-        line-height: 1.6;
+        line-height: 1.65;
         font-weight: 400;
         color: #78716c;
     }
     .station-card .mt-auto {
-        padding-top: 12px !important;
+        padding-top: 16px !important;
     }
     .detail-panel > div {
-        padding: 16px var(--pad) 20px !important;
+        padding: 20px var(--pad) 24px !important;
         background: #fafaf9 !important;
     }
     .detail-panel .text-sm {
         font-size: 13px;
         font-weight: 400;
+        line-height: 1.6;
     }
 
     /* ══════════════════════════
@@ -289,14 +290,14 @@
     }
     #career + section h3 {
         font-size: 2rem !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 32px !important;
     }
     #career + section .grid {
         gap: 0 !important;
     }
 
     .philosophy-card {
-        padding: 20px 0 !important;
+        padding: 24px 0 !important;
         border-radius: 0 !important;
         background: transparent !important;
         backdrop-filter: none !important;
@@ -310,17 +311,17 @@
     }
     .philosophy-card h4 {
         font-size: 11px;
-        margin-bottom: 8px !important;
+        margin-bottom: 10px !important;
         opacity: 0.5;
     }
     .philosophy-card > p:nth-child(3) {
         font-size: 16px;
-        line-height: 1.3;
-        margin-bottom: 8px !important;
+        line-height: 1.35;
+        margin-bottom: 10px !important;
     }
     .philosophy-card > p:last-child {
         font-size: 14px;
-        line-height: 1.55;
+        line-height: 1.6;
         font-weight: 400;
         color: #78716c;
     }
@@ -333,7 +334,7 @@
        ══════════════════════════ */
 
     #career + section + section {
-        padding: 24px var(--pad) 32px !important;
+        padding: 32px var(--pad) 40px !important;
     }
     .journey-line {
         display: none !important;
@@ -352,19 +353,19 @@
     #expertise h2 {
         font-size: 11px !important;
         opacity: 0.5;
-        margin-bottom: 12px !important;
+        margin-bottom: 16px !important;
     }
     #expertise h3 {
         font-size: 2rem !important;
-        margin-bottom: 10px !important;
+        margin-bottom: 12px !important;
     }
     /* Intro-Text */
     #expertise > div > div:first-child {
-        margin-bottom: 32px !important;
+        margin-bottom: 40px !important;
     }
     #expertise > div > div:first-child > p {
         font-size: 14px;
-        line-height: 1.55;
+        line-height: 1.6;
         font-weight: 400;
         opacity: 0.5;
     }
@@ -372,15 +373,15 @@
     /* Cards Grid */
     #expertise .grid.md\:grid-cols-2 {
         gap: 0 !important;
-        margin-bottom: 32px !important;
+        margin-bottom: 40px !important;
     }
     .expertise-card {
-        padding-top: 20px !important;
-        padding-bottom: 4px;
+        padding-top: 24px !important;
+        padding-bottom: 8px;
         border-top-color: rgba(255,255,255,0.06) !important;
     }
     .expertise-card .flex.items-center {
-        margin-bottom: 10px !important;
+        margin-bottom: 12px !important;
     }
     .expertise-card .expertise-number {
         font-size: 1.25rem !important;
@@ -392,28 +393,28 @@
     }
     .expertise-card > p {
         font-size: 14px;
-        line-height: 1.55;
+        line-height: 1.6;
         font-weight: 400;
-        margin-bottom: 12px !important;
+        margin-bottom: 16px !important;
     }
     .proof-point {
         opacity: 0.7;
-        padding: 4px 0;
+        padding: 5px 0;
     }
     .proof-point span:last-child {
         font-size: 12px;
         font-weight: 400;
     }
     .skill-tag {
-        padding: 6px 12px;
+        padding: 8px 14px;
         font-size: 11px;
         letter-spacing: 0.06em;
         border-color: rgba(255,255,255,0.08);
         color: rgba(255,255,255,0.5);
     }
     .expertise-card .flex-wrap {
-        gap: 6px !important;
-        margin-bottom: 8px !important;
+        gap: 8px !important;
+        margin-bottom: 12px !important;
     }
     .expertise-card > span:last-child {
         font-size: 11px !important;
@@ -422,23 +423,23 @@
 
     /* Sprachen */
     #expertise .border-t.border-white\/5 {
-        padding-top: 32px !important;
+        padding-top: 40px !important;
     }
     #expertise .border-t.border-white\/5 h4 {
-        margin-bottom: 16px !important;
+        margin-bottom: 20px !important;
         opacity: 0.5;
         font-size: 11px !important;
     }
     /* Sprach-Grid: 2 Spalten */
     #expertise .border-t.border-white\/5 .grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 16px 12px !important;
+        gap: 20px 16px !important;
     }
     #expertise .border-t.border-white\/5 .text-3xl {
         font-size: 1.125rem !important;
     }
     #expertise .border-t.border-white\/5 .flex-col {
-        margin-bottom: 6px !important;
+        margin-bottom: 8px !important;
     }
     #expertise .border-t.border-white\/5 .text-\[10px\] {
         font-size: 11px;
@@ -453,8 +454,8 @@
         padding: var(--section-gap) var(--pad) !important;
     }
     #impact .grid {
-        gap: 20px 12px !important;
-        padding-top: 24px !important;
+        gap: 24px 16px !important;
+        padding-top: 28px !important;
         border-top: none !important;
     }
     /* Counter-Zahlen */
@@ -488,32 +489,32 @@
 
     #contact {
         text-align: left !important;
-        padding: var(--section-gap) var(--pad) 40px !important;
+        padding: var(--section-gap) var(--pad) !important;
         background: var(--bg) !important;
     }
     #contact > div > span:first-child {
-        margin-bottom: 8px !important;
+        margin-bottom: 12px !important;
         opacity: 0.5;
         font-size: 11px !important;
     }
     #contact h2 {
         font-size: 1.75rem !important;
         line-height: 1.15;
-        margin-bottom: 28px !important;
+        margin-bottom: 32px !important;
         text-align: left;
     }
     #contact > div > div.flex {
         flex-direction: column !important;
         align-items: stretch !important;
         justify-content: flex-start !important;
-        gap: 16px !important;
+        gap: 0 !important;
         margin-top: 0 !important;
     }
     /* Cards — linksbündig, flach, volle Breite */
     #contact .project-card {
-        padding: 16px 0 !important;
+        padding: 20px 0 !important;
         border-radius: 0 !important;
-        gap: 14px !important;
+        gap: 16px !important;
         border: none !important;
         border-bottom: 1px solid #e7e5e4 !important;
         box-shadow: none !important;
@@ -555,7 +556,7 @@
        ══════════════════════════ */
 
     footer {
-        padding: 20px var(--pad) !important;
+        padding: 28px var(--pad) !important;
         gap: 0 !important;
         text-align: center;
         border-top: none !important;
