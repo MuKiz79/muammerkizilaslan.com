@@ -37,38 +37,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const splash = document.getElementById('splash');
     if (splash) {
         document.body.style.overflow = 'hidden';
-        // Text einblenden
-        requestAnimationFrame(() => {
+        // Phase 1: weiß → nach 1s zu dunkel wechseln
+        setTimeout(() => {
+            splash.classList.add('phase-dark');
+        }, 1000);
+        // Phase 2: Text einblenden (nach Farbwechsel)
+        setTimeout(() => {
             splash.querySelector('.splash-name').style.opacity = '1';
             splash.querySelector('.splash-name').style.transform = 'translateY(0)';
+        }, 1400);
+        setTimeout(() => {
             splash.querySelector('.splash-sub').style.opacity = '1';
             splash.querySelector('.splash-sub').style.transform = 'translateY(0)';
-        });
-        // Nach 2.5s: Splash wegfaden
+        }, 1800);
+        // Phase 3: Splash wegfaden
         setTimeout(() => {
             splash.style.opacity = '0';
             splash.style.visibility = 'hidden';
             document.body.style.overflow = '';
-        }, 2500);
-        // Nach Transition: Element entfernen
-        setTimeout(() => splash.remove(), 3500);
+        }, 3800);
+        setTimeout(() => splash.remove(), 4800);
     }
 
     // ── Scroll: Progress + Navbar ──
     let ticking = false;
-    const mobileMenu = document.getElementById('mobile-menu');
-    const scrollClasses = ['bg-[#f5f5f4]/95', 'py-8', 'border-b', 'border-stone-200', 'shadow-2xl'];
     window.addEventListener('scroll', () => {
         if (!ticking) {
             requestAnimationFrame(() => {
                 const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
                 progressBar.style.width = (window.pageYOffset / totalHeight) * 100 + '%';
-                const menuOpen = mobileMenu && mobileMenu.classList.contains('open');
                 if (window.scrollY > 80) {
-                    nav.classList.add(...scrollClasses);
-                    if (!menuOpen) nav.classList.add('backdrop-blur-3xl');
+                    nav.classList.add('bg-[#f5f5f4]/95', 'backdrop-blur-3xl', 'py-8', 'border-b', 'border-stone-200', 'shadow-2xl');
                 } else {
-                    nav.classList.remove(...scrollClasses, 'backdrop-blur-3xl');
+                    nav.classList.remove('bg-[#f5f5f4]/95', 'backdrop-blur-3xl', 'py-8', 'border-b', 'border-stone-200', 'shadow-2xl');
                 }
                 ticking = false;
             });
@@ -136,24 +137,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Mobile Menu ──
     const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
     if (menuBtn && mobileMenu) {
-        function openMenu() {
-            menuBtn.classList.add('open');
-            mobileMenu.classList.add('open');
-            nav.classList.remove('backdrop-blur-3xl');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeMenu() {
-            menuBtn.classList.remove('open');
-            mobileMenu.classList.remove('open');
-            document.body.style.overflow = '';
-            if (window.scrollY > 80) nav.classList.add('backdrop-blur-3xl');
-        }
         menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+            menuBtn.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
         });
         mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', closeMenu);
+            link.addEventListener('click', () => {
+                menuBtn.classList.remove('open');
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
         });
     }
 });

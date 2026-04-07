@@ -103,6 +103,9 @@ button:focus-visible,
     box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.25);
 }
 
+/* ── Splash Screen ── */
+#splash.phase-dark { background: #0f172a; }
+
 /* ── Mobile Menu ── */
 #mobile-menu.open { opacity: 1; pointer-events: auto; }
 #mobile-menu-btn.open #bar1 { transform: rotate(45deg) translate(2px, 2px); }

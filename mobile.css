@@ -55,6 +55,12 @@
     #navbar {
         padding: 12px var(--pad) !important;
     }
+    /* backdrop-filter erzeugt einen Containing Block der fixed-Kinder
+       (mobile-menu) auf die Navbar beschränkt — auf Mobile deaktivieren */
+    #navbar.backdrop-blur-3xl {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
     #navbar.shadow-2xl {
         box-shadow: 0 0.5px 0 rgba(0,0,0,0.08) !important;
         background: rgba(245,245,244,0.98) !important;
