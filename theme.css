@@ -132,6 +132,7 @@ button:focus-visible,
     letter-spacing: 0.3em;
     text-transform: uppercase;
     font-weight: 700;
+    text-align: center;
     opacity: 0;
     animation: loaderFade 1.5s ease-out 0.3s forwards;
 }
