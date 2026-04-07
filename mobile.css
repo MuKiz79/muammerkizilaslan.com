@@ -4,6 +4,9 @@
 
    Regel: Diese Datei kontrolliert ALLES auf Mobile.
    Die index.html wird NICHT verändert.
+
+   Apple-Minimum: 11px Schrift, 44px Touch-Targets,
+   konsistenter 8px-Spacing-Rhythmus.
    ══════════════════════════════════════════════════════════ */
 
 @media (max-width: 767px) {
@@ -11,6 +14,7 @@
     /* ── Tokens ── */
     :root {
         --pad: 24px;
+        --section-gap: 56px;
     }
 
     /* ══════════════════════════
@@ -19,7 +23,7 @@
 
     .loader { padding: 0 var(--pad); }
     .loader-text { font-size: 2rem; }
-    .loader-sub { font-size: 0.6rem; letter-spacing: 0.2em; }
+    .loader-sub { font-size: 11px; letter-spacing: 0.18em; }
 
     /* ══════════════════════════
        GLOBAL
@@ -38,8 +42,8 @@
 
     /* Section labels */
     h2.text-\[10px\], h2.text-\[11px\] {
-        font-size: 9px !important;
-        opacity: 0.4;
+        font-size: 11px !important;
+        opacity: 0.5;
         margin-bottom: 16px !important;
         letter-spacing: 0.14em;
     }
@@ -74,7 +78,7 @@
         background: rgba(245,245,244,0.98) !important;
     }
     #navbar a > span:first-child {
-        font-size: 7px;
+        font-size: 11px;
         opacity: 0.5;
     }
     #navbar a > span:last-child {
@@ -87,7 +91,7 @@
 
     .min-h-screen {
         min-height: auto;
-        padding: 64px var(--pad) 24px !important;
+        padding: var(--section-gap) var(--pad) 24px !important;
         align-items: flex-start !important;
     }
     .min-h-screen > div:first-child {
@@ -114,11 +118,11 @@
         margin-bottom: 8px !important;
     }
     main > section:first-child .tracking-editorial {
-        font-size: 8px;
-        letter-spacing: 0.25em;
+        font-size: 11px;
+        letter-spacing: 0.2em;
         padding-left: 0 !important;
         border-left: none !important;
-        opacity: 0.35;
+        opacity: 0.5;
     }
 
     /* H1 */
@@ -132,7 +136,7 @@
         margin-left: 0 !important;
     }
 
-    /* CTA: ein Button, volle Breite */
+    /* CTA: beide Buttons, volle Breite */
     main > section:first-child .flex.flex-col,
     main > section:first-child .flex.sm\:flex-row {
         flex-direction: column !important;
@@ -141,7 +145,7 @@
     }
     main > section:first-child a[href="#career"] {
         padding: 16px 0;
-        font-size: 10px;
+        font-size: 11px;
         width: 100%;
         text-align: center;
         justify-content: center;
@@ -149,7 +153,15 @@
         border-radius: 14px;
     }
     main > section:first-child a[href="#contact"] {
-        display: none !important;
+        padding: 14px 0;
+        font-size: 11px;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        display: flex !important;
+    }
+    main > section:first-child a[href="#contact"] span {
+        display: none;
     }
 
     /* Scroll-Indicator: weg */
@@ -162,7 +174,7 @@
        ══════════════════════════ */
 
     #profil {
-        padding: 56px var(--pad) 40px !important;
+        padding: var(--section-gap) var(--pad) 40px !important;
     }
     #profil .grid {
         gap: 24px !important;
@@ -204,7 +216,7 @@
        ══════════════════════════ */
 
     #career {
-        padding: 40px var(--pad) 48px !important;
+        padding: var(--section-gap) var(--pad) !important;
     }
 
     /* Container: flach, kein Radius, kein Shadow */
@@ -243,7 +255,7 @@
     /* Nummern 01/02/03 */
     .station-card .text-6xl {
         font-size: 1.25rem !important;
-        opacity: 0.08;
+        opacity: 0.12;
     }
     .station-card h4 {
         font-size: 11px;
@@ -273,7 +285,7 @@
        ══════════════════════════ */
 
     #career + section {
-        padding: 48px var(--pad) !important;
+        padding: var(--section-gap) var(--pad) !important;
     }
     #career + section h3 {
         font-size: 2rem !important;
@@ -297,9 +309,9 @@
         padding-bottom: 0 !important;
     }
     .philosophy-card h4 {
-        font-size: 8px;
+        font-size: 11px;
         margin-bottom: 8px !important;
-        opacity: 0.4;
+        opacity: 0.5;
     }
     .philosophy-card > p:nth-child(3) {
         font-size: 16px;
@@ -332,14 +344,14 @@
        ══════════════════════════ */
 
     #expertise {
-        padding: 56px var(--pad) !important;
+        padding: var(--section-gap) var(--pad) !important;
         margin: 0 !important;
         border-radius: 0 !important;
         box-shadow: none !important;
     }
     #expertise h2 {
-        font-size: 9px !important;
-        opacity: 0.35;
+        font-size: 11px !important;
+        opacity: 0.5;
         margin-bottom: 12px !important;
     }
     #expertise h3 {
@@ -354,7 +366,7 @@
         font-size: 14px;
         line-height: 1.55;
         font-weight: 400;
-        opacity: 0.4;
+        opacity: 0.5;
     }
 
     /* Cards Grid */
@@ -372,11 +384,11 @@
     }
     .expertise-card .expertise-number {
         font-size: 1.25rem !important;
-        opacity: 0.15;
+        opacity: 0.2;
     }
     .expertise-card h4 {
-        font-size: 8px;
-        opacity: 0.45;
+        font-size: 11px;
+        opacity: 0.55;
     }
     .expertise-card > p {
         font-size: 14px;
@@ -394,18 +406,18 @@
     }
     .skill-tag {
         padding: 6px 12px;
-        font-size: 7px;
-        letter-spacing: 0.1em;
+        font-size: 11px;
+        letter-spacing: 0.06em;
         border-color: rgba(255,255,255,0.08);
-        color: rgba(255,255,255,0.35);
+        color: rgba(255,255,255,0.5);
     }
     .expertise-card .flex-wrap {
         gap: 6px !important;
         margin-bottom: 8px !important;
     }
     .expertise-card > span:last-child {
-        font-size: 7px !important;
-        opacity: 0.15;
+        font-size: 11px !important;
+        opacity: 0.2;
     }
 
     /* Sprachen */
@@ -414,8 +426,8 @@
     }
     #expertise .border-t.border-white\/5 h4 {
         margin-bottom: 16px !important;
-        opacity: 0.4;
-        font-size: 9px !important;
+        opacity: 0.5;
+        font-size: 11px !important;
     }
     /* Sprach-Grid: 2 Spalten */
     #expertise .border-t.border-white\/5 .grid {
@@ -429,8 +441,8 @@
         margin-bottom: 6px !important;
     }
     #expertise .border-t.border-white\/5 .text-\[10px\] {
-        font-size: 8px;
-        opacity: 0.3;
+        font-size: 11px;
+        opacity: 0.4;
     }
 
     /* ══════════════════════════
@@ -438,7 +450,7 @@
        ══════════════════════════ */
 
     #impact {
-        padding: 48px var(--pad) !important;
+        padding: var(--section-gap) var(--pad) !important;
     }
     #impact .grid {
         gap: 20px 12px !important;
@@ -450,11 +462,11 @@
         font-size: 1.75rem !important;
     }
     #impact .text-\[10px\] {
-        font-size: 8px;
+        font-size: 11px;
         opacity: 0.6;
     }
     #impact .text-\[11px\] {
-        font-size: 10px;
+        font-size: 12px;
         color: #a8a29e;
     }
     #impact .group {
@@ -476,13 +488,13 @@
 
     #contact {
         text-align: left !important;
-        padding: 48px var(--pad) 40px !important;
+        padding: var(--section-gap) var(--pad) 40px !important;
         background: var(--bg) !important;
     }
     #contact > div > span:first-child {
         margin-bottom: 8px !important;
-        opacity: 0.4;
-        font-size: 8px !important;
+        opacity: 0.5;
+        font-size: 11px !important;
     }
     #contact h2 {
         font-size: 1.75rem !important;
@@ -528,9 +540,9 @@
         height: 18px;
     }
     #contact .project-card .text-\[11px\] {
-        font-size: 8px;
+        font-size: 11px;
         margin-bottom: 2px !important;
-        opacity: 0.35;
+        opacity: 0.5;
     }
     #contact .project-card .text-lg {
         font-size: 15px !important;
@@ -557,8 +569,8 @@
         justify-content: center;
     }
     footer button {
-        font-size: 9px;
-        letter-spacing: 0.12em;
+        font-size: 11px;
+        letter-spacing: 0.1em;
         color: #a8a29e;
     }
 
