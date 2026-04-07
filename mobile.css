@@ -91,7 +91,7 @@
 
     .min-h-screen {
         min-height: auto;
-        padding: 72px var(--pad) 48px !important;
+        padding: 100px var(--pad) 48px !important;
         align-items: flex-start !important;
     }
     .min-h-screen > div:first-child {
