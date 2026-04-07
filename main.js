@@ -56,15 +56,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Scroll: Progress + Navbar ──
     let ticking = false;
+    const mobileMenu = document.getElementById('mobile-menu');
+    const scrollClasses = ['bg-[#f5f5f4]/95', 'py-8', 'border-b', 'border-stone-200', 'shadow-2xl'];
     window.addEventListener('scroll', () => {
         if (!ticking) {
             requestAnimationFrame(() => {
                 const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
                 progressBar.style.width = (window.pageYOffset / totalHeight) * 100 + '%';
+                const menuOpen = mobileMenu && mobileMenu.classList.contains('open');
                 if (window.scrollY > 80) {
-                    nav.classList.add('bg-[#f5f5f4]/95', 'backdrop-blur-3xl', 'py-8', 'border-b', 'border-stone-200', 'shadow-2xl');
+                    nav.classList.add(...scrollClasses);
+                    if (!menuOpen) nav.classList.add('backdrop-blur-3xl');
                 } else {
-                    nav.classList.remove('bg-[#f5f5f4]/95', 'backdrop-blur-3xl', 'py-8', 'border-b', 'border-stone-200', 'shadow-2xl');
+                    nav.classList.remove(...scrollClasses, 'backdrop-blur-3xl');
                 }
                 ticking = false;
             });
@@ -132,20 +136,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ── Mobile Menu ──
     const menuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const blurClasses = ['backdrop-blur-3xl'];
     if (menuBtn && mobileMenu) {
         function openMenu() {
             menuBtn.classList.add('open');
             mobileMenu.classList.add('open');
-            nav.classList.remove(...blurClasses);
+            nav.classList.remove('backdrop-blur-3xl');
             document.body.style.overflow = 'hidden';
         }
         function closeMenu() {
             menuBtn.classList.remove('open');
             mobileMenu.classList.remove('open');
             document.body.style.overflow = '';
-            if (window.scrollY > 80) nav.classList.add(...blurClasses);
+            if (window.scrollY > 80) nav.classList.add('backdrop-blur-3xl');
         }
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
