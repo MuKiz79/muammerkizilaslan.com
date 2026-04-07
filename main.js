@@ -37,26 +37,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const splash = document.getElementById('splash');
     if (splash) {
         document.body.style.overflow = 'hidden';
-        // Phase 1: weiß → nach 1s zu dunkel wechseln
-        setTimeout(() => {
-            splash.classList.add('phase-dark');
-        }, 1000);
-        // Phase 2: Text einblenden (nach Farbwechsel)
+        // Name einblenden
         setTimeout(() => {
             splash.querySelector('.splash-name').style.opacity = '1';
             splash.querySelector('.splash-name').style.transform = 'translateY(0)';
-        }, 1400);
+        }, 300);
+        // Subline einblenden
         setTimeout(() => {
             splash.querySelector('.splash-sub').style.opacity = '1';
             splash.querySelector('.splash-sub').style.transform = 'translateY(0)';
-        }, 1800);
-        // Phase 3: Splash wegfaden
+        }, 800);
+        // Splash wegfaden
         setTimeout(() => {
             splash.style.opacity = '0';
             splash.style.visibility = 'hidden';
             document.body.style.overflow = '';
-        }, 3800);
-        setTimeout(() => splash.remove(), 4800);
+        }, 3000);
+        setTimeout(() => splash.remove(), 4000);
     }
 
     // ── Scroll: Progress + Navbar ──
