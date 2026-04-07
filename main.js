@@ -33,28 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBar = document.getElementById('progress-bar');
     const nav = document.getElementById('navbar');
 
-    // ── Splash Screen ──
-    const splash = document.getElementById('splash');
-    if (splash) {
-        document.body.style.overflow = 'hidden';
-        // Name einblenden
-        setTimeout(() => {
-            splash.querySelector('.splash-name').style.opacity = '1';
-            splash.querySelector('.splash-name').style.transform = 'translateY(0)';
-        }, 300);
-        // Subline einblenden
-        setTimeout(() => {
-            splash.querySelector('.splash-sub').style.opacity = '1';
-            splash.querySelector('.splash-sub').style.transform = 'translateY(0)';
-        }, 800);
-        // Splash wegfaden
-        setTimeout(() => {
-            splash.style.opacity = '0';
-            splash.style.visibility = 'hidden';
-            document.body.style.overflow = '';
-        }, 3000);
-        setTimeout(() => splash.remove(), 4000);
-    }
+    // ── Loader (wie Kolbe) ──
+    window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2400);
+    });
 
     // ── Scroll: Progress + Navbar ──
     let ticking = false;
