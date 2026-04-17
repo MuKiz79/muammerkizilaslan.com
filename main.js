@@ -75,26 +75,29 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting && !entry.target.dataset.counted) {
                 entry.target.dataset.counted = 'true';
-                const target = parseInt(entry.target.dataset.target);
-                const suffix = entry.target.dataset.suffix || '';
-                const duration = 2000;
-                const start = performance.now();
+                const el = entry.target;
+                const target = parseInt(el.dataset.target);
+                const suffix = el.dataset.suffix || '';
+                const duration = 2500;
 
-                function update(now) {
-                    const elapsed = now - start;
-                    const progress = Math.min(elapsed / duration, 1);
-                    const current = Math.round(easeOutQuart(progress) * target);
-                    entry.target.textContent = current + suffix;
-                    if (progress < 1) {
-                        requestAnimationFrame(update);
-                    } else {
-                        entry.target.textContent = target + suffix;
+                setTimeout(() => {
+                    const start = performance.now();
+                    function update(now) {
+                        const elapsed = now - start;
+                        const progress = Math.min(elapsed / duration, 1);
+                        const current = Math.round(easeOutQuart(progress) * target);
+                        el.textContent = current + suffix;
+                        if (progress < 1) {
+                            requestAnimationFrame(update);
+                        } else {
+                            el.textContent = target + suffix;
+                        }
                     }
-                }
-                requestAnimationFrame(update);
+                    requestAnimationFrame(update);
+                }, 300);
             }
         });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
     document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 
     // ── Language Bars — Animate on Scroll ──
