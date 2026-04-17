@@ -11,7 +11,7 @@ Muammer Kizilaslan is Vice President IT & Digital at Hansgrohe SE, a global lead
 
 ## Previous Roles
 - **Chief Digital Officer & Board Member** at Borusan Mannesmann, Istanbul (2019–2021): Developed company-wide digital strategy, supply chain digitalization, Industry 4.0 roadmap.
-- **13+ years at BSH Home Appliances** (2006–2019): Five leadership roles across Munich, Istanbul, and Milan — from Senior BI Engineer to Head of IT Factories. Built a global BI Center of Excellence and led one of the world's largest SAP HANA transformation projects.
+- **13+ years at BSH Home Appliances** (2006–2019): Five leadership roles across Munich, Istanbul, and Milan — from Senior BI Engineer to Head of IT Factories. Built a global BI Center of Excellence and led one of the world's largest SAP BW on HANA transformation projects.
 
 ## Core Expertise
 - Strategic IT leadership & P&L ownership
