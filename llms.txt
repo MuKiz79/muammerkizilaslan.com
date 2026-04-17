@@ -7,7 +7,7 @@ Muammer Kizilaslan is Vice President IT & Digital at Hansgrohe SE, a global lead
 - **Title:** Vice President IT & Digital
 - **Company:** Hansgrohe SE, Schiltach, Germany
 - **Since:** 2021
-- **Scope:** Leading the most comprehensive IT and digital transformation in the company's recent history, including SAP S/4HANA enterprise conversion, cloud strategy, AI integration, and a global delivery hub model. Responsible for 160+ employees and IT budgets in the double-digit million range.
+- **Scope:** Leading the most comprehensive IT and digital transformation in the company's recent history, including SAP S/4HANA enterprise conversion, cloud strategy, AI integration, and a global delivery hub model. Responsible for 140+ employees and IT budgets in the double-digit million range.
 
 ## Previous Roles
 - **Chief Digital Officer & Board Member** at Borusan Mannesmann, Istanbul (2019–2021): Developed company-wide digital strategy, supply chain digitalization, Industry 4.0 roadmap.
