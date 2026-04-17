@@ -2,6 +2,23 @@
    ProfilWebseite — Main Script
    ══════════════════════════════════════════ */
 
+function openMail(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const name = (data.get('name') || '').trim();
+    const company = (data.get('company') || '').trim();
+    const message = (data.get('message') || '').trim();
+    const label = form.dataset.subject || 'Kontaktanfrage';
+    const subject = [label, name, company && '(' + company + ')'].filter(Boolean).join(' ');
+    const signature = [name, company].filter(Boolean).join('\n');
+    const body = message + (signature ? '\n\n--\n' + signature : '');
+    window.location.href = 'mailto:Muammer.Kizilaslan@gmail.com'
+        + '?subject=' + encodeURIComponent(subject)
+        + '&body=' + encodeURIComponent(body);
+    return false;
+}
+
 function toggleStation(id) {
     const panels = document.querySelectorAll('.detail-panel');
     const icons = document.querySelectorAll('.expand-icon');
