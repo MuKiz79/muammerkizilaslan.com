@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => document.getElementById('loader')?.classList.add('hidden'), 300);
 
     // ── Scroll: Progress + Navbar ──
+    const darkSections = document.querySelectorAll('[data-nav-dark]');
     let ticking = false;
     window.addEventListener('scroll', () => {
         if (!ticking) {
@@ -48,6 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     nav.classList.remove('bg-[#f5f5f4]/95', 'backdrop-blur-3xl', 'py-8', 'border-b', 'border-stone-200', 'shadow-2xl');
                 }
+                // Wortmarke/Nav weiß, wenn die Leiste über einer dunklen Sektion liegt
+                let overDark = false;
+                for (let i = 0; i < darkSections.length; i++) {
+                    const r = darkSections[i].getBoundingClientRect();
+                    if (r.top <= 48 && r.bottom >= 48) { overDark = true; break; }
+                }
+                nav.classList.toggle('nav-over-dark', overDark);
                 ticking = false;
             });
             ticking = true;
