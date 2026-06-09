@@ -57,13 +57,14 @@ button:focus-visible,
 }
 
 /* ── Reveal Animations ── */
-.reveal {
+/* Nur bei aktivem JavaScript ausblenden — ohne JS bleiben Inhalte sichtbar. */
+.js .reveal {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 0.8s var(--ease),
                 transform 0.8s var(--ease); /* #10: Was 1.6s — now 0.8s */
 }
-.reveal.active {
+.js .reveal.active {
     opacity: 1;
     transform: translateY(0);
 }
@@ -117,6 +118,8 @@ button:focus-visible,
     transition: opacity 0.8s cubic-bezier(0.76, 0, 0.24, 1), visibility 0.8s;
 }
 .loader.hidden { opacity: 0; visibility: hidden; }
+/* Loader ist eine JS-Verbesserung — ohne JS gar nicht zeigen, sonst verdeckt er die Seite. */
+html:not(.js) .loader { display: none !important; }
 .loader-text {
     font-family: var(--font-sans);
     font-size: clamp(2rem, 5vw, 4rem);

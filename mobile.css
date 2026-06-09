@@ -58,7 +58,7 @@
     }
 
     /* Reveal: subtiler */
-    .reveal { transform: translateY(12px); transition-duration: 0.5s; }
+    .js .reveal { transform: translateY(12px); transition-duration: 0.5s; }
 
     /* ══════════════════════════
        NAV
@@ -125,9 +125,10 @@
         opacity: 0.5;
     }
 
-    /* H1 */
+    /* H1 — 12vw statt 14vw: "Unternehmen" (Em-Breite 6,355) passt damit bis ~200px
+       Viewport-Breite; 14vw klippte auf Phones < 435px. */
     main > section:first-child h1 {
-        font-size: 14vw !important;
+        font-size: 12vw !important;
         margin-bottom: 32px !important;
         margin-left: 0 !important;
         line-height: 0.9;

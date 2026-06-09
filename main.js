@@ -33,10 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBar = document.getElementById('progress-bar');
     const nav = document.getElementById('navbar');
 
-    // ── Loader (wie Kolbe) ──
-    window.addEventListener('load', () => {
-        setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2400);
-    });
+    // ── Loader: kurze Marken-Einblendung, kein künstliches Warten ──
+    setTimeout(() => document.getElementById('loader')?.classList.add('hidden'), 300);
 
     // ── Scroll: Progress + Navbar ──
     let ticking = false;
@@ -121,17 +119,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('open');
-            mobileMenu.classList.toggle('open');
-            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
-        });
+        const isEN = document.documentElement.lang === 'en';
+        const LABEL = isEN ? { open: 'Open menu', close: 'Close menu' } : { open: 'Menü öffnen', close: 'Menü schließen' };
+        const setMenu = (open) => {
+            menuBtn.classList.toggle('open', open);
+            mobileMenu.classList.toggle('open', open);
+            menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            menuBtn.setAttribute('aria-label', open ? LABEL.close : LABEL.open);
+            mobileMenu.setAttribute('aria-hidden', open ? 'false' : 'true');
+            document.body.style.overflow = open ? 'hidden' : '';
+            if (open) mobileMenu.querySelector('a')?.focus();
+        };
+        menuBtn.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
         mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuBtn.classList.remove('open');
-                mobileMenu.classList.remove('open');
-                document.body.style.overflow = '';
-            });
+            link.addEventListener('click', () => setMenu(false));
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                setMenu(false);
+                menuBtn.focus();
+            }
         });
     }
 });
