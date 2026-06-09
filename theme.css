@@ -120,6 +120,25 @@ button:focus-visible,
 .loader.hidden { opacity: 0; visibility: hidden; }
 /* Loader ist eine JS-Verbesserung — ohne JS gar nicht zeigen, sonst verdeckt er die Seite. */
 html:not(.js) .loader { display: none !important; }
+
+/* ── Adaptive Nav: liegt die Leiste über einer dunklen Sektion (data-nav-dark),
+   wird sie transparent und Wortmarke/Links werden weiß. Toggle via main.js. ── */
+#navbar.nav-over-dark {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+#navbar.nav-over-dark .nav-wordmark { color: #ffffff !important; }
+#navbar.nav-over-dark .nav-eyebrow { color: rgba(255, 255, 255, 0.6) !important; }
+#navbar.nav-over-dark a:not(.nav-cta) { color: rgba(255, 255, 255, 0.82) !important; }
+#navbar.nav-over-dark a:not(.nav-cta):hover { color: #ffffff !important; }
+#navbar.nav-over-dark .nav-cta { background-color: #ffffff !important; color: #1c1917 !important; }
+#navbar.nav-over-dark #mobile-menu-btn:not(.open) #bar1,
+#navbar.nav-over-dark #mobile-menu-btn:not(.open) #bar2 { background-color: #ffffff !important; }
+/* Geöffnetes Mobile-Menü (weißer Vollbild-Layer) behält dunkle Links. */
+#navbar.nav-over-dark #mobile-menu a { color: #1c1917 !important; }
 .loader-text {
     font-family: var(--font-sans);
     font-size: clamp(2rem, 5vw, 4rem);
