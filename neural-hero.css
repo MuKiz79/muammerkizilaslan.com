@@ -1,0 +1,62 @@
+/* The neural volume is the entire opening, with quiet controls at its edges. */
+.hero-accessible-title{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.hero{height:100svh;min-height:600px;background:#f0efeb}.hero-scroll{height:172svh;min-height:970px;background:#f0efeb}#grain{opacity:.075}
+.hero-header{inset:22px 40px auto;font-size:12px}.hero-header nav{position:static;gap:28px;padding:0}.hero-header .motion{top:29px;font-size:10px;right:0}.hero-header .hero-contact{font-size:12px}
+.hero-routes{top:94px;left:40px;right:auto;bottom:auto;max-width:360px}.hero-routes>p{display:block;font-size:8px;letter-spacing:.12em;margin-bottom:4px}.route-choices{gap:18px}.route-choices button{font-size:11px;min-height:40px}.route-preview{top:100%;bottom:auto;margin-top:7px}
+.hero-bottom{inset:auto 40px 27px;display:grid;grid-template-columns:1fr auto 1fr;gap:20px;font-size:13px;letter-spacing:.015em}.hero-roles{grid-column:1;grid-row:1}.hero-bottom>a{grid-column:2;grid-row:1;justify-self:center;margin:0;font-size:10px}.hero-bottom>.orbit-hint{grid-column:3;grid-row:1;justify-self:end;font-size:9px}.hero-roles a{font-size:11px}
+.hero-legend{left:40px;right:auto;bottom:84px;gap:18px;font-size:9px}.hero-selection,.neural-caption{left:50%;bottom:78px}.hero-selection{background:#f0efeb}.topic{font-size:12px}.topic.primary{font-size:19px}#topics{inset:0}
+.signature-intro{background:transparent;color:#30352f}.intro-active .hero{background:#f0efeb}
+.intro-brand{position:absolute;top:31px;left:40px;font:12px var(--mono);letter-spacing:.025em}.intro-brand .signature-dot{width:5px;height:5px;margin-left:5px}
+.intro-sequence,.hero-landing{position:absolute;left:40px;right:40px;bottom:98px;height:75px;pointer-events:none}.intro-sequence p,.hero-landing p{position:absolute;inset:auto 0 0;font:400 clamp(30px,3.7vw,58px)/1.1 var(--serif);letter-spacing:-.045em;color:#30352f;opacity:0;transform:translateY(10px)}
+.is-playing .intro-sequence p:nth-child(1){animation:thought-first 5s both}.is-playing .intro-sequence p:nth-child(2){animation:thought-second 5s both}.is-playing .intro-sequence p:nth-child(3){animation:thought-third 5s both}
+.intro-bottom{bottom:27px;left:40px;right:40px;gap:40px}.intro-timeline{display:block;width:150px;height:1px;background:#b8bcb450;overflow:hidden}.intro-timeline i{display:block;width:100%;height:100%;background:var(--signature);transform-origin:left;transform:scaleX(0)}.is-playing .intro-timeline i{animation:thought-time 5s linear both}
+.signature-intro.is-playing{animation:thought-leave 5s linear both}.intro-skip{font-size:10px;border-bottom:0}
+@keyframes thought-first{0%{opacity:0;transform:translateY(12px)}10%,24%{opacity:1;transform:none}33%,100%{opacity:0;transform:translateY(-10px)}}
+@keyframes thought-second{0%,26%{opacity:0;transform:translateY(12px)}36%,52%{opacity:1;transform:none}62%,100%{opacity:0;transform:translateY(-10px)}}
+@keyframes thought-third{0%,56%{opacity:0;transform:translateY(12px)}68%,91%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px)}}
+@keyframes thought-time{to{transform:scaleX(1)}}
+@keyframes thought-leave{0%,88%{opacity:1}100%{opacity:0}}
+@media(max-width:700px){
+ .hero{height:100svh;min-height:640px}.hero-scroll{height:164svh;min-height:1040px}
+ .hero-header{inset:20px 20px auto;font-size:10px;gap:12px}.hero-header nav{position:absolute;top:43px;left:0;gap:20px}.hero-header .motion{top:44px;font-size:8px}.hero-header .hero-contact{font-size:10px}.hero-header .name{max-width:225px}
+ .hero-routes{top:100px;left:20px;right:20px;bottom:auto;max-width:none}.hero-routes>p{font-size:7px}.route-choices{gap:18px}.route-choices button{font-size:10px;min-height:37px}.route-preview{max-width:290px;top:100%;bottom:auto}
+ #topics{inset:0 0 155px}.topic{font-size:11px}.topic.primary{font-size:15px}
+ .hero-bottom{inset:auto 20px 22px;display:grid;grid-template-columns:1fr auto;gap:14px}.hero-roles{grid-column:1;grid-row:1;font-size:11px}.hero-roles a{font-size:10px}.hero-bottom>a{grid-column:2;grid-row:1;font-size:9px}.hero-bottom>.orbit-hint{grid-column:1/-1;grid-row:2;justify-self:start;font-size:8px}
+ .hero-legend{left:20px;right:auto;bottom:119px;gap:16px;font-size:8px}.hero-selection{left:50%;bottom:119px}.hero-selection #topic-preview-open{font-size:10px;max-width:245px}.neural-caption{display:none}
+ .intro-brand{top:26px;left:20px;font-size:11px}.intro-sequence,.hero-landing{left:20px;right:20px;bottom:105px;height:75px}.intro-sequence p,.hero-landing p{font-size:clamp(27px,8.2vw,37px);max-width:350px}.intro-bottom{left:20px;right:20px;bottom:23px;gap:20px}.intro-timeline{width:100px}.intro-skip{font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-scroll{height:auto;min-height:0}.signature-intro.is-playing,.is-playing .intro-timeline i,.is-playing .intro-sequence p{animation:none}
+ .intro-sequence p{display:none;opacity:1;transform:none}.intro-sequence p:last-child{display:block}.intro-timeline i{transform:scaleX(1)}
+}
+
+/* Shared navigation details: natural name casing, a real logo tether and left-hand return. */
+.name,.rail-name,.intro-brand,.menu-top>span{text-transform:none}
+.dialog-close{left:5vw;right:auto;text-align:left}
+.case-close{text-align:left}.case-brand{margin-left:auto;text-align:right}
+.menu-top #menu-close{min-height:44px;padding:0;text-align:left}.menu-top>span{margin-left:auto;align-self:center;text-align:right}
+@media(min-width:701px){
+ .route-nav{left:calc(var(--rail) + 24px);right:24px;top:0;display:grid;grid-template-columns:1fr auto 1fr;padding:0;pointer-events:none}
+ .route-nav button{pointer-events:auto;min-height:44px}.route-nav #route-prev{justify-self:start;font-size:10px;padding-left:0}.route-nav #route-next{justify-self:end}.route-nav #route-position{font-size:9px}
+}
+@media(max-width:700px){.dialog-close{left:24px;right:auto}.menu-top{gap:14px}.menu-top>span{font-size:11px}}
+
+/* Landing after the signature intro continues the intro's own sequence: same place, same type, same lift, one sentence at a time. */
+.hero-landing{z-index:5}
+.hero-landing[hidden]{display:none}
+.hero-landing p{transition:opacity .35s ease,transform .35s ease}
+.hero-landing p.is-on{opacity:1;transform:none}
+.hero-landing p.is-off{opacity:0;transform:translateY(-10px)}
+.hero.is-landing #topics,.hero.is-landing .hero-legend,.hero.is-landing .hero-roles .hero-claim{opacity:0}
+.hero.is-landing #topics,.hero.is-landing .hero-legend,.hero.is-landing .hero-bottom{visibility:hidden}
+#topics,.hero-legend{transition:opacity .6s ease}
+.hero-roles .hero-claim{margin:0 0 9px;max-width:34ch;font:400 15px/1.35 var(--serif);letter-spacing:-.02em;color:#1f2430;transition:opacity .6s ease}
+@media(max-width:700px){.hero-roles .hero-claim{font-size:14px;max-width:28ch}}
+@media(prefers-reduced-motion:reduce){.hero-landing p,#topics,.hero-legend,.hero-roles .hero-claim{transition:none}.hero-landing p{transform:none}}
+/* The permanent claim line makes the roles block taller; the legend moves above it (measured: block top 121px / 144px from the edge). */
+.hero .hero-legend{bottom:134px}
+@media(max-width:700px){.hero .hero-legend{bottom:158px}}
+/* The portrait is square (512×512). Show it whole — same height as before, width follows — instead of cropping 37 % of it into a landscape box. */
+.about-bottom img,.portrait-frame img{aspect-ratio:1;height:clamp(210px,34vh,330px);width:auto;max-width:100%;object-fit:cover;object-position:center}
+.portrait-frame{justify-self:end;align-self:start}
+@media(max-width:700px){.about-bottom img,.portrait-frame img{height:auto;width:100%}}

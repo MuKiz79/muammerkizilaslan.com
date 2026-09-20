@@ -1,29 +1,29 @@
-# Muammer Kizilaslan — Executive IT Leader
+# Muammer Kizilaslan — VP IT & Digital, founder of Karriaro
 
 ## Summary
-Muammer Kizilaslan is Vice President IT & Digital at Hansgrohe SE, a global leader in sanitary fittings. He has 20+ years of international IT leadership experience across three Fortune-level corporations (Hansgrohe, Borusan Mannesmann, BSH Home Appliances) in three countries (Germany, Turkey, Italy).
+Muammer Kizilaslan is Vice President IT & Digital at Hansgrohe SE (Schiltach, Germany) and, since 2026, founder of Karriaro, a self-funded family venture for AI products that he builds alongside his main role. Over 20 years of international IT leadership in three corporations (Hansgrohe, Borusan Mannesmann, BSH Hausgeräte) and three countries (Germany, Turkey, Italy). Born in Stuttgart. Site language: German.
 
-## Current Role
-- **Title:** Vice President IT & Digital
-- **Company:** Hansgrohe SE, Schiltach, Germany
-- **Since:** 2021
-- **Scope:** Leading the most comprehensive IT and digital transformation in the company's recent history, including SAP S/4HANA enterprise conversion, cloud strategy, AI integration, and a global delivery hub model. Responsible for 140+ employees and IT budgets in the double-digit million range.
+## Current role
+- Vice President IT & Digital, Hansgrohe SE, since October 2021
+- Global IT and digital strategy; team of about 160 people (about 120 in Germany)
+- Transformation strategy with 16 initiatives; global IT service delivery hubs in Turkey and Asia
+- SAP S/4HANA migration as a group-wide programme (go-live May 2025); cloud migration strategy; cybersecurity and cyber resilience; digital business models; AI-based automation with measurable productivity gains
 
-## Previous Roles
-- **Chief Digital Officer & Board Member** at Borusan Mannesmann, Istanbul (2019–2021): Developed company-wide digital strategy, supply chain digitalization, Industry 4.0 roadmap.
-- **13+ years at BSH Home Appliances** (2006–2019): Five leadership roles across Munich, Istanbul, and Milan — from Senior BI Engineer to Head of IT Factories. Built a global BI Center of Excellence and led one of the world's largest SAP BW on HANA transformation projects.
+## Previous roles
+- Chief Digital Officer and board member, Borusan Mannesmann, Istanbul (2019–2021): company-wide digital strategy, new digital business models, ERP and cloud modernisation, supply-chain digitalisation, Industry 4.0 roadmap, agile transformation
+- BSH Hausgeräte GmbH (2006–2019), five roles: Head of IT Factories Region T-MEA-CIS, Istanbul (2018–2019, drone-based automated inventory, IDC Innovation Award); IT Manager, Milan (2017–2018); Head of Enterprise Management HR solutions, Munich (2015–2017); Head of Business Intelligence Competency Center, Istanbul (2011–2015, one of the world's largest SAP BI to HANA transformations, 2013); Senior Business Intelligence Engineer, Munich (2006–2010)
+- Junior Account Manager, Bechtle AG, Karlsruhe (2005–2006); working student, IBM Deutschland, Düsseldorf (2005)
 
-## Core Expertise
-- Strategic IT leadership & P&L ownership
-- AI & intelligent automation (Agentic AI, LLM integration, predictive analytics)
-- Enterprise architecture (SAP S/4HANA, hybrid cloud, zero trust)
-- International scaling & post-merger integration
-- Industry 4.0, IoT, manufacturing digitalization
+## Education
+- Diplom-Informatiker (FH), business informatics, Fachhochschule Köln (2000–2005)
+
+## Karriaro (family venture, alongside the main role)
+- Karriaro-Webdesign (live), Karriaro-Folio (live), Karriaro-Loupe (in development), Karriaro-Mesitara (pilot) — https://karriaro.de/
 
 ## Languages
-- German (native), Turkish (native), English (business fluent), Italian (basic)
+- German (native), Turkish (native), English (fluent), Italian (advanced basics)
 
 ## Contact
 - Email: Muammer.Kizilaslan@gmail.com
-- LinkedIn: linkedin.com/in/muammer-kizilaslan
-- Website: muammerkizilaslan.com
+- LinkedIn: https://linkedin.com/in/muammer-kizilaslan
+- Website: https://muammerkizilaslan.com/
