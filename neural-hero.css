@@ -60,3 +60,21 @@
 .about-bottom img,.portrait-frame img{aspect-ratio:1;height:clamp(210px,34vh,330px);width:auto;max-width:100%;object-fit:cover;object-position:center}
 .portrait-frame{justify-self:end;align-self:start}
 @media(max-width:700px){.about-bottom img,.portrait-frame img{height:auto;width:100%}}
+
+/* Mobile legibility floor (founder decision, 20 September 2026): on phones no visible label under 10 px and no text link under a 24 px tap height. Appended last on purpose — same selectors as the earlier mobile rules, later in the cascade, so it wins at equal specificity. */
+@media(max-width:700px){
+.hero-header,.hero-header nav,.hero-header .hero-contact{font-size:11px}.hero-header .motion{font-size:10px}
+.hero-routes>p{font-size:10px}.route-choices button{font-size:11px}
+.hero-legend,.hero-bottom>.orbit-hint,.orbit-hint{font-size:10px}
+.hero-roles a{font-size:11px}.hero-roles small{font-size:10px}
+.hero-statement>.eyebrow,.about-note .eyebrow,.about-body>.eyebrow,.selected-body>.eyebrow,.workshop-heading .eyebrow,.career-heading .eyebrow,.atlas-heading .eyebrow,.founder-note>.eyebrow,.founder-aside>.eyebrow,.expertise-card .eyebrow{font-size:10px}
+.about-foot span,.bench-label,.workshop-bottom>p,.product-number,.product-status,#workshop figcaption,#workshop figcaption span,#workshop small{font-size:10px}
+.atlas-tools button,.atlas-locations button,.atlas-footer label,.atlas-footer select,.atlas-hint,.atlas-coordinate{font-size:10px}.atlas-credit{font-size:9px}
+.contact-card-heading,.contact-card small{font-size:10px}.contact-card-action{font-size:12px}
+.hero-roles a,.rail-name,.about-note .text-link,.workshop-bottom>a,#contact a[href="https://karriaro.de/"],#contact footer a,.case-footer>a{padding-block:5px}
+.hero-header .name,.hero-header nav a,.hero-header .hero-contact{padding-block:5px;margin-block:-5px} /* hit area grows, line geometry stays: the nav sits right above the perspectives eyebrow */
+.hero-bottom>a{font-size:11px;padding-block:5px}.hero-statement small,.hero small{font-size:10px}
+.atlas-story-nav span{font-size:10px}.atlas-story-nav button{min-width:44px;padding:0 6px}.atlas-credit{font-size:10px}
+.contact-mail{padding-block:2px}.topic{padding:10px 8px}.product-preview span,.product-preview small{font-size:10px}
+#workshop figure span,#workshop figure small,#workshop .product-figure span,#workshop [class*="caption"]{font-size:10px}
+}
