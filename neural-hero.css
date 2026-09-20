@@ -78,3 +78,17 @@
 .contact-mail{padding-block:2px}.topic{padding:10px 8px}.product-preview span,.product-preview small{font-size:10px}
 #workshop figure span,#workshop figure small,#workshop .product-figure span,#workshop [class*="caption"]{font-size:10px}
 }
+
+/* Mobile chapters (founder decision, 20 September 2026): the desktop route bar becomes a fixed bar in thumb reach, and chapter content reveals on scroll. Appended last on purpose: the earlier `.route-nav{display:none}` for phones is overruled here at equal specificity. */
+@media(max-width:700px){
+.route-nav{display:flex;position:fixed;left:0;right:0;top:auto;bottom:0;z-index:30;align-items:center;justify-content:space-between;gap:8px;padding:8px max(14px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left));background:rgba(246,244,239,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-top:1px solid #d6d2c8;color:#2b2b2b;font:10px var(--mono);letter-spacing:.1em;transform:translateY(110%);transition:transform .38s cubic-bezier(.22,1,.36,1),background .3s,color .3s;pointer-events:none}
+.route-nav.is-live{transform:none;pointer-events:auto}
+.route-nav.is-dark{background:rgba(26,28,26,.92);border-color:#3b3e3a;color:#efece5}
+.route-nav button,.route-nav #route-prev,.route-nav #route-next{font:11px var(--mono);letter-spacing:.1em;min-height:44px;min-width:44px;padding:0 8px;color:inherit;background:none;border:0;white-space:nowrap}
+.route-nav button:disabled{opacity:.3}
+.route-nav #route-position{flex:1;min-width:0;font-size:10px;letter-spacing:.14em;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:inherit}
+#contact{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+/* Scroll reveal: only under html.reveal-armed, which the script sets after it could create an observer — without JavaScript or under reduced motion nothing is ever hidden. */
+html.reveal-armed .panel>[data-reveal]{opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .55s cubic-bezier(.22,1,.36,1)}
+html.reveal-armed .panel>[data-reveal].is-seen{opacity:1;transform:none}
+}

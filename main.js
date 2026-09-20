@@ -257,6 +257,7 @@ function resizeJourney(){
   if(small){
     journey.style.height='auto';track.style.transform='';maxTravel=0;
     scenes.forEach(scene=>{scene.style.visibility='';scene.style.transform='';scene.style.opacity='';scene.inert=false});
+    renderMobileNav();armReveal();
   }else{
     const viewportWidth=newWidth-rail.offsetWidth;
     path=window.createJourneyPath(viewportWidth,newHeight,scenes.map(scene=>({width:scene.scrollWidth,direction:scene.dataset.direction})));
@@ -293,7 +294,9 @@ function updateJourney(dt){
   if(mobile.matches){
     if(y===lastScroll)return;lastScroll=y;rail.classList.toggle('is-fixed',y>=journeyTop);
     const panel=panelMetrics.find(p=>p.top+journeyTop<=y+85&&p.top+journeyTop+p.height>y+85);
-    rail.classList.toggle('is-dark',!!panel?.element.classList.contains('dark'));if(panel)activeScene=panel.scene;return;
+    const dark=!!panel?.element.classList.contains('dark');rail.classList.toggle('is-dark',dark);routeNav.classList.toggle('is-dark',dark);
+    if(panel)activeScene=panel.scene;renderMobileNav();
+    routeNav.classList.toggle('is-live',y>=journeyTop-innerHeight*.4&&!modalOpen&&menu.hidden);return;
   }
   rail.classList.remove('is-fixed');targetTravel=Math.max(0,Math.min(maxTravel,y-journeyTop));
   if(y===lastScroll&&Math.abs(currentTravel-targetTravel)<.08)return;lastScroll=y;
@@ -315,7 +318,23 @@ function go(hash,instant=false){
   if(hash==='#home'&&!instant)window.SignatureIntro?.show();
 }
 $('#route-prev').addEventListener('click',()=>{go(activeScene>0?'#'+scenes[activeScene-1].querySelector('.panel').id:'#home')});
-$('#route-next').addEventListener('click',()=>{if(activeScene<scenes.length-1)go('#'+scenes[activeScene+1].querySelector('.panel').id)});
+$('#route-next').addEventListener('click',()=>{if(activeScene<scenes.length-1)go('#'+scenes[activeScene+1].querySelector('.panel').id);else if(mobile.matches)go('#home')});
+// Phones: the route bar is a fixed bar in thumb reach. Words instead of arrows, the current chapter in the middle, the last chapter offers the way back to the start.
+let mobileNavState='';function renderMobileNav(){
+  if(!mobile.matches||!scenes.length)return;const s=scenes[activeScene],last=activeScene===scenes.length-1,state=activeScene+':'+last;if(state===mobileNavState)return;mobileNavState=state;
+  $('#route-position').textContent=s.dataset.label.toUpperCase();
+  $('#route-prev').textContent='← ZURÜCK';$('#route-prev').disabled=false;$('#route-prev').setAttribute('aria-label',activeScene===0?'Zurück zum Start':'Vorheriger Abschnitt: '+scenes[activeScene-1].dataset.label);
+  $('#route-next').textContent=last?'ANFANG ↑':'WEITER →';$('#route-next').disabled=false;$('#route-next').setAttribute('aria-label',last?'Zurück zum Anfang':'Nächster Abschnitt: '+scenes[activeScene+1].dataset.label);
+}
+// Phones: chapter content reveals on scroll. Armed only when the browser can observe and motion is allowed — otherwise nothing is ever hidden. A net shows anything already within reach of the viewport; what lies below the fold waits for the scroll.
+let revealArmed=false;function armReveal(){
+  if(revealArmed||!mobile.matches||reduce.matches||!('IntersectionObserver' in window))return;revealArmed=true;
+  const items=[];panels.forEach(p=>[...p.children].forEach((el,i)=>{if(el.tagName==='SCRIPT'||el.hidden)return;el.dataset.reveal='';el.style.transitionDelay=Math.min(i,4)*50+'ms';items.push(el)}));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)seen(e.target)}),{threshold:.04,rootMargin:'0px 0px -2% 0px'});
+  const seen=el=>{el.classList.add('is-seen');io.unobserve(el)};
+  document.documentElement.classList.add('reveal-armed');items.forEach(el=>io.observe(el));
+  const net=()=>items.forEach(el=>{if(!el.classList.contains('is-seen')&&el.getBoundingClientRect().top<innerHeight+40)seen(el)});setTimeout(net,1800);setInterval(net,900);
+}
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const hash=a.getAttribute('href');if(!$(hash))return;e.preventDefault();closeMenu();go(hash)});
 let menuPrevious;function openMenu(){menuPrevious=document.activeElement;menu.hidden=false;hero.inert=true;journey.inert=true;toggle.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';$('#menu-close').focus()}function closeMenu(){const wasOpen=!menu.hidden;menu.hidden=true;hero.inert=false;journey.inert=false;toggle.setAttribute('aria-expanded','false');if(wasOpen)document.body.style.overflow='';if(wasOpen)menuPrevious?.focus({preventScroll:true})}toggle.addEventListener('click',openMenu);$('#menu-close').addEventListener('click',closeMenu);document.addEventListener('keydown',e=>{if(menu.hidden)return;if(e.key==='Escape')closeMenu();if(e.key==='Tab'){const nodes=[...menu.querySelectorAll('a,button')],first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
 let keyboardNavigation=false;document.addEventListener('keydown',e=>{if(e.key==='Tab')keyboardNavigation=true});document.addEventListener('pointerdown',()=>keyboardNavigation=false);document.addEventListener('focusin',e=>{if(!keyboardNavigation||mobile.matches||!menu.hidden||modalOpen)return;const panel=e.target.closest('.panel');if(panel){document.querySelector('.stage').scrollLeft=0;window.scrollTo({top:destinationFor(panel),behavior:'instant'})}});
