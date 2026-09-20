@@ -1,0 +1,18 @@
+/* Professional stations: factual details checked against muammerkizilaslan.com. */
+window.MUAMMER_CASES={
+ hans:{brand:'Hansgrohe SE',meta:'STATION 01 · SEIT 2021',title:'Transformation braucht ein gemeinsames Zielbild.',intro:'Seit 2021 verantworte ich als Vice President IT & Digital die IT- und Digitaltransformation bei Hansgrohe SE.',facts:['VP IT & Digital','Gesamtverantwortung IT & Digital','Seit 2021'],flow:['Organisation','Systeme','Wertschöpfung'],sections:[
+ ['Die Verantwortung','IT und Digital gemeinsam führen.','Meine Verantwortung umfasst die Neuausrichtung der IT-Organisation, ein globales Delivery-Hub-Modell, die Einführung von SAP S/4HANA und die Verankerung von KI in der Wertschöpfung.'],
+ ['Die Schwerpunkte','Organisation und Systeme weiterentwickeln.','Zu den Schwerpunkten gehören die konzernweite SAP S/4HANA Enterprise Conversion, die Harmonisierung und Modernisierung der Systemlandschaft sowie eine Cloud-Strategie mit der Migration zentraler Anwendungen.'],
+ ['KI und Sicherheit','Digitale Fähigkeiten verankern.','KI-Integration sowie die Stärkung von Cybersecurity und Cyberresilienz sind weitere Schwerpunkte meiner Arbeit bei Hansgrohe.']
+ ],next:'bor'},
+ bor:{brand:'Borusan Mannesmann',meta:'STATION 02 · 2019 — 2021',title:'Digitalisierung wird zur Unternehmensaufgabe.',intro:'Von 2019 bis 2021 entwickelte und implementierte ich als Chief Digital Officer und Vorstandsmitglied in Istanbul die unternehmensweite Digitalstrategie.',facts:['CDO & Vorstandsmitglied','Istanbul','2019 — 2021'],flow:['Digitalstrategie','Wertschöpfungskette','Geschäftsmodelle'],sections:[
+ ['Die Verantwortung','Die gesamte Wertschöpfung betrachten.','Meine Aufgabe verband die unternehmensweite Digitalstrategie mit der End-to-End-Optimierung der Supply Chain, einer Industrie-4.0-Roadmap und neuen digitalen Geschäftsmodellen.'],
+ ['Die Schwerpunkte','Strategie in konkrete Arbeitsfelder übersetzen.','Supply-Chain-Digitalisierung, IoT und Automatisierung sowie ERP- und Cloud-Modernisierung waren zentrale Handlungsfelder. Die Industrie-4.0-Roadmap verband diese Themen mit der Produktion.'],
+ ['Organisation und Veränderung','Digitalisierung in der Organisation verankern.','Neben den technologischen Aufgaben gehörte die agile Transformation der Organisationskultur zu den Schwerpunkten. Als CDO und Vorstandsmitglied verband ich Digitalisierung mit unternehmerischer Verantwortung.']
+ ],next:'bsh'},
+ bsh:{brand:'BSH Home Appliances',meta:'STATION 03 · 2006 — 2019',title:'Von Daten zu internationaler IT-Führung.',intro:'Fünf Rollen in München, Istanbul und Mailand. Von Business Intelligence über globale HR-Systeme bis zu regionaler IT-Verantwortung für Produktion und Supply Chain.',facts:['2006 — 2019 · 5 Rollen','Deutschland · Türkei · Italien','Daten · HR · Produktion'],flow:['Business Intelligence','Enterprise HR','Produktion & Supply Chain'],sections:[
+ ['Die Stationen','Verantwortung über Länder und Funktionen hinweg.','Ich begann als Senior BI Engineer in München. Es folgten der Aufbau eines globalen BI Competency Centers in Istanbul, die globale Verantwortung für SAP-HCM-Lösungen in München und die lokale IT-Führung in Mailand.'],
+ ['Daten und Systeme','Business Intelligence international entwickeln.','Zu meiner Arbeit bei BSH gehörten der Aufbau eines globalen BI Competency Centers und die Leitung eines SAP-BW-auf-HANA-Transformationsprojekts. Als Head of Enterprise Management HR solutions verantwortete ich globale SAP-HCM-Lösungen.'],
+ ['Produktion und Supply Chain','Regionale IT-Verantwortung übernehmen.','Von 2018 bis 2019 war ich Head of IT Factories in Istanbul. In dieser Station lag meine regionale IT-Verantwortung bei Produktion und Supply Chain in T-MEA-CIS.']
+ ],next:'hans'}
+};
