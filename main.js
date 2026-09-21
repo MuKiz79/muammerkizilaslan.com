@@ -292,11 +292,12 @@ function renderJourney(){
 function updateJourney(dt){
   const y=scrollY;
   if(mobile.matches){
+    routeNav.classList.toggle('is-live',y>=journeyTop-innerHeight*.4&&!modalOpen&&menu.hidden);
     if(y===lastScroll)return;lastScroll=y;rail.classList.toggle('is-fixed',y>=journeyTop);
     const panel=panelMetrics.find(p=>p.top+journeyTop<=y+85&&p.top+journeyTop+p.height>y+85);
     const dark=!!panel?.element.classList.contains('dark');rail.classList.toggle('is-dark',dark);routeNav.classList.toggle('is-dark',dark);
     if(panel)activeScene=panel.scene;renderMobileNav();
-    routeNav.classList.toggle('is-live',y>=journeyTop-innerHeight*.4&&!modalOpen&&menu.hidden);return;
+    return;
   }
   rail.classList.remove('is-fixed');targetTravel=Math.max(0,Math.min(maxTravel,y-journeyTop));
   if(y===lastScroll&&Math.abs(currentTravel-targetTravel)<.08)return;lastScroll=y;
@@ -335,7 +336,16 @@ let revealArmed=false;function armReveal(){
   document.documentElement.classList.add('reveal-armed');items.forEach(el=>io.observe(el));
   const net=()=>items.forEach(el=>{if(!el.classList.contains('is-seen')&&el.getBoundingClientRect().top<innerHeight+40)seen(el)});setTimeout(net,1800);setInterval(net,900);
 }
-document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const hash=a.getAttribute('href');if(!$(hash))return;e.preventDefault();closeMenu();go(hash)});
+// Explicit menu choices go straight to their destination. The chapter arrows and native scroll retain the spatial journey.
+let destinationFade=null;
+function goDirect(hash){
+  destinationFade?.cancel();destinationFade=null;
+  go(hash,true);lastScroll=-1;updateJourney(0);
+  if(hash==='#home'){window.SignatureIntro?.show();return}
+  const destination=$(hash),surface=mobile.matches?destination:destination.closest('.journey-scene');
+  if(!reduce.matches&&surface?.animate)destinationFade=surface.animate([{filter:'opacity(0)'},{filter:'opacity(1)'}],{duration:320,easing:'cubic-bezier(.22,1,.36,1)'});
+}
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const hash=a.getAttribute('href');if(!$(hash))return;e.preventDefault();const direct=!!a.closest('#menu,.hero-header');closeMenu();if(direct)goDirect(hash);else go(hash)});
 let menuPrevious;function openMenu(){menuPrevious=document.activeElement;menu.hidden=false;hero.inert=true;journey.inert=true;toggle.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';$('#menu-close').focus()}function closeMenu(){const wasOpen=!menu.hidden;menu.hidden=true;hero.inert=false;journey.inert=false;toggle.setAttribute('aria-expanded','false');if(wasOpen)document.body.style.overflow='';if(wasOpen)menuPrevious?.focus({preventScroll:true})}toggle.addEventListener('click',openMenu);$('#menu-close').addEventListener('click',closeMenu);document.addEventListener('keydown',e=>{if(menu.hidden)return;if(e.key==='Escape')closeMenu();if(e.key==='Tab'){const nodes=[...menu.querySelectorAll('a,button')],first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
 let keyboardNavigation=false;document.addEventListener('keydown',e=>{if(e.key==='Tab')keyboardNavigation=true});document.addEventListener('pointerdown',()=>keyboardNavigation=false);document.addEventListener('focusin',e=>{if(!keyboardNavigation||mobile.matches||!menu.hidden||modalOpen)return;const panel=e.target.closest('.panel');if(panel){document.querySelector('.stage').scrollLeft=0;window.scrollTo({top:destinationFor(panel),behavior:'instant'})}});
 window.ProfileNavigation={go,refresh:resizeJourney};

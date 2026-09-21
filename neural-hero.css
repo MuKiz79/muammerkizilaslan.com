@@ -61,6 +61,41 @@
 .portrait-frame{justify-self:end;align-self:start}
 @media(max-width:700px){.about-bottom img,.portrait-frame img{height:auto;width:100%}}
 
+/* A quiet handover: network first, then its topics, context and optional perspectives. Interaction cancels the entrance. */
+.hero.is-landing .hero-routes{visibility:hidden}
+.hero.is-arriving #topics{animation:hero-arrive .65s both}
+.hero.is-arriving .hero-legend{animation:hero-arrive .55s .16s both}
+.hero.is-arriving .hero-bottom{animation:hero-arrive .55s .28s both}
+.hero.is-arriving .hero-routes{animation:hero-arrive .55s .48s both}
+@keyframes hero-arrive{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.hero.is-arriving #topics,.hero.is-arriving .hero-legend,.hero.is-arriving .hero-bottom,.hero.is-arriving .hero-routes{animation:none}}
+
+/* Keep the tilted work montage inside a deliberate frame, including its first card's attribution. */
+@media(min-width:701px){
+ .work-montage{padding:54px 3vw 30px;gap:2vw}
+ .work-word{font-size:clamp(60px,8.6vw,145px)}
+ .word-left,.word-right{width:24%}
+ .montage{width:46%;height:calc(100% - 80px);padding:0;gap:16px;transform:rotate(-4deg)}
+ .project-cover{flex:1;min-height:0;padding:16px 26px}
+ .project-cover strong{font-size:clamp(28px,5vh,48px)}
+ .cover-bor strong{font-size:clamp(22px,3.7vh,36px)}
+ .cover-meta,.cover-bottom{font-size:10px}.cover-bottom{margin-top:6px}
+}
+@media(min-width:701px) and (max-height:650px){
+ .work-montage{padding-top:48px;padding-bottom:20px}.montage{height:calc(100% - 46px);gap:12px;transform:rotate(-3deg)}
+ .project-cover{padding:10px 22px}.project-cover strong{font-size:28px}.cover-bor strong{font-size:22px}
+}
+@media(max-width:700px){
+ #contact h2{margin-bottom:38px}
+ #contact .contact-card{margin-top:20px;margin-bottom:24px;scroll-margin-bottom:calc(100px + env(safe-area-inset-bottom))}
+ #contact footer{margin-top:48px}
+}
+@media(max-width:350px){
+ .menu nav a{font-size:36px;line-height:1.2;white-space:nowrap}
+ .menu nav small{width:28px;min-width:28px}
+ .menu nav a:hover{padding-left:8px}
+}
+
 /* Mobile legibility floor (founder decision, 20 September 2026): on phones no visible label under 10 px and no text link under a 24 px tap height. Appended last on purpose — same selectors as the earlier mobile rules, later in the cascade, so it wins at equal specificity. */
 @media(max-width:700px){
 .hero-header,.hero-header nav,.hero-header .hero-contact{font-size:11px}.hero-header .motion{font-size:10px}
@@ -87,7 +122,7 @@
 .route-nav button,.route-nav #route-prev,.route-nav #route-next{font:11px var(--mono);letter-spacing:.1em;min-height:44px;min-width:44px;padding:0 8px;color:inherit;background:none;border:0;white-space:nowrap}
 .route-nav button:disabled{opacity:.3}
 .route-nav #route-position{flex:1;min-width:0;font-size:10px;letter-spacing:.14em;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:inherit}
-#contact{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+#contact{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
 /* Scroll reveal: only under html.reveal-armed, which the script sets after it could create an observer — without JavaScript or under reduced motion nothing is ever hidden. */
 html.reveal-armed .panel>[data-reveal]{opacity:0;transform:translateY(12px);transition:opacity .45s ease,transform .55s cubic-bezier(.22,1,.36,1)}
 html.reveal-armed .panel>[data-reveal].is-seen{opacity:1;transform:none}
