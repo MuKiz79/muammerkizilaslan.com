@@ -8,9 +8,9 @@
 .signature-intro{background:transparent;color:#30352f}.intro-active .hero{background:#f0efeb}
 .intro-brand{position:absolute;top:31px;left:40px;font:12px var(--mono);letter-spacing:.025em}.intro-brand .signature-dot{width:5px;height:5px;margin-left:5px}
 .intro-sequence,.hero-landing{position:absolute;left:40px;right:40px;bottom:98px;height:75px;pointer-events:none}.intro-sequence p,.hero-landing p{position:absolute;inset:auto 0 0;font:400 clamp(30px,3.7vw,58px)/1.1 var(--serif);letter-spacing:-.045em;color:#30352f;opacity:0;transform:translateY(10px)}
-.is-playing .intro-sequence p:nth-child(1){animation:thought-first 5s both}.is-playing .intro-sequence p:nth-child(2){animation:thought-second 5s both}.is-playing .intro-sequence p:nth-child(3){animation:thought-third 5s both}
-.intro-bottom{bottom:27px;left:40px;right:40px;gap:40px}.intro-timeline{display:block;width:150px;height:1px;background:#b8bcb450;overflow:hidden}.intro-timeline i{display:block;width:100%;height:100%;background:var(--signature);transform-origin:left;transform:scaleX(0)}.is-playing .intro-timeline i{animation:thought-time 5s linear both}
-.signature-intro.is-playing{animation:thought-leave 5s linear both}.intro-skip{font-size:10px;border-bottom:0}
+.is-playing .intro-sequence p:nth-child(1){animation:thought-first 6.6s both}.is-playing .intro-sequence p:nth-child(2){animation:thought-second 6.6s both}.is-playing .intro-sequence p:nth-child(3){animation:thought-third 6.6s both}
+.intro-bottom{bottom:27px;left:40px;right:40px;gap:40px}.intro-timeline{display:block;width:150px;height:1px;background:#b8bcb450;overflow:hidden}.intro-timeline i{display:block;width:100%;height:100%;background:var(--signature);transform-origin:left;transform:scaleX(0)}.is-playing .intro-timeline i{animation:thought-time 6.6s linear both}
+.signature-intro.is-playing{animation:thought-leave 6.6s linear both}.intro-skip{font-size:10px;border-bottom:0}
 @keyframes thought-first{0%{opacity:0;transform:translateY(12px)}10%,24%{opacity:1;transform:none}33%,100%{opacity:0;transform:translateY(-10px)}}
 @keyframes thought-second{0%,26%{opacity:0;transform:translateY(12px)}36%,52%{opacity:1;transform:none}62%,100%{opacity:0;transform:translateY(-10px)}}
 @keyframes thought-third{0%,56%{opacity:0;transform:translateY(12px)}68%,91%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px)}}
@@ -37,7 +37,7 @@
 .menu-top #menu-close{min-height:44px;padding:0;text-align:left}.menu-top>span{margin-left:auto;align-self:center;text-align:right}
 @media(min-width:701px){
  .route-nav{left:calc(var(--rail) + 24px);right:24px;top:0;display:grid;grid-template-columns:1fr auto 1fr;padding:0;pointer-events:none}
- .route-nav button{pointer-events:auto;min-height:44px}.route-nav #route-prev{justify-self:start;font-size:10px;padding-left:0}.route-nav #route-next{justify-self:end}.route-nav #route-position{font-size:9px}
+ .route-nav button{pointer-events:auto;min-height:44px}.route-nav #route-prev{justify-self:start;font-size:10px;padding-left:0}.route-nav #route-next{justify-self:end;font-size:10px}.route-nav #route-position{font-size:9px}
 }
 @media(max-width:700px){.dialog-close{left:24px;right:auto}.menu-top{gap:14px}.menu-top>span{font-size:11px}}
 
@@ -65,8 +65,8 @@
 .hero.is-landing .hero-routes{visibility:hidden}
 .hero.is-arriving #topics{animation:hero-arrive .65s both}
 .hero.is-arriving .hero-legend{animation:hero-arrive .55s .16s both}
-.hero.is-arriving .hero-bottom{animation:hero-arrive .55s .28s both}
-.hero.is-arriving .hero-routes{animation:hero-arrive .55s .48s both}
+.hero.is-arriving .hero-bottom{animation:hero-arrive .45s .2s both}
+.hero.is-arriving .hero-routes{animation:hero-arrive .45s .3s both}
 @keyframes hero-arrive{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.hero.is-arriving #topics,.hero.is-arriving .hero-legend,.hero.is-arriving .hero-bottom,.hero.is-arriving .hero-routes{animation:none}}
 
@@ -123,6 +123,18 @@
  .mobile-spatial details[open] .row-symbol::after{content:'−'}
 }
 
+/* Every disclosure uses a state mark; links use typography, never arrow glyphs. */
+.row-symbol{font-size:0;transform:none!important}
+.row-symbol::after{content:'+';display:block;font:300 26px/1 var(--sans);width:24px;text-align:center}
+details[open] .row-symbol::after{content:'−'}
+.product-preview:has(img[src*="webdesign-current"]){aspect-ratio:2.1}
+.product-preview:has(img[src*="webdesign-current"]) img{object-position:top}
+@media(max-width:700px){
+ .mobile-spatial .route-nav{-webkit-backdrop-filter:none;backdrop-filter:none}
+ .product-preview:has(img[src*="webdesign-current"]){aspect-ratio:1.65}
+}
+@media(min-width:701px) and (max-height:750px){.product-preview:has(img[src*="webdesign-current"]){aspect-ratio:2.9}}
+
 /* Mobile legibility floor (founder decision, 20 September 2026): on phones no visible label under 10 px and no text link under a 24 px tap height. Appended last on purpose — same selectors as the earlier mobile rules, later in the cascade, so it wins at equal specificity. */
 @media(max-width:700px){
 .hero-header,.hero-header nav,.hero-header .hero-contact{font-size:11px}.hero-header .motion{font-size:10px}
@@ -155,7 +167,7 @@ html.reveal-armed .panel>[data-reveal]{opacity:0;transform:translateY(12px);tran
 html.reveal-armed .panel>[data-reveal].is-seen{opacity:1;transform:none}
 }
 
-/* Mobile perspectives (founder, 21 September 2026): an editorial index instead of three arrowed tabs — the words alone, one hairline under the row, the chosen perspective carries the signature line. Desktop keeps its arrows. */
+/* Mobile perspectives (founder, 21 September 2026): an editorial index instead of three arrowed tabs — the words alone, one hairline under the row, the chosen perspective carries the signature line. Desktop uses the same typographic links. */
 @media(max-width:700px){
 .route-choices{gap:22px;border-bottom:1px solid #b9bcb2;align-items:stretch}
 .route-choices button{flex:0 0 auto;font:11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#2f332e;padding:13px 0 11px;min-height:44px;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;border-radius:0;background:none;transition:border-color .25s,color .25s}

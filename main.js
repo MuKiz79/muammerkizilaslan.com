@@ -2,7 +2,7 @@
 history.scrollRestoration='manual';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const hero=$('.hero'),canvas=$('#network'),ctx=canvas.getContext('2d'),grain=$('#grain'),gc=grain.getContext('2d'),field=$('#topics'),motion=$('#motion'),reduce=matchMedia('(prefers-reduced-motion: reduce)'),mobile=matchMedia('(max-width:700px)');
-let width=0,height=0,dpr=1,clock=0,last=0,paused=reduce.matches,visible=true,dragX=0,dragY=0,targetXRotation=0,targetYRotation=0,fieldTop=80,hoveredTopic=-1,needsDraw=true,chapterProgress=0,modalOpen=false,chapterRunway=1;
+let width=0,height=0,dpr=1,clock=0,last=0,paused=reduce.matches,visible=true,dragX=0,dragY=0,targetXRotation=0,targetYRotation=0,fieldTop=80,hoveredTopic=-1,needsDraw=true,chapterProgress=0,modalOpen=false,chapterRunway=1,heroStylesDirty=true;
 const bridge=$('.hero-bridge'),heroScroll=$('.hero-scroll');
 const topics=window.MUAMMER_TOPICS,FX=window.HeroEffects,Space=window.KineticSpace,anchors=$('.hero-anchors'),legend=$('.hero-legend'),selection=$('.hero-selection');
 const neural=window.NeuralSpace.create(),autopilot=window.OrbitMotion.create(),Flow=window.ThoughtFlow;
@@ -10,12 +10,12 @@ const neuralCaption=$('.neural-caption');
 const topicEdges=[...new Map(FX.links.map((neighbors,i)=>{const edge=[i,neighbors[0]].sort((a,b)=>a-b);return[edge.join(':'),edge]})).values()];
 // The signature intro now provides the opening; hover captions stay available.
 let welcomeAllowed=false,openingTime=-1;
-window.addEventListener('signatureintro:start',()=>{openingTime=0;chapterProgress=0;needsDraw=true});
+window.addEventListener('signatureintro:start',()=>{openingTime=0;chapterProgress=0;heroStylesDirty=true;needsDraw=true});
 window.addEventListener('signatureintro:end',()=>{openingTime=-1;needsDraw=true});
 function stopWelcome(){if(welcomeAllowed){welcomeAllowed=false;needsDraw=true}}
 let automaticAngles={yaw:0,pitch:0};
 let effectClock=0,selectedTouch=-1,lastTopicPointer='mouse',relationStrength=0,relationOrigin=-1,relationRoute=[];
-const topicSelection=FX.createTopicSelection(i=>{selectedTouch=i;hoveredTopic=i;selection.hidden=false;legend.hidden=true;$('#topic-preview-open').textContent=topics[i][0]+' entdecken ↗';needsDraw=true},i=>openTopic(i),()=>{selectedTouch=-1;hoveredTopic=-1;selection.hidden=true;legend.hidden=false;needsDraw=true});
+const topicSelection=FX.createTopicSelection(i=>{selectedTouch=i;hoveredTopic=i;selection.hidden=false;legend.hidden=true;$('#topic-preview-open').textContent=topics[i][0]+' entdecken';needsDraw=true},i=>openTopic(i),()=>{selectedTouch=-1;hoveredTopic=-1;selection.hidden=true;legend.hidden=false;needsDraw=true});
 function clearSelection(){topicSelection.clear()}
 function activateTopic(i,event){topicSelection.activate(i,lastTopicPointer,event.detail)}
 const points=topics.map((t,i)=>{const b=document.createElement('button');b.className='topic '+t[2];b.textContent=t[0];b.setAttribute('aria-label',t[0]+' entdecken');field.append(b);b.addEventListener('pointerdown',e=>lastTopicPointer=e.pointerType);b.addEventListener('click',e=>activateTopic(i,e));b.addEventListener('pointerenter',()=>{stopWelcome();hoveredTopic=i;needsDraw=true});b.addEventListener('pointerleave',()=>{if(hoveredTopic===i&&selectedTouch!==i)hoveredTopic=-1;needsDraw=true});b.addEventListener('focus',()=>{stopWelcome();hoveredTopic=i;needsDraw=true});b.addEventListener('blur',()=>{if(selectedTouch!==i)hoveredTopic=-1;needsDraw=true});return{b,t,i,x:(t[3]-.5)*2,y:(t[4]-.5)*2,z:t[2]==='primary'?.55:t[2]==='secondary'?-.15:-.65,bw:0,bh:0,alpha:0,focus:0,relation:0,angleX:0,angleY:0,lastX:null,lastY:null,bendX:0,bendY:0,rank:t[2]==='primary'?3:t[2]==='secondary'?2:1}});
@@ -51,7 +51,7 @@ function draw(dt){
   const storyRoute=userFocus<0&&themeTopics.length?themeTopics:focusIndex>=0?Flow.route(focusIndex,FX.links):[];
   const captionVisible=chapterProgress<.03&&selectedTouch<0&&(!!greeting||userFocus>=0);
   neuralCaption.hidden=!captionVisible;
-  if(captionVisible){neuralCaption.querySelector('span').textContent=greeting?'VERBINDUNGEN SCHAFFEN':'ZUSAMMENHÄNGE';neuralCaption.querySelector('p').textContent=greeting?greeting.label:storyRoute.map(i=>topics[i][0]).join(' → ');neuralCaption.style.opacity=String(greeting?greeting.opacity:1)}
+  if(captionVisible){neuralCaption.querySelector('span').textContent=greeting?'VERBINDUNGEN SCHAFFEN':'ZUSAMMENHÄNGE';neuralCaption.querySelector('p').textContent=greeting?greeting.label:storyRoute.map(i=>topics[i][0]).join(' · ');neuralCaption.style.opacity=String(greeting?greeting.opacity:1)}
   legend.hidden=captionVisible||selectedTouch>=0;
   if(focusIndex>=0){relationOrigin=focusIndex;relationRoute=storyRoute}
   const related=storyRoute.slice(1);
@@ -108,10 +108,11 @@ function draw(dt){
 }
 function tick(t){
   const dt=Math.min((t-last)/1000||1/60,.05);last=t;
-  if(openingTime>=0&&!document.hidden)openingTime+=dt;
+  if(openingTime>=0&&!document.hidden){const elapsed=window.SignatureIntro.elapsed();openingTime=elapsed<0?-1:window.IntroStory.growth(elapsed)}
   if(visible&&!document.hidden&&!modalOpen){
     const nextProgress=reduce.matches?0:Math.max(0,Math.min(1,scrollY/chapterRunway));
-    if(Math.abs(nextProgress-chapterProgress)>.00001){
+    if(heroStylesDirty||Math.abs(nextProgress-chapterProgress)>.00001){
+      heroStylesDirty=false;
       chapterProgress=reduce.matches?nextProgress:follow(chapterProgress,nextProgress,dt,.065);needsDraw=true;
       const reveal=FX.smooth(.64,.96,chapterProgress);
       anchors.style.opacity=String(FX.smooth(.08,.27,chapterProgress)*(1-FX.smooth(.44,.68,chapterProgress)));
@@ -223,7 +224,7 @@ function renderCase(key){
   caseDialog.querySelector('.case-facts').replaceChildren(...c.facts.map(text=>{const span=document.createElement('span');span.textContent=text;return span}));
   caseDialog.querySelector('.case-flow').replaceChildren(...c.flow.map((text,i)=>{const li=document.createElement('li'),n=document.createElement('small'),label=document.createElement('span');n.textContent='0'+(i+1);label.textContent=text;li.append(n,label);return li}));
   caseDialog.querySelector('.case-story').replaceChildren(...c.sections.map(([label,heading,copy])=>{const section=document.createElement('section'),tag=document.createElement('p'),div=document.createElement('div'),h=document.createElement('h3'),p=document.createElement('p');tag.className='eyebrow';tag.textContent=label;h.textContent=heading;p.textContent=copy;div.append(h,p);section.append(tag,div);return section}));
-  caseDialog.querySelector('.case-next').textContent='Weiter: '+cases[c.next].brand+' ↗';
+  caseDialog.querySelector('.case-next').textContent='Weiter: '+cases[c.next].brand;
   caseDialog.style.setProperty('--case-color',{hans:'#0c4e46',bor:'#b4c3d5',bsh:'#d8d0c0'}[key]);
   caseDialog.style.setProperty('--case-ink',key==='hans'?'#fbf8ed':'#243646');
   caseDialog.scrollTop=0;
@@ -249,7 +250,7 @@ $$('[data-case]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();e
 const journey=$('#journey'),track=$('#track'),rail=$('.rail'),menu=$('#menu'),toggle=$('#menu-toggle'),scenes=$$('.journey-scene'),routeNav=$('.route-nav');
 const sceneContents=scenes.map(scene=>{const content=document.createElement('div');content.className='scene-content';while(scene.firstChild)content.append(scene.firstChild);scene.append(content);return content});
 const routeIndex=document.createElement('button');routeIndex.id='route-index';routeIndex.type='button';routeIndex.setAttribute('aria-label','Kapitelübersicht öffnen');routeIndex.append($('#route-position'));routeNav.insertBefore(routeIndex,$('#route-next'));
-let maxTravel=0,journeyTop=0,currentTravel=0,targetTravel=0,panels=[],lastScroll=-1,path=null,activeScene=0,layoutWidth=0,layoutHeight=0,wasMobile=mobile.matches;
+let maxTravel=0,journeyTop=0,currentTravel=0,targetTravel=0,panels=[],lastScroll=-1,path=null,activeScene=0,layoutWidth=0,layoutHeight=0,wasMobile=mobile.matches,paintedScene=-1,paintedFrames='';
 function resizeJourney(){
   panels=$$('.panel');
   const small=mobile.matches,newWidth=innerWidth;
@@ -274,25 +275,26 @@ function resizeJourney(){
     const destination=journeyTop+path.stops[activeScene].start+(wasMobile===small?previousProgress*(path.stops[activeScene].end-path.stops[activeScene].start):0);
     window.scrollTo({top:Math.max(0,destination),behavior:'instant'});
   }
-  currentTravel=targetTravel=Math.max(0,Math.min(maxTravel,scrollY-journeyTop));renderJourney();
+  paintedScene=-1;paintedFrames='';currentTravel=targetTravel=Math.max(0,Math.min(maxTravel,scrollY-journeyTop));renderJourney();
   layoutWidth=newWidth;layoutHeight=newHeight;wasMobile=small;lastScroll=-1;
 }
 function renderJourney(){
   const state=path.sample(currentTravel,reduce.matches),visibleScenes=new Set(state.frames.map(f=>f.index));
-  scenes.forEach((scene,i)=>{
-    scene.style.visibility=visibleScenes.has(i)?'visible':'hidden';
-    scene.inert=i!==state.index;
-  });
+  const frameKey=state.frames.map(f=>f.index).join(':');
+  if(frameKey!==paintedFrames){scenes.forEach((scene,i)=>{scene.style.visibility=visibleScenes.has(i)?'visible':'hidden'});paintedFrames=frameKey}
   for(const frame of state.frames){const scene=scenes[frame.index];scene.style.transform=`translate3d(${frame.x}px,${frame.y}px,0)`;scene.style.opacity=String(frame.opacity);if(mobile.matches)sceneContents[frame.index].style.transform=`translate3d(0,${frame.contentY}px,0)`}
   activeScene=state.index;
+  if(mobile.matches)routeNav.style.setProperty('--route-progress',String(maxTravel?currentTravel/maxTravel:0));
+  if(paintedScene===activeScene)return;
+  paintedScene=activeScene;scenes.forEach((scene,i)=>scene.inert=i!==activeScene);
   const dark=scenes[activeScene].querySelector('.panel').classList.contains('dark');
   rail.classList.toggle('is-dark',dark);routeNav.classList.toggle('is-dark',dark);
   panels.forEach(p=>p.classList.toggle('is-current',p.closest('.journey-scene')===scenes[activeScene]));
-  if(mobile.matches){renderMobileNav();routeNav.style.setProperty('--route-progress',String(maxTravel?currentTravel/maxTravel:0));return}
-  $('#route-prev').textContent='← ZURÜCK';mobileNavState='';
+  if(mobile.matches){renderMobileNav();return}
+  $('#route-prev').textContent='Zurück';mobileNavState='';
   $('#route-position').textContent=scenes[activeScene].dataset.label.toUpperCase();
   $('#route-prev').disabled=false;$('#route-prev').setAttribute('aria-label',activeScene===0?'Zurück zum Start':'Vorheriger Abschnitt: '+scenes[activeScene-1].dataset.label);$('#route-next').disabled=activeScene===scenes.length-1;
-  $('#route-next').textContent=({right:'→',down:'↓',up:'↑'}[scenes[activeScene].dataset.direction]);
+  $('#route-next').textContent='Weiter';
   $('#route-next').setAttribute('aria-label','Nächster Abschnitt'+(scenes[activeScene+1]?': '+scenes[activeScene+1].dataset.label:''));
 }
 function updateJourney(dt){
@@ -303,7 +305,7 @@ function updateJourney(dt){
   }else rail.classList.remove('is-fixed');
   targetTravel=Math.max(0,Math.min(maxTravel,y-journeyTop));
   if(y===lastScroll&&Math.abs(currentTravel-targetTravel)<.08)return;lastScroll=y;
-  currentTravel=reduce.matches||mobile.matches?targetTravel:follow(currentTravel,targetTravel,dt,.075);
+  currentTravel=reduce.matches?targetTravel:follow(currentTravel,targetTravel,dt,mobile.matches?.045:.065);
   if(Math.abs(currentTravel-targetTravel)<.08)currentTravel=targetTravel;
   renderJourney();
 }
@@ -330,7 +332,7 @@ let mobileNavState='';function renderMobileNav(){
   $('#route-prev').textContent=activeScene===0?'Start':'Zurück';$('#route-prev').disabled=false;$('#route-prev').setAttribute('aria-label',activeScene===0?'Zurück zum Start':'Vorheriger Abschnitt: '+scenes[activeScene-1].dataset.label);
   $('#route-next').textContent=last?'Anfang':'Weiter';$('#route-next').disabled=false;$('#route-next').setAttribute('aria-label',last?'Zurück zum Anfang':'Nächster Abschnitt: '+scenes[activeScene+1].dataset.label);
 }
-// Explicit menu choices go straight to their destination. The chapter arrows and native scroll retain the spatial journey.
+// Explicit menu choices go straight to their destination. The chapter buttons and native scroll retain the spatial journey.
 let destinationFade=null;
 function goDirect(hash){
   destinationFade?.cancel();destinationFade=null;

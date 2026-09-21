@@ -4,7 +4,8 @@ const screen=document.getElementById('signature-intro');
 if(!screen)return;
 
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-let timer,playing=false,pending=false;
+let timer,playing=false,pending=false,startedAt=0;
+const duration=window.IntroStory.duration;
 function finish(){
   const wasPlaying=playing;
   pending=false;
@@ -25,13 +26,14 @@ function show(){
   // Flush the previous animation before replaying the same element.
   void screen.offsetWidth;
   screen.classList.add('is-playing');
+  startedAt=performance.now();
   playing=true;
   document.body.classList.add("intro-active");
   document.querySelectorAll(".hero,.journey").forEach(el=>el.inert=true);
   window.dispatchEvent(new Event("signatureintro:start"));
-  timer=setTimeout(finish,5000);
+  timer=setTimeout(finish,reduced.matches?1200:duration);
 }
-window.SignatureIntro={show};
+window.SignatureIntro={show,elapsed:()=>playing?(performance.now()-startedAt)/1000:-1};
 
 screen.querySelector('.intro-skip').addEventListener('click',finish);
 screen.addEventListener('pointerdown',event=>{event.stopPropagation();finish()});
