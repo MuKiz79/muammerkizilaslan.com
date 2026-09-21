@@ -43,7 +43,7 @@ function selectProduct(key){
   output.querySelector('.product-number').textContent=product.number+' / 04';output.querySelector('.product-status').textContent=product.status;
   output.querySelector('h3').textContent=product.name;output.querySelector('.product-reason').textContent=product.reason;
   output.querySelector('.product-tags').replaceChildren(...product.tags.map(text=>{const span=document.createElement('span');span.textContent=text;return span}));
-  const link=output.querySelector('.product-link');link.href=product.url;link.textContent=product.cta+' ↗';
+  const link=output.querySelector('.product-link');link.href=product.url;link.textContent=product.cta;
   resultAnimation?.cancel();
   if(!reduced.matches)resultAnimation=output.querySelector('.product-result').animate([{opacity:.3,transform:'translateX(12px)'},{opacity:1,transform:'none'}],{duration:500,easing:'cubic-bezier(.22,1,.36,1)'});
   const connector=$('.workbench-connector');connector.classList.remove('is-passing');void connector.offsetWidth;connector.classList.add('is-passing');
