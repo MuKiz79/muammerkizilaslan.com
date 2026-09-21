@@ -35,7 +35,7 @@ function choosePlace(key,index){
 function updateStoryNav(){
  $('#atlas-prev').disabled=selectedIndex<=0;
  $('#atlas-progress').textContent=selectedIndex<0?'MEIN WEG':String(selectedIndex+1).padStart(2,'0')+' / '+String(career.length).padStart(2,'0');
- $('#atlas-next').textContent=selectedIndex<0?'Weg beginnen →':selectedIndex===career.length-1?'Zum Anfang ↺':'Nächste Station →';
+ $('#atlas-next').textContent=selectedIndex<0?'Weg beginnen':selectedIndex===career.length-1?'Zum Anfang':'Nächste Station';
 }
 function stepStation(delta){const i=selectedIndex<0?0:delta>0?(selectedIndex+1)%career.length:Math.max(0,selectedIndex-1);choosePlace(career[i].point,i)}
 $('#atlas-prev').addEventListener('click',()=>stepStation(-1));$('#atlas-next').addEventListener('click',()=>stepStation(1));updateStoryNav();

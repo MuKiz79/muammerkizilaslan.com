@@ -20,7 +20,7 @@ function visit(index){
   guide.querySelector('.guide-name').textContent=route.name;
   guide.querySelector('.guide-progress').textContent=String(step+1).padStart(2,'0')+' / '+String(route.stops.length).padStart(2,'0');
   guide.querySelector('strong').textContent=stop.title;guide.querySelector('.guide-story p').textContent=stop.copy;
-  $('#guide-prev').disabled=step===0;$('#guide-next').textContent=step===route.stops.length-1?'Abschließen ✓':'Weiter →';
+  $('#guide-prev').disabled=step===0;$('#guide-next').textContent=step===route.stops.length-1?'Abschließen':'Weiter';
   if(stop.detail!==undefined){const details=$$('#selected-work details');details.forEach((d,i)=>d.open=i===stop.detail)}
   if(stop.product)selectProduct(stop.product);
   window.ProfileNavigation?.refresh();window.ProfileNavigation?.go('#'+stop.target);
