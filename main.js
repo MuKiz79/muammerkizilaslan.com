@@ -32,6 +32,7 @@ function size(){
     grain.width=Math.ceil(width*dpr);grain.height=Math.ceil(height*dpr);
     gc.fillStyle=gc.createPattern(noiseTile,'repeat');gc.fillRect(0,0,grain.width,grain.height);
   }
+  legend.style.bottom=(height-$('.hero-bottom').offsetTop+12)+'px';
   for(const p of points){p.bw=p.b.offsetWidth;p.bh=p.b.offsetHeight;p.lastX=p.lastY=null}
   chapterRunway=Math.max(1,heroScroll.offsetHeight-height);resizeJourney();needsDraw=true;
 }
