@@ -34,14 +34,16 @@
 @media(min-width:701px){
  .track{position:absolute;inset:0 0 0 var(--rail);width:auto;height:100%;padding:0;display:block;transform:none!important;will-change:auto}
  .journey-scene{position:absolute;top:0;left:0;display:flex;width:max-content;height:100%;visibility:hidden;will-change:transform;contain:layout style}
- .journey-scene>.panel:only-child{min-width:calc(100vw - var(--rail))}
+ .journey-scene .scene-content>.panel:only-child{min-width:calc(100vw - var(--rail))}
  .journey-scene:first-child{visibility:visible}
  .stage{background:var(--paper);overflow-anchor:none}
  .is-current .about-body,.is-current .selected-body{animation:none}
  .route-nav{position:absolute;z-index:9;right:24px;top:7px;display:flex;align-items:center;gap:12px;font:10px var(--mono);letter-spacing:.08em;background:var(--paper);color:var(--ink);padding:0 8px;border-radius:2px}
  .route-nav button{font:inherit;min-height:28px;padding:0 7px}.route-nav button:disabled{opacity:.25}.route-nav.is-dark{background:var(--dark);color:var(--paper)}
 }
-@media(max-width:700px){.journey-scene{display:contents;visibility:visible!important;transform:none!important;opacity:1!important}.route-nav{display:none}}
+.scene-content{display:contents}
+#route-index{display:contents}
+@media(max-width:700px){html:not(.mobile-spatial) .journey-scene{display:contents;visibility:visible!important;transform:none!important;opacity:1!important}.route-nav{display:none}}
 
 .journey{overflow-anchor:none}
 
