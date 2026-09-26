@@ -1,0 +1,166 @@
+/* Finishing layer: the same materials, readable controls and considered details across every chapter. */
+:root{--craft-petrol:#285c63;--craft-ochre:#c7a04a;--craft-night:#272b35;--craft-paper:#f1f1ec}
+a,button,summary{touch-action:manipulation}
+a:focus-visible,button:focus-visible,summary:focus-visible,select:focus-visible{outline:2px solid var(--signature);outline-offset:5px}
+.chapter,.career-map>.chapter,.workshop>.chapter{font-size:11px;letter-spacing:.12em}
+.route-nav #route-prev,.route-nav #route-next{font-size:11px}
+.route-nav #route-position{font-size:10px;letter-spacing:.1em}
+.text-link,.evidence-link,.product-link,.founder-note>a,.founder-aside>a{ text-decoration-thickness:1px;text-underline-offset:5px}
+.hero-header a,.hero-bottom>a,.text-link,.product-link{transition:color .2s ease,text-decoration-color .2s ease}
+
+/* Navigation fits a full desktop viewport and records the current part of the journey. */
+#menu{background:var(--craft-night);color:#f6f2e8}
+#menu .menu-top{min-height:44px;align-items:center}
+#menu nav{max-width:1040px;margin:clamp(24px,4vh,50px) auto}
+#menu nav a{display:flex;align-items:center;gap:18px;font-size:clamp(34px,6.7vh,72px);padding:7px 0;line-height:1.06;border-color:#aeb8b530;transition:color .25s,padding .25s}
+#menu nav small{width:34px;min-width:34px;font:11px var(--mono);color:#b2bcba}
+#menu nav a[aria-current]{color:#e2c178}
+#menu nav a[aria-current] small{color:inherit}
+#menu nav a[aria-current]::after{content:'HIER';font:10px var(--mono);letter-spacing:.12em;margin-left:auto;padding-right:4px;color:#e2c178}
+#menu .menu-mail{max-width:1040px;font-size:13px;color:#c6d0cc;padding-block:8px;width:fit-content;margin-left:max(0px,calc((100% - 1040px)/2))}
+
+/* The portrait and founder note read as one personal spread. */
+#about .about-intro{color:#4c5650}
+#about .portrait-frame{padding:8px;background:#eee9de;border:1px solid #285c6320}
+#about .portrait-frame img{height:clamp(240px,36vh,340px);max-width:100%;object-fit:cover}
+#about .founder-note{border-top:1px solid #285c6345}
+#about .founder-note>a{color:var(--craft-petrol)}
+#about .about-foot strong{color:var(--craft-petrol)}
+#about .about-foot span{font-size:11px;line-height:1.5}
+
+/* Four hand-drawn network structures make each area of expertise identifiable. */
+#expertise{background:var(--craft-night)}
+body:has(#expertise.is-current) .rail,body:has(.expertise-card.is-current) .rail{background:var(--craft-night)}
+.mobile-spatial .journey-scene:has(#expertise) .scene-content{background:var(--craft-night)}
+#expertise>div:last-child{margin-block:auto}
+#expertise h2{font:400 clamp(40px,4.25vw,68px)/1.06 var(--serif);letter-spacing:-.045em;max-width:10.8em}
+#expertise .accent-people{color:#e2c178}
+.expertise-card{border-color:#a2b9b530;background:#253d40}
+.expertise-card[data-title="Strategische Führung"],.expertise-card[data-title="Internationale Skalierung"]{background:#263e40}
+.expertise-card[data-title="KI und Automatisierung"],.expertise-card[data-title="Architektur und Cloud"]{background:#293540}
+.expertise-index{display:flex;justify-content:space-between;align-items:center;gap:20px;width:100%}
+.expertise-index .expertise-number{font-size:clamp(62px,6.4vw,92px);color:#e2c178}
+.expertise-diagram{width:clamp(70px,8vw,115px);height:auto;flex:none;stroke:#b9cdc9;fill:none;stroke-width:1.3;transition:transform .4s ease}
+.expertise-diagram circle,.expertise-diagram rect{fill:#293c40}
+.expertise-diagram circle{stroke:#e2c178}
+.expertise-card h3{font-size:clamp(26px,2.4vw,38px);letter-spacing:-.045em;line-height:1.12}
+.expertise-card p{color:#e1e9e5;line-height:1.6}
+.expertise-card .eyebrow{font:10px/1.6 var(--mono);letter-spacing:.07em;color:#bfcbc6;padding-top:18px;border-top:1px solid #a2b9b530}
+
+/* Map controls and dated stations use the same active-state language. */
+#career-map{background:#e8eeea}
+#career-map .atlas-surface{background:#f1f3ed;border-color:#9faea455}
+#career-map .atlas-tools button{font-size:11px;min-height:40px;background:#f1f3edee}
+#career-map .atlas-tools button[aria-pressed=true],#career-map .atlas-locations button[aria-pressed=true]{background:var(--craft-petrol);color:#f7f5ed;border-color:var(--craft-petrol)}
+#career-map .atlas-locations button{min-height:40px}
+#career-map .atlas-years{color:var(--craft-petrol)}
+#career-map .atlas-credit{font-size:10px;letter-spacing:.025em}
+#career-map .atlas-footer label,#career-map .atlas-story-nav span{font-size:10px}
+#career-map .atlas-focus{font-size:14px;line-height:1.6}
+#career-map .atlas-city-roles button[aria-pressed=true]{background:var(--craft-petrol);border-color:var(--craft-petrol);color:#fff}
+#experience{background:#f4f0e8}
+#experience details[open]>summary{color:var(--craft-petrol)}
+#experience summary{padding-block:22px}
+#experience summary>small{font-size:11px;color:#66716b}
+#experience details{border-color:#9ba9a050}
+#experience details>div{padding:4px 0 26px}
+#experience details p{line-height:1.65}
+#experience .founder-aside{border-top:2px solid var(--craft-ochre)}
+#experience .founder-aside>a{color:var(--craft-petrol)}
+#experience .experience-footer{font-size:11px;line-height:1.6}
+
+/* A stable, legible product selector; the status is part of the product, not decoration. */
+#workshop{background:#f8f3e9}
+#workshop .workshop-heading .eyebrow{font-size:11px;color:var(--craft-petrol)}
+#workshop .bench-label{font-size:10px}
+#workshop .product-choices button{justify-content:flex-start;padding:16px 14px;font-size:14px;min-height:58px;line-height:1.5;border-color:#b6bdb350}
+#workshop .product-choices button[aria-pressed=true]{background:var(--craft-petrol);color:#f7f5ed;box-shadow:inset 3px 0 var(--craft-ochre)}
+#workshop .product-choices button[aria-pressed=true]::before{display:none}
+#workshop .product-preview{border:1px solid #b6bdb360}
+#workshop .product-preview>span{font-size:10px;line-height:1.4;padding:7px 10px}
+#workshop .product-meta{align-items:center;font-size:11px}
+#workshop .product-status{display:inline-flex;align-items:center;border:1px solid #285c6350;padding:4px 9px;font:10px/1.4 var(--mono);letter-spacing:.035em;color:var(--craft-petrol);background:#e5ede6}
+#workshop [data-status="In Entwicklung"] .product-status{color:#465760;background:#e8ecee;border-color:#b1bec3}
+#workshop [data-status="Im Pilot"] .product-status{color:#65501e;background:#eee2c3;border-color:#c6ac6e}
+#workshop .product-reason{font-size:14px;color:#535b55;line-height:1.7}
+#workshop .product-link{color:var(--craft-petrol);min-height:32px;display:inline-flex;align-items:center}
+#workshop .workshop-bottom>p,#workshop .workshop-bottom>a{font-size:11px;line-height:1.5}
+
+/* A physical contact card closes the site, carrying the same light paper and ochre. */
+#contact{background:var(--craft-night)}
+body:has(#contact.is-current) .rail,body:has(#contact.is-current) .route-nav{background:var(--craft-night);color:#f6f2e8}
+.mobile-spatial .journey-scene:has(#contact) .scene-content{background:var(--craft-night)}
+#contact .contact-emphasis{color:#e2c178}
+#contact .contact-mail{letter-spacing:-.035em;border-color:#bfcac560;padding-bottom:7px}
+#contact .contact-card{width:208px;max-width:none;padding:18px;gap:11px;background:#f4eee1;color:#293331;border:1px solid #e3d8c3;box-shadow:0 12px 24px #10131a30;transform:rotate(2deg)}
+#contact .contact-card img{width:150px;height:150px}
+#contact .contact-card-heading{font-size:10px;letter-spacing:.04em}
+#contact .contact-card-action{font-size:13px;color:var(--craft-petrol)}
+#contact .contact-card small{font-size:10px;color:#59655e}
+#contact footer{font-size:11px;border-color:#a9b9b030}
+#contact .contact-profile>p,#contact .contact-profile>a{color:#d2dbd6}
+
+@media(min-width:701px){
+ #about{padding-top:70px}
+ #experience{width:calc(100vw - var(--rail));grid-template-columns:34% minmax(0,1fr);padding-top:76px}
+ #experience .experience-body{min-width:0}
+ #experience summary>span{font-size:clamp(38px,4.5vw,65px);line-height:1.04}
+ .expertise-card{padding-top:64px;padding-bottom:40px}
+ #expertise{padding-top:64px}
+ #workshop{padding-top:64px}
+ #workshop .product-preview{height:clamp(100px,22vh,230px);aspect-ratio:auto}
+}
+@media(min-width:701px) and (max-height:740px){
+ #about{padding-top:58px}#about .portrait-frame img{height:29vh;min-height:165px}
+ #expertise h2{font-size:clamp(36px,3.8vw,54px)}
+ .expertise-card{padding-top:52px;padding-bottom:28px}
+ #experience{padding-top:54px}#experience summary{padding-block:15px}#experience summary>span{font-size:42px}
+ #workshop{padding-top:50px;gap:16px}#workshop .product-choices button{min-height:46px;padding-block:10px;font-size:13px}
+ #workshop .product-reason{font-size:13px;line-height:1.55}
+ #workshop .product-preview{height:clamp(90px,19vh,140px)}
+ #contact .contact-card{width:190px;padding:13px;gap:8px}#contact .contact-card img{width:130px;height:130px}
+}
+@media(max-width:700px){
+ #menu{padding:20px 24px}
+ #menu nav{margin:24px auto}
+ #menu nav a{font-size:clamp(29px,9vw,43px);min-height:54px;padding:10px 0;gap:8px;white-space:nowrap}
+ #menu nav small{width:24px;min-width:24px;font-size:10px}
+ #menu nav a[aria-current]::after{content:'';width:16px;height:2px;background:#e2c178;padding:0;flex:none}
+ #menu .menu-mail{font-size:12px;overflow-wrap:anywhere}
+ #about .portrait-frame img{height:auto;width:100%;aspect-ratio:1;object-fit:cover}
+ #about .portrait-frame{padding:7px;width:100%}
+ #about .about-foot span{font-size:10px}
+ #expertise{min-height:60svh;padding-top:100px}
+ #expertise>div:last-child{margin-top:44px;margin-bottom:12px}
+ #expertise h2{font-size:clamp(35px,10.5vw,49px)}
+ .expertise-index .expertise-number{font-size:68px}
+ .expertise-diagram{width:90px}
+ .expertise-card{min-height:460px;padding:38px 24px;gap:32px}
+ .expertise-card h3{font-size:clamp(25px,8vw,36px);overflow-wrap:anywhere}
+ .expertise-card p{font-size:16px}
+ #career-map .atlas-tools button{font-size:10px;padding-inline:8px}
+ #career-map .atlas-focus{font-size:14px}
+ #experience summary{align-items:flex-start}
+ #experience summary>span{font-size:clamp(34px,10vw,44px)}
+ #experience summary>small{padding-top:7px;font-size:10px}
+ #experience .experience-footer{font-size:10px;gap:20px}
+ #workshop .product-choices{gap:10px}
+ #workshop .product-choices button{font-size:12px;padding:12px 10px;min-height:74px;align-items:center}
+ #workshop .product-result h3{font-size:clamp(29px,9vw,38px);overflow-wrap:anywhere}
+ #workshop .product-preview>span{font-size:10px}
+ #contact .contact-mail{font-size:clamp(16px,5vw,27px);letter-spacing:-.035em}
+ #contact h2{font-size:16vw}
+ #contact .contact-card{margin-top:32px;margin-right:5px}
+}
+@media(hover:hover) and (pointer:fine){
+ .hero-header a:hover,.hero-bottom>a:hover,.text-link:hover,.product-link:hover{color:var(--founder-ink);text-decoration:underline}
+ #menu nav a:hover{color:#e2c178;padding-left:8px}
+ .expertise-card:hover .expertise-diagram{transform:translateY(-4px)}
+ #workshop .product-choices button:not([aria-pressed=true]):hover{background:#285c630a;color:var(--craft-petrol)}
+ #contact .contact-card:hover{transform:rotate(0);box-shadow:0 15px 28px #10131a45}
+}
+@media(prefers-reduced-motion:reduce){
+ #menu nav a,.expertise-diagram,.hero-header a,.hero-bottom>a,.text-link,.product-link{transition:none}
+ .expertise-card:hover .expertise-diagram{transform:none}
+ #contact .contact-card,#contact .contact-card:hover{transform:none;transition:none}
+}

@@ -36,7 +36,7 @@ document.addEventListener('click',e=>{if(e.target.closest('a[href="#home"]'))end
 function selectProduct(key){
   const product=products[key];if(!product)return;
   $$('[data-product]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.product===key)));
-  const output=$('.workbench-output');
+  const output=$('.workbench-output');output.dataset.status=product.status;
   const preview=output.querySelector('.product-preview'),img=preview.querySelector('img');
   preview.hidden=!product.image;
   if(product.image){img.src=product.image;img.alt=product.imageAlt;preview.querySelector('span').textContent=product.imageCaption;}else{img.removeAttribute('src');img.alt='';}
