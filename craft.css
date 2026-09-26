@@ -118,6 +118,7 @@ body:has(#contact.is-current) .rail,body:has(#contact.is-current) .route-nav{bac
  #workshop{padding-top:50px;gap:16px}#workshop .product-choices button{min-height:46px;padding-block:10px;font-size:13px}
  #workshop .product-reason{font-size:13px;line-height:1.55}
  #workshop .product-preview{height:clamp(90px,19vh,140px)}
+ #contact{padding-top:54px}
  #contact .contact-card{width:190px;padding:13px;gap:8px}#contact .contact-card img{width:130px;height:130px}
 }
 @media(max-width:700px){
