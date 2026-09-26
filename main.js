@@ -225,8 +225,8 @@ function renderCase(key){
   caseDialog.querySelector('.case-flow').replaceChildren(...c.flow.map((text,i)=>{const li=document.createElement('li'),n=document.createElement('small'),label=document.createElement('span');n.textContent='0'+(i+1);label.textContent=text;li.append(n,label);return li}));
   caseDialog.querySelector('.case-story').replaceChildren(...c.sections.map(([label,heading,copy])=>{const section=document.createElement('section'),tag=document.createElement('p'),div=document.createElement('div'),h=document.createElement('h3'),p=document.createElement('p');tag.className='eyebrow';tag.textContent=label;h.textContent=heading;p.textContent=copy;div.append(h,p);section.append(tag,div);return section}));
   caseDialog.querySelector('.case-next').textContent='Weiter: '+cases[c.next].brand;
-  caseDialog.style.setProperty('--case-color',{hans:'#234e46',bor:'#bdcbd2',bsh:'#dfd5c4'}[key]);
-  caseDialog.style.setProperty('--case-ink',{hans:'#fbf8ef',bor:'#263e4a',bsh:'#403b32'}[key]);
+  caseDialog.style.setProperty('--case-color',{hans:'#efe4d0',bor:'#bfc3f2',bsh:'#e8ab91'}[key]);
+  caseDialog.style.setProperty('--case-ink',{hans:'#302d29',bor:'#292940',bsh:'#3d2c29'}[key]);
   caseDialog.scrollTop=0;
 }
 function openCase(key,source){
