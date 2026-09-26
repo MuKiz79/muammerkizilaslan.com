@@ -343,7 +343,7 @@ function goDirect(hash){
 }
 document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const hash=a.getAttribute('href');if(!$(hash))return;e.preventDefault();const direct=!!a.closest('#menu,.hero-header');closeMenu();if(direct)goDirect(hash);else go(hash)});
 function markMenuLocation(){
-  const id=scrollY<journeyTop?'home':scenes[activeScene].querySelector('.panel').id;
+  const id=scrollY<journeyTop-1?'home':scenes[activeScene].querySelector('.panel').id;
   const section=({'selected-work':'work',experience:'career-map'})[id]||id;
   menu.querySelectorAll('nav a').forEach(a=>{if(a.getAttribute('href')==='#'+section)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
 }
