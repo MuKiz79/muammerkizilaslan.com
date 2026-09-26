@@ -111,7 +111,7 @@ function tick(t){
   const dt=Math.min((t-last)/1000||1/60,.05);last=t;
   if(openingTime>=0&&!document.hidden){const elapsed=window.SignatureIntro.elapsed();openingTime=elapsed<0?-1:window.IntroStory.growth(elapsed)}
   if(visible&&!document.hidden&&!modalOpen){
-    const nextProgress=reduce.matches?0:Math.max(0,Math.min(1,scrollY/chapterRunway));
+    const nextProgress=reduce.matches?0:Math.max(0,Math.min(1,(scrollY-Math.max(0,height-innerHeight))/chapterRunway));
     if(heroStylesDirty||Math.abs(nextProgress-chapterProgress)>.00001){
       heroStylesDirty=false;
       chapterProgress=reduce.matches?nextProgress:follow(chapterProgress,nextProgress,dt,.065);needsDraw=true;

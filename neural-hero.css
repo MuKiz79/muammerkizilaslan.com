@@ -135,6 +135,20 @@ details[open] .row-symbol::after{content:'−'}
 }
 @media(min-width:701px) and (max-height:750px){.product-preview:has(img[src*="webdesign-current"]){aspect-ratio:2.9}}
 
+/* The positioning pairs the leadership role with the founder's own products. */
+.hero-bottom{grid-template-columns:minmax(0,460px) auto 1fr}
+.hero-roles .hero-description{max-width:60ch;font:400 12px/1.6 var(--sans);letter-spacing:0;color:#555b53}
+.hero-roles .hero-description a{display:inline-block;font:inherit;letter-spacing:inherit;padding:0;min-height:24px;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){
+ .hero{min-height:740px}
+ .hero-scroll .hero{top:min(0px,calc(100svh - 740px))}
+ .hero-bottom{grid-template-columns:1fr auto;gap:12px}
+ .hero-roles{grid-column:1/-1;grid-row:1}
+ .hero-roles .hero-claim{max-width:34ch;font-size:16px}
+ .hero-bottom>a{grid-column:2;grid-row:2}
+ .hero-bottom>.orbit-hint{grid-column:1;grid-row:2;max-width:180px;justify-self:start}
+}
+
 /* Mobile legibility floor (founder decision, 20 September 2026): on phones no visible label under 10 px and no text link under a 24 px tap height. Appended last on purpose — same selectors as the earlier mobile rules, later in the cascade, so it wins at equal specificity. */
 @media(max-width:700px){
 .hero-header,.hero-header nav,.hero-header .hero-contact{font-size:11px}.hero-header .motion{font-size:10px}
