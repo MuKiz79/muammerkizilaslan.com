@@ -117,6 +117,7 @@ function tick(t){
       chapterProgress=reduce.matches?nextProgress:follow(chapterProgress,nextProgress,dt,.065);needsDraw=true;
       const reveal=FX.smooth(.64,.96,chapterProgress);
       anchors.style.opacity=String(FX.smooth(.08,.27,chapterProgress)*(1-FX.smooth(.44,.68,chapterProgress)));
+      anchors.style.setProperty('--motto-completion',String(FX.smooth(.20,.38,chapterProgress)));
       const controlsOpacity=String(1-FX.smooth(0,.16,chapterProgress));legend.style.opacity=controlsOpacity;selection.style.opacity=controlsOpacity;selection.inert=chapterProgress>.03;
       bridge.style.opacity=String(reveal);bridge.style.transform=`translate3d(0,${(1-reveal)*30}px,0)`;
       $('.hero-header').style.opacity=String(Math.max(0,1-chapterProgress*2));
