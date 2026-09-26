@@ -4,7 +4,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const hero=$('.hero'),canvas=$('#network'),ctx=canvas.getContext('2d'),grain=$('#grain'),gc=grain.getContext('2d'),field=$('#topics'),motion=$('#motion'),reduce=matchMedia('(prefers-reduced-motion: reduce)'),mobile=matchMedia('(max-width:700px)');
 let width=0,height=0,dpr=1,clock=0,last=0,paused=reduce.matches,visible=true,dragX=0,dragY=0,targetXRotation=0,targetYRotation=0,fieldTop=80,hoveredTopic=-1,needsDraw=true,chapterProgress=0,modalOpen=false,chapterRunway=1,heroStylesDirty=true;
 const bridge=$('.hero-bridge'),heroScroll=$('.hero-scroll');
-const topics=window.MUAMMER_TOPICS,FX=window.HeroEffects,Space=window.KineticSpace,anchors=$('.hero-anchors'),legend=$('.hero-legend'),selection=$('.hero-selection');
+const topics=window.MUAMMER_TOPICS,FX=window.HeroEffects,Space=window.KineticSpace,legend=$('.hero-legend'),selection=$('.hero-selection');
 const neural=window.NeuralSpace.create(),autopilot=window.OrbitMotion.create(),Flow=window.ThoughtFlow;
 const neuralCaption=$('.neural-caption');
 const topicEdges=[...new Map(FX.links.map((neighbors,i)=>{const edge=[i,neighbors[0]].sort((a,b)=>a-b);return[edge.join(':'),edge]})).values()];
@@ -115,9 +115,7 @@ function tick(t){
     if(heroStylesDirty||Math.abs(nextProgress-chapterProgress)>.00001){
       heroStylesDirty=false;
       chapterProgress=reduce.matches?nextProgress:follow(chapterProgress,nextProgress,dt,.065);needsDraw=true;
-      const reveal=FX.smooth(.64,.96,chapterProgress);
-      anchors.style.opacity=String(FX.smooth(.08,.27,chapterProgress)*(1-FX.smooth(.44,.68,chapterProgress)));
-      anchors.style.setProperty('--motto-completion',String(FX.smooth(.20,.38,chapterProgress)));
+      const reveal=FX.smooth(.46,.88,chapterProgress);
       const controlsOpacity=String(1-FX.smooth(0,.16,chapterProgress));legend.style.opacity=controlsOpacity;selection.style.opacity=controlsOpacity;selection.inert=chapterProgress>.03;
       bridge.style.opacity=String(reveal);bridge.style.transform=`translate3d(0,${(1-reveal)*30}px,0)`;
       $('.hero-header').style.opacity=String(Math.max(0,1-chapterProgress*2));

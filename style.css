@@ -49,9 +49,8 @@
 
 /* Topic controls and the transition into the editorial chapters. */
 .hero-scroll{height:172svh}.hero-legend{position:absolute;z-index:4;bottom:77px;left:40px;display:flex;gap:22px;font:10px var(--mono);letter-spacing:.04em;pointer-events:none}.hero-legend span::before{content:'';display:inline-block;width:5px;height:5px;margin-right:7px;background:var(--signature)}.hero-legend span:nth-child(2)::before{background:#2a53bc}.hero-legend span:nth-child(3)::before{background:#53755b}
-.hero-anchors{position:absolute;inset:30% 24px auto;z-index:4;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;pointer-events:none;opacity:0}.hero-anchors>span{display:block;font:400 clamp(38px,6.5vw,104px)/1.05 var(--serif);letter-spacing:-.055em;white-space:nowrap}.hero-anchors>.scroll-motto-completion{opacity:var(--motto-completion,0);transform:translate3d(0,calc((1 - var(--motto-completion,0))*18px),0)}
 #topic-dialog .topic-category{color:var(--topic-accent,#242424)}#topic-dialog .topic-body{border-color:var(--topic-accent,#b4b4b4)}#topic-dialog .topic-links button{color:var(--topic-accent,#242424)}
-@media(max-width:700px){.hero-scroll{height:164svh}.hero-legend{left:0;right:0;bottom:128px;justify-content:center;gap:17px;font-size:9px}#topics{bottom:165px}.hero-anchors{inset:30% 20px auto;gap:10px}.hero-anchors>span{font-size:clamp(28px,8.8vw,62px)}}
+@media(max-width:700px){.hero-scroll{height:164svh}.hero-legend{left:0;right:0;bottom:128px;justify-content:center;gap:17px;font-size:9px}#topics{bottom:165px}}
 @media(prefers-reduced-motion:reduce){.hero-scroll{height:auto}}
 
 .hero-legend[hidden],.hero-selection[hidden]{display:none}.hero-selection{position:absolute;z-index:6;bottom:72px;left:50%;translate:-50% 0;display:flex;align-items:center;gap:12px;max-width:calc(100% - 30px);background:#e7e7e7;border-bottom:1px solid #aaa;padding:0 5px;font:11px var(--mono)}.hero-selection button{font:inherit;min-height:44px;text-align:left}.hero-selection #topic-preview-clear{min-width:32px;font-size:20px}@media(max-width:700px){.hero-selection{bottom:113px;width:max-content}.hero-selection #topic-preview-open{max-width:275px}}
