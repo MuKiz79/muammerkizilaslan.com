@@ -148,6 +148,57 @@ details[open] .row-symbol::after{content:'−'}
  .hero-bottom>.orbit-hint{grid-column:1;grid-row:2;max-width:180px;justify-self:start}
 }
 
+/* A shared palette and measured spacing for the two work chapters. */
+#work{background:#f2efe8}
+#work .cover-hans{background:#234e46;color:#fbf8ef}
+#work .cover-bor{background:#bdcbd2;color:#263e4a}
+#work .cover-bsh{background:#dfd5c4;color:#403b32}
+#work .project-cover{box-shadow:0 1px 2px #273b3210,0 12px 30px -22px #273b3240;transition:transform .45s ease,box-shadow .45s ease}
+#work .cover-meta{letter-spacing:.055em;line-height:1.5}
+#work .cover-bottom{border-top:1px solid currentColor;border-color:color-mix(in srgb,currentColor 24%,transparent);padding-top:8px;font-size:10px;letter-spacing:.075em}
+#selected-work{background:#eef1ef}
+#selected-work .work-introduction{font-size:clamp(40px,4vw,58px);line-height:1.04;letter-spacing:-.045em;font-weight:400;margin-bottom:24px}
+#selected-work .work-introduction em{color:#34574e;font-weight:400}
+#selected-work .work-rows{margin-top:0}
+#selected-work .work-rows details{border-bottom-color:#aab7b080}
+#selected-work .work-rows summary{letter-spacing:-.045em;line-height:1.25;transition:color .2s ease}
+#selected-work .work-rows details[open]>summary{color:#34574e}
+#selected-work .row-detail p{color:#49534f}
+#selected-work .evidence-link{color:var(--founder-ink);border-bottom-color:color-mix(in srgb,var(--founder-ink) 30%,transparent)}
+#selected-work .selected-body>.text-link{font-size:16px;letter-spacing:-.02em}
+@media(min-width:701px){
+ #work{width:calc(100vw - var(--rail));padding:64px 2.5vw 36px;gap:2vw}
+ #work .work-word{font-size:clamp(46px,6.7vw,108px)}
+ #work .word-left,#work .word-right{width:22%}
+ #work .montage{width:48%;transform:rotate(-3deg)}
+ #selected-work{grid-template-columns:20% minmax(0,1fr);padding-top:70px;padding-bottom:38px}
+ #selected-work .selected-body{padding-left:20px;max-width:820px;min-height:0}
+ #selected-work .work-rows summary{font-size:clamp(24px,2.3vw,34px)}
+}
+@media(hover:hover) and (pointer:fine){
+ #work .project-cover:hover{transform:translateY(-3px) rotate(1deg);box-shadow:0 16px 36px -22px #273b3260}
+ #selected-work .work-rows summary:hover{color:#34574e}
+}
+@media(min-width:701px) and (max-height:700px){
+ #work{padding-top:48px;padding-bottom:24px}
+ #work .project-cover{padding:10px 22px}
+ #work .cover-bottom{min-height:22px;padding-top:4px;margin-top:4px}
+ #selected-work{padding-top:54px;padding-bottom:26px}
+ #selected-work .work-introduction{font-size:36px;margin-bottom:16px}
+ #selected-work .work-rows summary{padding-block:14px;font-size:26px}
+}
+@media(max-width:700px){
+ #work{padding:96px 24px 52px}
+ #work .montage{gap:20px;padding-block:28px}
+ #work .project-cover{padding:26px;min-height:296px}
+ #work .work-word{font-size:21vw}
+ #selected-work .selected-body{margin-top:32px}
+ #selected-work .work-introduction{font-size:clamp(36px,10.25vw,44px);margin-bottom:30px}
+ #selected-work .work-rows summary{font-size:clamp(23px,6.2vw,26px);padding-block:21px;gap:14px}
+ #selected-work .row-symbol{flex:none}
+}
+@media(prefers-reduced-motion:reduce){#work .project-cover,#selected-work .work-rows summary{transition:none}#work .project-cover:hover{transform:none}}
+
 /* Mobile legibility floor (founder decision, 20 September 2026): on phones no visible label under 10 px and no text link under a 24 px tap height. Appended last on purpose — same selectors as the earlier mobile rules, later in the cascade, so it wins at equal specificity. */
 @media(max-width:700px){
 .hero-header,.hero-header nav,.hero-header .hero-contact{font-size:11px}.hero-header .motion{font-size:10px}
