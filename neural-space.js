@@ -2,6 +2,7 @@
 (function(root){
  'use strict';
  const Flow=typeof module!=='undefined'&&module.exports?require('./thought-flow.js'):root.ThoughtFlow;
+ const Story=typeof module!=='undefined'&&module.exports?require('./intro-story.js'):root.IntroStory;
  const Space=typeof module!=='undefined'&&module.exports?require('./kinetic-space.js'):root.KineticSpace;
  const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
  const smooth=(a,b,v)=>{const p=clamp((v-a)/(b-a));return p*p*(3-2*p)};
@@ -41,14 +42,14 @@
  }
  function create(){
   const layouts=[graph(false),graph(true)],sequence=Flow.createSequence(),palette=[[170,83,47],[42,83,188],[83,117,91]];
-  let aimX=.5,aimY=.5,px=.5,py=.5,touching=false,force=0,velocity=0,pending=null,groupMix=0,cameraScale=0,previousWidth=0,previousHeight=0,lastFocus=-1,cachedPlan=null,planKey='';
+  let aimX=.5,aimY=.5,px=.5,py=.5,touching=false,force=0,velocity=0,pending=null,groupMix=0,cameraScale=0,previousWidth=0,previousHeight=0,lastFocus=-1,cachedPlan=null,planKey='',flowOrigin=0;
   function point(x,y){aimX=clamp(x);aimY=clamp(y);touching=true}
   function release(){touching=false}
   function pulse(x,y){point(x,y);pending={x:aimX,y:aimY}}
   function draw(ctx,state){
-   const {width:w,height:h,small,dt,time,shapeTime=time,yaw,pitch,progress,focusGroup,focusTopic=-1,welcomeTime=-1,opening=-1,reduced,paused}=state;
+   const {width:w,height:h,small,dt,time,shapeTime=time,yaw,pitch,progress,focusGroup,focusTopic=-1,welcomeTime=-1,opening=-1,openingSeconds=-1,reduced,paused}=state;
    if(w<=0||h<=0)return false;
-   const unfolding=opening>=0&&!reduced;
+   const unfolding=opening>=0&&!reduced,story=openingSeconds>=0&&!reduced?Story.frame(openingSeconds):null;
    const layout=layouts[small?1:0],fade=(1-smooth(.12,.78,progress))*(reduced||paused?1:smooth(0,1.2,time));
    const target=touching&&!reduced&&!paused?1:0,next=spring(force,velocity,target,dt);
    force=reduced?0:next.position;velocity=reduced?0:next.velocity;
@@ -57,7 +58,8 @@
    if(reduced||paused)pending=null;
    if(focusTopic!==lastFocus){if(focusTopic>=0)sequence.request(focusTopic);lastFocus=focusTopic;}
    const greeting=welcomeTime>=0&&!reduced?Flow.welcome(welcomeTime):null;
-   const flow=sequence.update(time),nextPlanKey=String(small)+':'+flow.seed;
+   if(story)flowOrigin=time;
+   const flow=story?{age:story.signalAge,seed:16,active:story.signalAge>=0&&story.signalAge<Flow.timing.active}:sequence.update(time-flowOrigin),nextPlanKey=String(small)+':'+flow.seed;
    if(nextPlanKey!==planKey){cachedPlan=Flow.plan(layout,flow.seed);planKey=nextPlanKey;}
    const frame=Space.frame(w,h,small),cy=frame.cy,turn=yaw-.32,tilt=pitch+.20;
    const model=geometry(layout,small,shapeTime,turn,tilt,reduced);
@@ -69,9 +71,10 @@
    else cameraScale+=(targetScale-cameraScale)*(1-Math.exp(-dt/.12));
    previousWidth=w;previousHeight=h;
    const projected=model.map(n=>{
-    const birth=unfolding?smooth(.55+n.layer*.29,1.7+n.layer*.29,opening):1;
-    const expansion=1-Math.pow(1-birth,3);
-    let sx=frame.cx+n.x*cameraScale*expansion,sy=cy+n.y*cameraScale*expansion;
+    const birth=story?story.visibility:unfolding?smooth(.55+n.layer*.29,1.7+n.layer*.29,opening):1;
+    const expansion=story?.88+.12*story.assembly:1-Math.pow(1-birth,3);
+    const scatter=story?(1-story.assembly)*cameraScale:0;
+    let sx=frame.cx+n.x*cameraScale*expansion+Math.cos(n.index*2.399)*scatter*.1,sy=cy+n.y*cameraScale*expansion+Math.sin(n.index*2.399)*scatter*.14;
     const dx=sx-px*w,dy=sy-py*h,distance=Math.hypot(dx,dy),radius=small?100:185,weight=Math.exp(-distance*distance/(radius*radius));
     sx+=dx*.045*weight*force;sy+=dy*.045*weight*force;
     sy+=(h*.77-sy)*smooth(.18,.85,progress);
@@ -93,7 +96,7 @@
    if(fade<.002)return active;
    ctx.save();ctx.beginPath();ctx.rect(0,76,w,Math.max(0,h-(small?245:170)));ctx.clip();
    // The first impulse is the origin of the same volume that stays on screen.
-   if(unfolding&&opening<1.9){
+   if(!story&&unfolding&&opening<1.9){
     const alpha=1-smooth(.8,1.9,opening),r=3.5+Math.sin(Math.min(opening,1.2)*Math.PI)*1.5;
     const halo=ctx.createRadialGradient(frame.cx,cy,0,frame.cx,cy,32);
     halo.addColorStop(0,`rgba(185,65,45,${alpha*.2})`);halo.addColorStop(1,'rgba(185,65,45,0)');
@@ -108,9 +111,11 @@
    for(const [from,to] of layout.edges){
     const a=projected[from],b=projected[to],alpha=Math.min(a.connectionAlpha,b.connectionAlpha)*fade;
     if(alpha<.002)continue;
-    const routeWeight=cachedPlan.edgeWeight(from,to),activation=Math.max(a.activation,b.activation)*routeWeight,color=palette[greeting?[2,2,1,1,0][a.layer]:focusGroup>=0?focusGroup:a.group],segments=small?4:6;
+    const routeWeight=cachedPlan.edgeWeight(from,to),activation=Math.max(a.activation,b.activation)*routeWeight,color=palette[story?0:greeting?[2,2,1,1,0][a.layer]:focusGroup>=0?focusGroup:a.group],segments=small?4:6;
+    const connection=story?story.connections[a.layer]:1;
     for(let k=0;k<segments;k++){
-     const fromPoint=along(a,b,k/segments),toPoint=along(a,b,(k+1)/segments);
+     if(k/segments>=connection)break;
+     const fromPoint=along(a,b,k/segments),toPoint=along(a,b,Math.min((k+1)/segments,connection));
      primitives.push({kind:'edge',a:fromPoint,b:toPoint,depth:(fromPoint.depth+toPoint.depth)/2,color:activation>.08?color:'81,99,123',alpha:alpha*(.25+activation*.4),width:.75+activation*.65,energy:activation});
     }
     function signal(t,strength){
@@ -140,7 +145,7 @@
      ctx.beginPath();ctx.arc(item.x,item.y,2.4*item.perspective,0,Math.PI*2);ctx.fillStyle=`rgba(${item.color},${item.alpha})`;ctx.fill();continue;
     }
     const n=item.node;if(n.birth<.005)continue;
-    const alpha=n.alpha*fade,color=palette[greeting?[2,2,1,1,0][n.layer]:focusGroup>=0&&cachedPlan.weights[n.index]>0?focusGroup:n.group],radius=((small?5:6.5)+n.activation*1.4)*n.perspective;
+    const alpha=n.alpha*fade,color=palette[story&&n.activation>.02?0:greeting?[2,2,1,1,0][n.layer]:focusGroup>=0&&cachedPlan.weights[n.index]>0?focusGroup:n.group],radius=((small?5:6.5)+n.activation*1.4)*n.perspective;
     if(n.activation>.02){const halo=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,18);halo.addColorStop(0,`rgba(${color},${alpha*n.activation*.2})`);halo.addColorStop(1,`rgba(${color},0)`);ctx.fillStyle=halo;ctx.beginPath();ctx.arc(n.x,n.y,18,0,Math.PI*2);ctx.fill()}
     ctx.beginPath();ctx.arc(n.x,n.y,radius+1.5,0,Math.PI*2);ctx.fillStyle=`rgba(244,243,239,${fade*n.birth})`;ctx.fill();
     const lightX=n.x-radius*(.34-Math.sin(turn)*.1),lightY=n.y-radius*.4;

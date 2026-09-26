@@ -9,9 +9,9 @@ const neural=window.NeuralSpace.create(),autopilot=window.OrbitMotion.create(),F
 const neuralCaption=$('.neural-caption');
 const topicEdges=[...new Map(FX.links.map((neighbors,i)=>{const edge=[i,neighbors[0]].sort((a,b)=>a-b);return[edge.join(':'),edge]})).values()];
 // The signature intro now provides the opening; hover captions stay available.
-let welcomeAllowed=false,openingTime=-1;
-window.addEventListener('signatureintro:start',()=>{openingTime=0;chapterProgress=0;heroStylesDirty=true;needsDraw=true});
-window.addEventListener('signatureintro:end',()=>{openingTime=-1;needsDraw=true});
+let welcomeAllowed=false,openingTime=-1,openingSeconds=-1;
+window.addEventListener('signatureintro:start',()=>{openingTime=0;openingSeconds=0;chapterProgress=0;heroStylesDirty=true;needsDraw=true});
+window.addEventListener('signatureintro:end',()=>{openingTime=-1;openingSeconds=-1;needsDraw=true});
 function stopWelcome(){if(welcomeAllowed){welcomeAllowed=false;needsDraw=true}}
 let automaticAngles={yaw:0,pitch:0};
 let effectClock=0,selectedTouch=-1,lastTopicPointer='mouse',relationStrength=0,relationOrigin=-1,relationRoute=[];
@@ -58,7 +58,7 @@ function draw(dt){
   const related=storyRoute.slice(1);
   relationStrength=reduce.matches?(focusIndex>=0?1:0):follow(relationStrength,focusIndex>=0?1:0,dt,.16);
   unsettled ||= Math.abs(relationStrength-(focusIndex>=0?1:0))>.001;
-  unsettled=neural.draw(ctx,{width,height,small,dt,time:effectClock,shapeTime:clock,yaw:rotY,pitch:rotX,progress:chapterProgress,focusTopic:focusIndex,welcomeTime:greeting?effectClock:-1,focusGroup:focusIndex>=0?topics[focusIndex][1]:-1,reduced:reduce.matches,paused,opening:openingTime})||unsettled;
+  unsettled=neural.draw(ctx,{width,height,small,dt,time:effectClock,shapeTime:clock,yaw:rotY,pitch:rotX,progress:chapterProgress,focusTopic:focusIndex,welcomeTime:greeting?effectClock:-1,focusGroup:focusIndex>=0?topics[focusIndex][1]:-1,reduced:reduce.matches,paused,opening:openingTime,openingSeconds})||unsettled;
   const arranged=points.map(p=>{
     const mass=FX.clamp((.8-(p.depth??p.z))/1.6),tau=orbit.dragging?.02+mass*.06:.05+mass*.10;
     p.angleY=reduce.matches?rotY:follow(p.angleY,rotY,dt,tau);p.angleX=reduce.matches?rotX:follow(p.angleX,rotX,dt,tau);
@@ -109,7 +109,7 @@ function draw(dt){
 }
 function tick(t){
   const dt=Math.min((t-last)/1000||1/60,.05);last=t;
-  if(openingTime>=0&&!document.hidden){const elapsed=window.SignatureIntro.elapsed();openingTime=elapsed<0?-1:window.IntroStory.growth(elapsed)}
+  if(openingTime>=0&&!document.hidden){const elapsed=window.SignatureIntro.elapsed();openingSeconds=elapsed;openingTime=elapsed<0?-1:window.IntroStory.growth(elapsed)}
   if(visible&&!document.hidden&&!modalOpen){
     const nextProgress=reduce.matches?0:Math.max(0,Math.min(1,(scrollY-Math.max(0,height-innerHeight))/chapterRunway));
     if(heroStylesDirty||Math.abs(nextProgress-chapterProgress)>.00001){
@@ -126,7 +126,7 @@ function tick(t){
     }
     orbit.update(dt,!paused&&!reduce.matches);
     if(chapterProgress>.02)stopWelcome();
-    automaticAngles=autopilot.update(dt,!paused&&!reduce.matches);clock=autopilot.time;
+    automaticAngles=autopilot.update(dt*(openingSeconds>=0?window.IntroStory.frame(openingSeconds).motion:1),!paused&&!reduce.matches);clock=autopilot.time;
     field.dataset.orbitMode=autopilot.mode;
     const tau=reduce.matches?.012:orbit.dragging?.028:.065;
     dragX=follow(dragX,targetXRotation,dt,tau);dragY=follow(dragY,targetYRotation,dt,tau);
