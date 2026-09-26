@@ -9,6 +9,14 @@
   }
   return beats.at(-1)[1];
  }
- const story={duration,growth};
+ // Build connections while the first word holds; send one thought as the sentence completes.
+ const smooth=(a,b,t)=>{const p=Math.max(0,Math.min(1,(t-a)/(b-a)));return p*p*(3-2*p)};
+ function frame(seconds){
+  const t=Math.max(0,seconds);
+  return {assembly:smooth(.2,2.2,t),visibility:smooth(0,.65,t),
+   connections:[0,1,2,3].map(layer=>smooth(.45+layer*.32,1.2+layer*.32,t)),
+   signalAge:t<2.5?-1:(t-2.5)*2.8,motion:smooth(2.24,3.56,t)};
+ }
+ const story={duration,growth,frame};
  if(typeof module!=='undefined'&&module.exports)module.exports=story;else root.IntroStory=story;
 })(typeof window!=='undefined'?window:this);
