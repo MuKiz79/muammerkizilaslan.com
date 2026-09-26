@@ -152,9 +152,9 @@ details[open] .row-symbol::after{content:'−'}
 #work{background:#272b35;color:#f8f2e8}
 body:has(#work.is-current) .rail,body:has(#work.is-current) .route-nav{background:#272b35;color:#f8f2e8}
 .mobile-spatial .journey-scene:has(#work) .scene-content{background:#272b35}
-#work .cover-hans{background:#efe4d0;color:#302d29}
-#work .cover-bor{background:#bfc3f2;color:#292940}
-#work .cover-bsh{background:#e8ab91;color:#3d2c29}
+#work .cover-hans{background:#285c63;color:#f7f5ed}
+#work .cover-bor{background:#c7a04a;color:#2d291f}
+#work .cover-bsh{background:#ced2cf;color:#293331}
 #work .project-cover{min-width:0;box-shadow:0 16px 32px -22px #10121c90;transition:transform .4s ease,box-shadow .4s ease}
 #work .cover-meta{display:flex;justify-content:space-between;gap:12px;align-items:start;font-size:11px;letter-spacing:.025em;line-height:1.35}
 #work .cover-meta>span:last-child{white-space:nowrap}
