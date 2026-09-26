@@ -68,23 +68,23 @@ function draw(){
  const grid=camera.zoom>14?2:camera.zoom>3?10:30;
  for(let lon=-180;lon<=180;lon+=grid){const p=project(lon,0);ctx.beginPath();ctx.moveTo(p.x,0);ctx.lineTo(p.x,height);ctx.stroke()}
  for(let lat=-80;lat<=80;lat+=grid){const p=project(0,lat);ctx.beginPath();ctx.moveTo(0,p.y);ctx.lineTo(width,p.y);ctx.stroke()}
- ctx.fillStyle='#cdd6c8';ctx.strokeStyle='#aab8a5';ctx.lineWidth=.55;
+ ctx.fillStyle='#cbd5cf';ctx.strokeStyle='#9aaca2';ctx.lineWidth=.55;
  ctx.beginPath();for(const ring of land){for(let i=0;i<ring.length;i++){const p=project(ring[i][0],ring[i][1]);if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)}ctx.closePath()}ctx.fill('evenodd');ctx.stroke();
  if(camera.zoom>2){
   ctx.beginPath();for(const ring of window.WorldBorders){for(let i=0;i<ring.length;i++){const p=project(ring[i][0],ring[i][1]);if(i===0)ctx.moveTo(p.x,p.y);else ctx.lineTo(p.x,p.y)}ctx.closePath()}ctx.strokeStyle='rgba(113,134,104,.38)';ctx.lineWidth=.65;ctx.stroke();
-  ctx.font='9px "Space Grotesk",sans-serif';ctx.fillStyle='rgba(81,107,72,.43)';ctx.textAlign='center';
+  ctx.font='9px "Space Grotesk",sans-serif';ctx.fillStyle='rgba(47,78,73,.70)';ctx.textAlign='center';
   for(const [name,lon,lat] of [['DEUTSCHLAND',10.5,51.2],['FRANKREICH',2,47],['ITALIEN',12.8,43],['TÜRKEI',34,39],['POLEN',19.2,52],['ÖSTERREICH',14,47.6],['SCHWEIZ',8.2,46.7],['NIEDERLANDE',5.5,52.5],['BELGIEN',4.6,50.5],['TSCHECHIEN',15.5,49.9],['SPANIEN',-3.8,40.5],['GRIECHENLAND',23,39]]){const p=project(lon,lat);if(p.x>20&&p.x<width-20&&p.y>85&&p.y<height-30)ctx.fillText(name,p.x,p.y)}ctx.textAlign='left';
  }
  // Geographic links join documented dated stations only.
  for(let i=1;i<career.length;i++){
   const from=locations[career[i-1].point],to=locations[career[i].point];if(!from||!to||career[i-1].point===career[i].point)continue;
   const a=project(from.lon,from.lat),b=project(to.lon,to.lat),active=i===selectedIndex;
-  ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo((a.x+b.x)/2,(a.y+b.y)/2-Math.min(130,Math.hypot(a.x-b.x,a.y-b.y)*.3),b.x,b.y);ctx.strokeStyle=active?'rgba(180,65,45,.85)':'rgba(153,81,59,.25)';ctx.lineWidth=active?1.5:.85;ctx.setLineDash(career[i].years.includes('parallel')?[3,4]:[]);ctx.stroke();ctx.setLineDash([]);
+  ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo((a.x+b.x)/2,(a.y+b.y)/2-Math.min(130,Math.hypot(a.x-b.x,a.y-b.y)*.3),b.x,b.y);ctx.strokeStyle=active?'rgba(180,65,45,.85)':'rgba(40,92,99,.38)';ctx.lineWidth=active?1.5:.85;ctx.setLineDash(career[i].years.includes('parallel')?[3,4]:[]);ctx.stroke();ctx.setLineDash([]);
  }
  screenPins=[];
  for(const [key,p] of Object.entries(locations)){
   const q=project(p.lon,p.lat);if(q.x<-20||q.x>width+20||q.y<-20||q.y>height+20)continue;screenPins.push({...q,key});const active=key===selected;
-  ctx.beginPath();ctx.arc(q.x,q.y,active?9:5,0,Math.PI*2);ctx.fillStyle=active?'rgba(188,72,48,.10)':'rgba(241,244,235,.7)';ctx.fill();ctx.beginPath();ctx.arc(q.x,q.y,active?3.6:2.5,0,Math.PI*2);ctx.fillStyle=active?'#b3422c':'#936754';ctx.fill();
+  ctx.beginPath();ctx.arc(q.x,q.y,active?9:5,0,Math.PI*2);ctx.fillStyle=active?'rgba(188,72,48,.10)':'rgba(241,244,235,.7)';ctx.fill();ctx.beginPath();ctx.arc(q.x,q.y,active?3.6:2.5,0,Math.PI*2);ctx.fillStyle=active?'#b3422c':'#285c63';ctx.fill();
   if(active){const text=p.name.toUpperCase();ctx.font='10px "Space Grotesk",sans-serif';const tw=ctx.measureText(text).width;const left=q.x>width-130?q.x-tw-20:q.x+17;ctx.fillStyle='#eff2e9';ctx.fillRect(left-6,q.y-23,tw+12,21);ctx.fillStyle='#793d2c';ctx.fillText(text,left,q.y-9);ctx.strokeStyle='#b3422c';ctx.beginPath();ctx.moveTo(q.x,q.y);ctx.lineTo(left+(left<q.x?tw:0),q.y-8);ctx.stroke()}
  }
  if(!selected&&camera.zoom<3){const q=project(14,49);ctx.fillStyle='#4e6652';ctx.font='10px "Space Grotesk",sans-serif';ctx.fillText('MEINE STATIONEN',q.x+18,q.y-22);ctx.strokeStyle='#70856a';ctx.beginPath();ctx.moveTo(q.x+14,q.y-18);ctx.lineTo(q.x+4,q.y-4);ctx.stroke()}
