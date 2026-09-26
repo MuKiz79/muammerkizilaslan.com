@@ -161,17 +161,21 @@ body:has(#work.is-current) .rail,body:has(#work.is-current) .route-nav{backgroun
 #work .cover-bottom{border-top:1px solid currentColor;border-color:color-mix(in srgb,currentColor 25%,transparent);padding-top:8px;margin-top:8px;min-height:24px;font-size:10px;letter-spacing:.075em}
 #work .project-cover strong{font-size:clamp(46px,7.6vh,76px);line-height:.94}
 #work .cover-bor strong{font-size:clamp(32px,5.3vh,53px);line-height:.96}
-#selected-work{background:#f7f1e7}
-#selected-work .work-introduction{font-size:clamp(44px,5.1vw,74px);line-height:1;letter-spacing:-.05em;font-weight:400;margin-bottom:28px}
-#selected-work .work-introduction em{color:#5b5794;font-weight:400}
+#selected-work{background:#f1f1ec;color:#293331}
+#selected-work .work-introduction{font-size:clamp(44px,4.5vw,68px);line-height:1.04;letter-spacing:-.05em;font-weight:400;margin:0}
+#selected-work .work-introduction::after{content:"";display:block;width:48px;height:3px;background:#c7a04a;margin-top:30px}
+#selected-work .work-introduction em{color:#285c63;font-weight:400}
 #selected-work .work-rows{margin-top:0}
-#selected-work .work-rows details{border-bottom:1px solid #b7afa380;padding-inline:16px;margin-inline:-16px;transition:background .25s ease}
-#selected-work .work-rows details[open]{background:#fffcf780}
+#selected-work .work-rows details{border-bottom:1px solid #a3ada780;padding-inline:20px;margin:0;transition:background .25s ease,color .25s ease}
+#selected-work .work-rows details[open]{background:#285c63;color:#f7f5ed;border-bottom-color:transparent;box-shadow:inset 3px 0 #c7a04a}
+#selected-work .work-rows details[open] .row-symbol,#selected-work .work-rows details[open] .word-accent{color:#f7f5ed}
 #selected-work .work-rows summary{letter-spacing:-.045em;line-height:1.2;transition:color .2s ease}
-#selected-work .work-rows details[open]>summary{color:#5b5794}
-#selected-work .row-detail p{color:#514d49;font-size:15px}
-#selected-work .evidence-link{color:var(--founder-ink);border-bottom-color:color-mix(in srgb,var(--founder-ink) 30%,transparent)}
-#selected-work .selected-body>.text-link{font-size:16px;letter-spacing:-.02em}
+#selected-work .work-rows details[open]>summary{color:#f7f5ed}
+#selected-work .row-detail{padding:0 0 24px}
+#selected-work .row-detail p{color:inherit;font-size:15px;line-height:1.7;max-width:48ch}
+#selected-work .row-detail>span{color:#d5e1df}
+#selected-work .evidence-link{color:#f0d08c;border-bottom-color:#f0d08c70;font-size:11px;line-height:1.6}
+#selected-work .selected-body>.text-link{font-size:16px;letter-spacing:-.02em;color:#285c63}
 @media(min-width:701px){
  #work{width:calc(100vw - var(--rail));padding:65px 4vw 42px;display:flex;gap:0}
  #work .work-word{position:absolute;left:4vw;width:auto;font-size:clamp(64px,9.2vw,148px);text-align:left;line-height:.92;letter-spacing:-.07em;z-index:1}
@@ -179,13 +183,18 @@ body:has(#work.is-current) .rail,body:has(#work.is-current) .route-nav{backgroun
  #work .word-right{top:43%;transform:translateY(8%);margin:0}
  #work .montage{width:56%;height:100%;margin-left:auto;gap:16px;padding:0;transform:rotate(-2deg)}
  #work .project-cover{padding:20px 26px;flex:1;min-height:0}
- #selected-work{grid-template-columns:17% minmax(0,1fr);padding-top:66px;padding-bottom:32px}
- #selected-work .selected-body{padding-left:20px;max-width:840px;min-height:0}
- #selected-work .work-rows summary{font-size:clamp(25px,2.55vw,38px);padding-block:20px}
+ #selected-work{width:calc(100vw - var(--rail));grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);grid-template-rows:auto auto;column-gap:4vw;align-content:start;padding-top:118px;padding-bottom:38px}
+ #selected-work>.chapter{position:absolute;left:4.5vw;top:65px}
+ #selected-work .selected-body{display:contents}
+ #selected-work .work-introduction{grid-column:1;grid-row:1;align-self:start}
+ #selected-work .work-rows{grid-column:2;grid-row:1;min-width:0}
+ #selected-work .selected-body>.text-link{grid-column:2;grid-row:2;justify-self:end;margin-top:26px;padding-top:0}
+ #selected-work .work-rows summary{font-size:clamp(24px,2.15vw,32px);padding-block:23px;gap:14px}
+ #selected-work .row-symbol{flex:none}
 }
 @media(hover:hover) and (pointer:fine){
  #work .project-cover:hover{transform:translateX(-6px) rotate(1deg);box-shadow:0 18px 40px -20px #10121cb0}
- #selected-work .work-rows summary:hover{color:#5b5794}
+ #selected-work .work-rows details:not([open])>summary:hover{color:#285c63}
 }
 @media(min-width:701px) and (max-height:700px){
  #work{padding-top:50px;padding-bottom:30px}
@@ -193,9 +202,11 @@ body:has(#work.is-current) .rail,body:has(#work.is-current) .route-nav{backgroun
  #work .project-cover strong{font-size:clamp(34px,7.3vh,51px)}
  #work .cover-bor strong{font-size:clamp(26px,4.9vh,34px)}
  #work .cover-bottom{padding-top:4px;margin-top:4px;min-height:20px}
- #selected-work{padding-top:54px;padding-bottom:26px}
- #selected-work .work-introduction{font-size:46px;margin-bottom:20px}
- #selected-work .work-rows summary{padding-block:14px;font-size:27px}
+ #selected-work{padding-top:94px;padding-bottom:26px}
+ #selected-work>.chapter{top:52px}
+ #selected-work .work-introduction{font-size:42px}
+ #selected-work .work-rows summary{padding-block:15px;font-size:24px}
+ #selected-work .row-detail p{font-size:14px;line-height:1.6}
 }
 @media(max-width:700px){
  #work{padding:96px 24px 52px}
@@ -207,7 +218,9 @@ body:has(#work.is-current) .rail,body:has(#work.is-current) .route-nav{backgroun
  #work .cover-meta{flex-direction:column;gap:3px}
  #selected-work .selected-body{margin-top:32px}
  #selected-work .work-introduction{font-size:clamp(42px,11.8vw,60px);margin-bottom:32px}
- #selected-work .work-rows details{padding-inline:12px;margin-inline:-12px}
+ #selected-work .work-introduction::after{margin-top:22px;width:36px}
+ #selected-work .work-rows details{padding-inline:16px;margin-inline:-8px}
+ #selected-work .work-rows details[open]>summary{font-size:clamp(22px,6vw,28px)}
  #selected-work .work-rows summary{font-size:clamp(23px,6.5vw,29px);padding-block:23px;gap:14px}
  #selected-work .row-symbol{flex:none}
 }
