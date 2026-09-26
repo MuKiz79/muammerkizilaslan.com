@@ -165,3 +165,165 @@ body:has(#contact.is-current) .rail,body:has(#contact.is-current) .route-nav{bac
  .expertise-card:hover .expertise-diagram{transform:none}
  #contact .contact-card,#contact .contact-card:hover{transform:none;transition:none}
 }
+
+/* Typography and proportion: expressive display, readable content, precise notation. */
+:root{
+ --type-display:clamp(48px,4.65vw,72px);
+ --type-body:clamp(16px,1.2vw,18px);
+ --type-lead:clamp(18px,1.35vw,21px);
+ --type-caption:12px;
+}
+#about h2,#selected-work h2,#expertise h2,#career-map h2,#workshop h2,
+#contact h2,#menu nav a,.case-heading h2,.case-story h3,
+.intro-sequence p,.hero-landing p{
+ font-variation-settings:'opsz' 48;font-kerning:normal;text-wrap:balance;
+}
+#about h2,#selected-work h2,#expertise h2,#career-map h2,#workshop h2{font-weight:450;letter-spacing:-.045em}
+#about h2 em,#selected-work h2 em{font-weight:450}
+.chapter,.career-map>.chapter,.workshop>.chapter{font:500 11px/1.5 var(--mono);letter-spacing:.12em}
+.hero-header .name,.intro-brand{font-size:14px;font-weight:500;letter-spacing:-.025em}
+.hero-roles,.hero-roles a{font-size:14px;line-height:1.65;letter-spacing:-.015em}
+.hero .route-choices button{font-size:12px}
+#about .about-intro{font-size:var(--type-lead);line-height:1.65;letter-spacing:-.018em;max-width:55ch}
+#about .about-note p:not(.eyebrow),#experience .founder-aside>p:not(.eyebrow){font-size:16px;line-height:1.65;max-width:31ch}
+#about .about-note .text-link{font-size:16px}
+#about .founder-note>a,#experience .founder-aside>a{font-variation-settings:'opsz' 36;font-weight:450}
+#about .about-foot strong{font-size:56px;font-variation-settings:'opsz' 48}
+#about .about-foot span{font-size:12px;line-height:1.5}
+#selected-work .row-detail p{font-size:var(--type-body);line-height:1.65;letter-spacing:-.012em;max-width:48ch}
+#selected-work .work-rows summary{font-weight:500;letter-spacing:-.035em}
+#selected-work .evidence-link{font-size:12px}
+#work .project-cover strong{font-variation-settings:'opsz' 48;font-weight:450;letter-spacing:-.045em;line-height:1}
+#work .cover-bor strong{font-weight:500;letter-spacing:-.045em;line-height:1.08}
+#work .work-word{font-variation-settings:'opsz' 72;font-weight:400;letter-spacing:-.055em}
+#work .cover-meta{font-size:12px;line-height:1.45}
+#work .cover-bottom{font-size:11px;letter-spacing:.055em}
+.expertise-index{align-items:flex-start}
+.expertise-index .expertise-number{font:400 42px/1.1 var(--serif);font-variation-settings:'opsz' 32;letter-spacing:-.04em}
+.expertise-diagram{width:clamp(120px,11vw,165px);stroke-width:1.1}
+.expertise-card h3{font:500 clamp(27px,2.3vw,36px)/1.16 var(--sans);letter-spacing:-.045em;text-wrap:balance;overflow-wrap:normal}
+.expertise-card p{font-size:var(--type-body);line-height:1.65;letter-spacing:-.012em;max-width:33ch}
+.expertise-card .eyebrow{font-size:11px;letter-spacing:.035em;line-height:1.7}
+#career-map .atlas-focus{font-size:15px;line-height:1.65}
+#career-map .atlas-company{font-size:12px;line-height:1.5}
+#career-map .atlas-readout h3{font-weight:500;letter-spacing:-.025em}
+#experience summary>span{font-variation-settings:'opsz' 48;letter-spacing:-.045em}
+#experience summary>small{font-size:12px;font-variant-numeric:tabular-nums}
+#experience details p{font-size:16px;line-height:1.65;letter-spacing:-.01em}
+#experience details p:first-child{font-weight:600}
+#experience ul{font-size:15px;line-height:1.7}
+#workshop .workshop-heading>p{font-size:16px;line-height:1.65;max-width:33ch}
+#workshop .product-choices button{font-size:16px;letter-spacing:-.02em}
+#workshop .product-result h3{font:500 clamp(28px,2.55vw,38px)/1.16 var(--sans);letter-spacing:-.045em;text-wrap:balance}
+#workshop .product-reason{font-size:16px;line-height:1.65;max-width:55ch}
+#workshop .product-link{font-size:14px;font-weight:500}
+#workshop .product-status{font-size:11px}
+#contact h2{font-variation-settings:'opsz' 64;letter-spacing:-.055em;line-height:.94}
+#contact .contact-mail{font-size:clamp(26px,2.8vw,42px);letter-spacing:-.03em}
+#contact .contact-card{width:220px;padding:20px;gap:12px}
+#contact .contact-card img{width:156px;height:156px}
+#contact .contact-card-action{font-size:14px;font-weight:500}
+#contact .contact-card small{font-size:11px;line-height:1.5}
+.case-story h3{font-weight:450}
+.case-facts,.case-top,.topic-evidence-label{font-size:12px}
+.case-story section p:not(.eyebrow){font-size:18px;line-height:1.7;max-width:60ch}
+@media(min-width:701px){
+ #about h2{font-size:var(--type-display);line-height:1.07;max-width:15em}
+ #about .about-bottom{grid-template-columns:minmax(0,1fr) auto;max-width:960px;gap:clamp(30px,5vw,80px);margin-top:34px;align-items:start}
+ #about .portrait-frame{width:clamp(260px,25vw,370px);padding:9px}
+ #about .portrait-frame img{width:100%;height:auto;aspect-ratio:1}
+ #about .about-foot{bottom:48px;max-width:170px}
+ #about .about-foot span{max-width:160px}
+ #expertise h2{font-size:var(--type-display);line-height:1.08}
+ .expertise-card{padding-inline:3vw}
+ #workshop{gap:20px}
+ #workshop .workshop-heading h2{font-size:clamp(54px,5.2vw,78px)}
+ #workshop .product-preview{height:clamp(110px,20vh,210px)}
+ #workshop .workshop-bottom{margin-top:12px}
+}
+@media(min-width:701px) and (max-height:750px){
+ #about h2{font-size:clamp(40px,4vw,56px)}
+ #about .about-intro{font-size:16px;line-height:1.6;margin-top:18px}
+ #about .about-bottom{margin-top:24px}
+ #about .portrait-frame{width:clamp(220px,35vh,270px)}
+ #about .about-note p:not(.eyebrow){font-size:15px}
+ #about .about-foot strong{font-size:44px}
+ #selected-work .row-detail p{font-size:15px;line-height:1.6}
+ #selected-work .work-rows summary{font-size:24px;line-height:1.15;padding-block:14px}
+ #selected-work .row-detail{padding-bottom:20px}
+ #work .cover-meta{font-size:11px}
+ #work .cover-bottom{font-size:10px;min-height:16px;padding-top:3px}
+ #work .cover-bor strong{font-size:clamp(24px,4.4vh,32px);line-height:1.05}
+ #expertise h2{font-size:clamp(38px,4vw,56px)}
+ .expertise-diagram{width:125px}
+ #experience details p{font-size:15px;line-height:1.6}
+ #experience ul{font-size:14px}
+ #workshop{gap:14px}
+ #workshop .workshop-heading h2{font-size:clamp(44px,3.8vw,52px)}
+ #workshop .workshop-heading>p{font-size:14px;max-width:36ch}
+ #workshop .product-result h3{font-size:28px}
+ #workshop .product-choices button{font-size:14px;min-height:46px;padding-block:10px}
+ #workshop .product-preview{height:clamp(110px,21vh,150px)}
+ #workshop .product-reason{font-size:15px;line-height:1.55}
+ #workshop .product-link{font-size:13px;min-height:26px}
+ #contact h2{font-size:clamp(76px,9.2vw,125px);margin-top:4vh}
+ #contact .contact-card{width:190px;padding:13px;gap:8px}
+ #contact .contact-card img{width:130px;height:130px}
+}
+@media(max-width:1000px) and (min-width:701px){
+ #about{grid-template-columns:18% 82%}
+ #about .portrait-frame{width:clamp(215px,27vw,260px)}
+ #about .about-bottom{gap:24px}
+ #about .about-note p:not(.eyebrow){font-size:15px}
+ #about .about-foot span{font-size:11px;max-width:115px}
+ #about .about-foot strong{font-size:44px}
+ #experience{grid-template-columns:31% minmax(0,1fr)}
+ #experience summary{gap:12px}
+ #experience summary>span{font-size:clamp(32px,4.6vw,44px)}
+ #experience summary>small{font-size:11px}
+ #experience .founder-aside>p:not(.eyebrow){font-size:14px}
+ #workshop .workshop-heading>p{font-size:14px}
+}
+@media(max-width:700px){
+ .hero-header .name,.intro-brand{font-size:12px}
+ .hero-roles,.hero-roles a{font-size:12px;line-height:1.6}
+ .hero .route-choices button{font-size:11px}
+ #about h2{font-size:clamp(35px,10vw,48px);line-height:1.1}
+ #about .about-intro{font-size:17px;line-height:1.65;margin-top:24px}
+ #about .about-bottom{gap:28px}
+ #about .portrait-frame{max-width:380px;justify-self:start}
+ #about .about-foot{grid-template-columns:auto 1fr;gap:12px 20px;align-items:center}
+ #about .about-foot strong{font-size:48px}
+ #about .about-foot span{font-size:12px;max-width:22ch}
+ #selected-work .work-introduction{font-size:clamp(40px,11.2vw,58px);line-height:1.08}
+ #selected-work .row-detail p{font-size:16px}
+ #selected-work .work-rows summary,#selected-work .work-rows details[open]>summary{font-size:clamp(22px,6.2vw,28px);line-height:1.25}
+ #work .project-cover{min-height:350px;padding:26px}
+ #work .project-cover strong{font-size:clamp(60px,18vw,94px)}
+ #work .cover-bor strong{font-size:clamp(36px,10.6vw,54px)}
+ .expertise-card{min-height:480px;padding:36px 24px;gap:36px}
+ .expertise-index .expertise-number{font-size:38px}
+ .expertise-diagram{width:135px}
+ .expertise-card h3{font-size:clamp(27px,7.7vw,34px);line-height:1.2}
+ .expertise-card p{font-size:17px;line-height:1.65}
+ #career-map .atlas-heading h2{font-size:clamp(40px,11vw,52px);line-height:1.06}
+ #career-map .atlas-readout h3{font-size:24px}
+ #career-map .atlas-focus{font-size:16px}
+ #career-map .atlas-surface{height:clamp(280px,78vw,350px);min-height:280px}
+ #career-map .atlas-locations{grid-template-columns:repeat(3,1fr)}
+ #career-map .atlas-locations button{font-size:11px;min-height:44px}
+ #experience summary>span{font-size:clamp(32px,9vw,42px);line-height:1.08}
+ #experience summary>small{font-size:11px}
+ #experience .experience-footer{font-size:11px}
+ #workshop .workshop-heading h2{font-size:clamp(54px,16vw,72px);line-height:1}
+ #workshop .workshop-heading>p{font-size:17px;line-height:1.65}
+ #workshop .product-choices button{font-size:14px;min-height:90px;line-height:1.45}
+ #workshop .product-result h3{font-size:clamp(26px,7vw,34px);overflow-wrap:normal;hyphens:auto}
+ #workshop .product-reason{font-size:16px}
+ #contact h2{font-size:15.6vw;line-height:1;letter-spacing:-.055em}
+ #contact .contact-mail{font-size:clamp(17px,5vw,26px);line-height:1.4}
+ #contact .contact-card{width:220px;padding:20px;margin-top:36px}
+ #contact .contact-card img{width:156px;height:156px}
+ .case-heading h2{font-size:clamp(36px,10vw,54px);line-height:1.08}
+ .case-story section p:not(.eyebrow){font-size:17px}
+}
