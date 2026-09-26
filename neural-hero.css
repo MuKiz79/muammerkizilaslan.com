@@ -49,13 +49,11 @@
 .hero-landing p{transition:opacity .35s ease,transform .35s ease}
 .hero-landing p.is-on{opacity:1;transform:none}
 .hero-landing p.is-off{opacity:0;transform:translateY(-10px)}
-.hero.is-landing #topics,.hero.is-landing .hero-legend,.hero.is-landing .hero-roles .hero-claim{opacity:0}
+.hero.is-landing #topics,.hero.is-landing .hero-legend{opacity:0}
 .hero.is-landing #topics,.hero.is-landing .hero-legend,.hero.is-landing .hero-bottom{visibility:hidden}
 #topics,.hero-legend{transition:opacity .6s ease}
-.hero-roles .hero-claim{margin:0 0 9px;max-width:34ch;font:400 22px/1.2 var(--serif);letter-spacing:-.02em;color:#1f2430;transition:opacity .6s ease}
-@media(max-width:700px){.hero-roles .hero-claim{font-size:20px;max-width:28ch}}
-@media(prefers-reduced-motion:reduce){.hero-landing p,#topics,.hero-legend,.hero-roles .hero-claim{transition:none}.hero-landing p{transform:none}}
-/* The permanent claim line makes the roles block taller; the legend moves above it (measured: block top 121px / 144px from the edge). */
+@media(prefers-reduced-motion:reduce){.hero-landing p,#topics,.hero-legend{transition:none}.hero-landing p{transform:none}}
+/* Fallback until main.js positions the legend above the measured roles block. */
 .hero .hero-legend{bottom:134px}
 @media(max-width:700px){.hero .hero-legend{bottom:158px}}
 /* The portrait is square (512×512). Show it whole — same height as before, width follows — instead of cropping 37 % of it into a landscape box. */
@@ -146,7 +144,6 @@ details[open] .row-symbol::after{content:'−'}
  .hero-scroll .hero{top:min(0px,calc(100svh - 740px))}
  .hero-bottom{grid-template-columns:1fr auto;gap:12px}
  .hero-roles{grid-column:1/-1;grid-row:1}
- .hero-roles .hero-claim{max-width:34ch;font-size:20px}
  .hero-bottom>a{grid-column:2;grid-row:2}
  .hero-bottom>.orbit-hint{grid-column:1;grid-row:2;max-width:180px;justify-self:start}
 }
