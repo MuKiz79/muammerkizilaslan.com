@@ -113,6 +113,7 @@ function draw(dt){
 }
 function tick(t){
   const dt=Math.min((t-last)/1000||1/60,.05);last=t;
+  if(window.KarriaroShowcase?.paused){requestAnimationFrame(tick);return;}
   if(openingTime>=0&&!document.hidden){const elapsed=window.SignatureIntro.elapsed();openingSeconds=elapsed;openingTime=elapsed<0?-1:window.IntroStory.growth(elapsed)}
   if(visible&&!document.hidden&&!modalOpen){
     const nextProgress=reduce.matches?0:Math.max(0,Math.min(1,(scrollY-Math.max(0,height-innerHeight))/chapterRunway));

@@ -46,3 +46,9 @@
  .signature-intro .intro-timeline{background:#30352f22}
  .intro-pillars span{border-color:#30352f44}
 }
+
+/* The Karriaro showcase can pause the actual page without replacing it with a recording. */
+.signature-intro.is-paused,.signature-intro.is-paused *,html.karriaro-preview-paused *{animation-play-state:paused!important}
+html.karriaro-preview .intro-skip{display:none}
+html.karriaro-preview .hero{min-height:100svh}
+html.karriaro-preview .hero-scroll .hero{top:0}
