@@ -42,6 +42,7 @@
  }
  function create(){
   const layouts=[graph(false),graph(true)],sequence=Flow.createSequence(),palette=[[170,83,47],[42,83,188],[83,117,91]];
+  let projection=null;
   let aimX=.5,aimY=.5,px=.5,py=.5,touching=false,force=0,velocity=0,pending=null,groupMix=0,cameraScale=0,previousWidth=0,previousHeight=0,lastFocus=-1,cachedPlan=null,planKey='',flowOrigin=0;
   function point(x,y){aimX=clamp(x);aimY=clamp(y);touching=true}
   function release(){touching=false}
@@ -81,6 +82,7 @@
     const edge=smooth(8,35,sx)*(1-smooth(w-35,w-8,sx))*smooth(82,132,sy)*(1-smooth(h-(small?210:145),h-(small?170:105),sy));
     return{...n,x:sx,y:sy,weight,birth,alpha:birth*edge*(.42+.58*clamp((n.depth+1.7)/3.4)),connectionAlpha:birth*(.5+.5*clamp((n.depth+1.7)/3.4)),activation:0};
    });
+   projection={layout,points:projected};
    if(pending){
     let seed=0,best=Infinity;
     for(const n of projected){const d=Math.hypot(n.x-pending.x*w,n.y-pending.y*h);if(d<best){best=d;seed=n.index}}
@@ -158,7 +160,7 @@
    }
    ctx.restore();return active;
   }
-  return{point,release,pulse,draw};
+  return{point,release,pulse,draw,projection:()=>projection};
  }
  const api={spring,graph,distances,geometry,create};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.NeuralSpace=api;

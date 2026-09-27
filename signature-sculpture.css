@@ -1,0 +1,48 @@
+/* A short film in one continuous space. No new loading gate. */
+.signature-intro{color:#f4f0e6;background:transparent}
+.intro-active .hero{animation:signature-background 6.6s linear both}
+@keyframes signature-background{0%,74%{background:#040710}99%,100%{background:#f0efeb}}
+.signature-intro .intro-brand{top:32px;left:5vw;font-family:var(--sans);font-size:16px;letter-spacing:-.035em;color:inherit}
+.signature-intro .intro-brand .signature-dot{background:var(--signature-light)}
+.signature-intro .intro-sequence{left:5vw;right:auto;bottom:19vh;width:45vw;height:auto}
+.signature-intro .intro-sequence .intro-motto{position:relative;font-family:var(--serif);font-size:clamp(56px,6.1vw,105px);line-height:1.04;letter-spacing:-.055em;text-wrap:initial;color:inherit}
+.signature-intro .intro-motto .motto-start{margin-bottom:.08em}
+.signature-intro .intro-motto .motto-completion{max-width:10ch}
+.signature-intro .signature-stop{color:var(--signature-light)}
+.signature-intro .intro-bottom{left:5vw;right:5vw;bottom:32px;align-items:center;color:inherit}
+.signature-intro .intro-timeline{width:90px;background:#cccccc2b}
+.signature-intro .intro-timeline i{background:#bcbcbc}
+.signature-intro .intro-skip{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:inherit;min-width:120px;min-height:44px;text-align:right}
+.intro-pillars{position:absolute;left:52%;right:5vw;bottom:22vh;display:flex;justify-content:space-between;gap:18px;font:11px/1.5 var(--mono);letter-spacing:.025em}
+.intro-pillars span{display:block;padding-top:12px;border-top:1px solid #d0d0d044;opacity:0}
+.is-playing .intro-pillars span{animation:signature-pillar 6.6s both}
+.is-playing .intro-pillars span:nth-child(2){animation-name:signature-pillar-two}
+.is-playing .intro-pillars span:nth-child(3){animation-name:signature-pillar-three}
+.signature-intro.is-playing{animation:signature-exit 6.6s linear both,signature-ink 6.6s linear both}
+.signature-intro.is-playing .motto-start{animation:signature-start 6.6s both}
+.signature-intro.is-playing .motto-completion{animation:signature-complete 6.6s both}
+@keyframes signature-ink{0%,32%{color:#f4f0e6}62%,100%{color:#f2f2f2}}
+@keyframes signature-start{0%,4%{opacity:0;transform:translateY(18px);filter:blur(3px)}20%,100%{opacity:1;transform:none;filter:blur(0)}}
+@keyframes signature-complete{0%,25%{opacity:0;transform:translateY(16px);filter:blur(3px)}45%,100%{opacity:1;transform:none;filter:blur(0)}}
+@keyframes signature-pillar{0%,22%{opacity:0;transform:translateY(7px)}34%,100%{opacity:1;transform:none}}
+@keyframes signature-pillar-two{0%,32%{opacity:0;transform:translateY(7px)}44%,100%{opacity:1;transform:none}}
+@keyframes signature-pillar-three{0%,42%{opacity:0;transform:translateY(7px)}54%,100%{opacity:1;transform:none}}
+@keyframes signature-exit{0%,74%{opacity:1}89%,100%{opacity:0;visibility:hidden}}
+@media(max-width:700px),(max-width:900px) and (orientation:portrait){
+ .signature-intro .intro-brand{top:24px;left:24px;font-size:14px}
+ .signature-intro .intro-sequence{left:24px;bottom:21vh;width:calc(100% - 48px)}
+ .signature-intro .intro-sequence .intro-motto{font-size:clamp(39px,10.4vw,65px);line-height:1.08;max-width:none}
+ .signature-intro .intro-motto .motto-completion{max-width:none}
+ .intro-pillars{left:24px;right:24px;bottom:12vh;gap:10px;font-size:10px}
+ .intro-pillars span{padding-top:8px}
+ .signature-intro .intro-bottom{left:24px;right:24px;bottom:17px}
+}
+@media(max-height:620px) and (min-width:701px){.signature-intro .intro-sequence{bottom:20vh}.signature-intro .intro-sequence .intro-motto{font-size:clamp(45px,5.4vw,72px)}.intro-pillars{bottom:17vh}}
+@media(prefers-reduced-motion:reduce){
+ .intro-active .hero{animation:none;background:#f0efeb}
+ .signature-intro{color:#30352f;background:#f0efeb}
+ .signature-intro.is-playing,.signature-intro.is-playing .motto-start,.signature-intro.is-playing .motto-completion,.is-playing .intro-pillars span{animation:none;opacity:1;transform:none;filter:none}
+ .signature-intro .intro-sequence{bottom:35vh}.intro-pillars{bottom:22vh}
+ .signature-intro .intro-timeline{background:#30352f22}
+ .intro-pillars span{border-color:#30352f44}
+}
