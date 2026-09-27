@@ -59,6 +59,10 @@ function draw(dt){
   relationStrength=reduce.matches?(focusIndex>=0?1:0):follow(relationStrength,focusIndex>=0?1:0,dt,.16);
   unsettled ||= Math.abs(relationStrength-(focusIndex>=0?1:0))>.001;
   unsettled=neural.draw(ctx,{width,height,small,dt,time:effectClock,shapeTime:clock,yaw:rotY,pitch:rotX,progress:chapterProgress,focusTopic:focusIndex,welcomeTime:greeting?effectClock:-1,focusGroup:focusIndex>=0?topics[focusIndex][1]:-1,reduced:reduce.matches,paused,opening:openingTime,openingSeconds})||unsettled;
+  if(openingSeconds>=0&&!reduce.matches&&window.SignatureSculpture){
+    window.SignatureSculpture.draw(ctx,{width,height:Math.min(height,window.innerHeight),seconds:openingSeconds,projection:neural.projection()});
+    return true;
+  }
   const arranged=points.map(p=>{
     const mass=FX.clamp((.8-(p.depth??p.z))/1.6),tau=orbit.dragging?.02+mass*.06:.05+mass*.10;
     p.angleY=reduce.matches?rotY:follow(p.angleY,rotY,dt,tau);p.angleX=reduce.matches?rotX:follow(p.angleX,rotX,dt,tau);
