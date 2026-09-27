@@ -4,12 +4,14 @@ const screen=document.getElementById('signature-intro');
 if(!screen)return;
 
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-let timer,playing=false,pending=false,startedAt=0;
+let timer,playing=false,pending=false,startedAt=0,pausedAt=null;
 const duration=window.IntroStory.duration;
 function finish(){
   const wasPlaying=playing;
   pending=false;
   playing=false;
+  pausedAt=null;
+  screen.classList.remove('is-paused');
   clearTimeout(timer);
   document.body.classList.remove("intro-active");
   document.querySelectorAll(".hero,.journey").forEach(el=>el.inert=false);
@@ -33,7 +35,16 @@ function show(){
   window.dispatchEvent(new Event("signatureintro:start"));
   timer=setTimeout(finish,reduced.matches?1200:duration);
 }
-window.SignatureIntro={show,elapsed:()=>playing?(performance.now()-startedAt)/1000:-1};
+function pause(){
+  if(!playing||pausedAt!==null)return;
+  pausedAt=performance.now();clearTimeout(timer);screen.classList.add('is-paused');
+}
+function resume(){
+  if(!playing||pausedAt===null)return;
+  startedAt+=performance.now()-pausedAt;pausedAt=null;screen.classList.remove('is-paused');
+  timer=setTimeout(finish,Math.max(0,(reduced.matches?1200:duration)-(performance.now()-startedAt)));
+}
+window.SignatureIntro={show,finish,pause,resume,elapsed:()=>playing?((pausedAt??performance.now())-startedAt)/1000:-1};
 
 screen.querySelector('.intro-skip').addEventListener('click',finish);
 screen.addEventListener('pointerdown',event=>{event.stopPropagation();finish()});
