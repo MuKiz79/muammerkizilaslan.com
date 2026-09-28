@@ -8,11 +8,11 @@
     try{const u=new URL(origin);return local&&u.protocol==='http:'&&['127.0.0.1','localhost'].includes(u.hostname);}catch{return false;}
   }
   let parentOrigin='';
-  try{parentOrigin=new URL(document.referrer).origin;}catch{return;}
-  if(!accepts(parentOrigin))return;
+  try{parentOrigin=new URL(document.referrer).origin;}catch{}
+  if(parentOrigin&&!accepts(parentOrigin))return;
   const state=window.KarriaroShowcase={paused:false};
   document.documentElement.classList.add('karriaro-preview');
-  let ready=false,firstPlay=true,revision=0;
+  let ready=false,firstPlay=true,revision=0,domReady=document.readyState!=='loading';
   function report(type){window.parent.postMessage({channel:'karriaro-preview',type},parentOrigin);}
   function pause(){
     revision++;window.SignatureIntro?.pause();state.paused=true;
@@ -28,7 +28,14 @@
     requestAnimationFrame(()=>requestAnimationFrame(()=>{if(current===revision){pause();firstPlay=true;}}));
   }
   window.addEventListener('message',event=>{
-    if(!ready||event.source!==window.parent||event.origin!==parentOrigin||event.data?.channel!=='karriaro-preview')return;
+    if(event.source!==window.parent||!accepts(event.origin)||event.data?.channel!=='karriaro-preview')return;
+    if(parentOrigin&&event.origin!==parentOrigin)return;
+    if(event.data.type==='hello'){
+      parentOrigin=event.origin;
+      if(ready)report('ready');else initialise();
+      return;
+    }
+    if(!ready||event.origin!==parentOrigin)return;
     switch(event.data.type){
       case 'play':play();break;
       case 'replay':play(true);break;
@@ -38,8 +45,14 @@
     }
     report(state.paused?'paused':'playing');
   });
-  window.addEventListener('load',()=>document.fonts.ready.then(()=>{
-    window.SignatureIntro?.finish();
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{pause();ready=true;report('ready');}));
-  }),{once:true});
+  // The host hides the frame until ready. Waiting for animation frames here can
+  // deadlock on browsers which suspend painting of invisible embedded documents.
+  // Neither remote fonts nor images are prerequisites for the playback bridge.
+  function initialise(){
+    if(ready||!domReady||!parentOrigin)return;
+    window.SignatureIntro?.finish();pause();ready=true;report('ready');
+  }
+  if(domReady)Promise.resolve().then(initialise);
+  else document.addEventListener('DOMContentLoaded',()=>{domReady=true;Promise.resolve().then(initialise);},{once:true});
+  window.addEventListener('load',initialise,{once:true});
 })();
