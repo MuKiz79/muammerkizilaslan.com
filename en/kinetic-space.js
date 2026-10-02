@@ -1,6 +1,8 @@
 (function(root){
  'use strict';
  const TAU=Math.PI*2;
+ let bounds=null;
+ function setBounds(next){bounds=next;}
  // Camera space is shared by labels, suspension contours and their attachments.
  // The camera remains outside the bounded sculpture through unrestricted rotation.
  function rotate(p,yaw,pitch){
@@ -22,12 +24,16 @@
   return rotate(p,[-.4,.95,-.85][group]+Math.sin(time*.06+group)*.08,[-.45,.55,1.1][group]);
  }
  function frame(width,height,small){
+  if(bounds){
+   const {left,right,top,bottom}=bounds;
+   return{cx:(left+right)/2,cy:(top+bottom)/2,rx:(right-left)*.43,ry:Math.max(40,(bottom-top)*.43),left,right,top,bottom};
+  }
   return {cx:width*.5,cy:height/2-(small?30:0),rx:width*(small?.40:.38),ry:Math.max(80,(height-(small?320:245))*.43),left:12,right:width-12,top:small?160:115,bottom:height-(small?180:115)};
  }
  function project(p,width,height,small){
   const perspective=3.8/(3.8-p.z),f=frame(width,height,small);
   return{x:f.cx+p.x*f.rx*perspective,y:f.cy+p.y*f.ry*perspective,z:p.z,perspective,scale:Math.pow(perspective,small?.9:1.22)};
  }
- const api={rotate,position,contour,project,frame,TAU};
+ const api={rotate,position,contour,project,frame,setBounds,TAU};
  if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.KineticSpace=api;
 })(typeof window!=='undefined'?window:this);

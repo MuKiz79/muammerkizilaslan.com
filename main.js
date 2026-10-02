@@ -33,6 +33,8 @@ function size(){
     gc.fillStyle=gc.createPattern(noiseTile,'repeat');gc.fillRect(0,0,grain.width,grain.height);
   }
   legend.style.bottom=(height-$('.hero-bottom').offsetTop+12)+'px';
+  const positioning=$('.hero-positioning'),legendTop=legend.offsetTop;
+  Space.setBounds({left:mobile.matches?12:Math.max(width*.49,positioning.offsetLeft+positioning.offsetWidth+24),right:width-20,top:mobile.matches?positioning.offsetTop+positioning.offsetHeight+24:110,bottom:Math.min(legendTop-24,height-(mobile.matches?180:115))});
   for(const p of points){p.bw=p.b.offsetWidth;p.bh=p.b.offsetHeight;p.lastX=p.lastY=null}
   chapterRunway=Math.max(1,heroScroll.offsetHeight-height);resizeJourney();needsDraw=true;
 }
@@ -123,6 +125,7 @@ function tick(t){
       const reveal=FX.smooth(.46,.88,chapterProgress);
       const controlsOpacity=String(1-FX.smooth(0,.16,chapterProgress));legend.style.opacity=controlsOpacity;selection.style.opacity=controlsOpacity;selection.inert=chapterProgress>.03;
       bridge.style.opacity=String(reveal);bridge.style.transform=`translate3d(0,${(1-reveal)*30}px,0)`;
+      $('.hero-positioning').style.opacity=String(Math.max(0,1-chapterProgress*5));$('.hero-positioning').inert=chapterProgress>.18;
       $('.hero-header').style.opacity=String(Math.max(0,1-chapterProgress*2));
       $('.hero-bottom').style.opacity=String(Math.max(0,1-chapterProgress*3));
       $('.hero-routes').inert=chapterProgress>.08;$('.hero-routes').style.opacity=String(Math.max(0,1-chapterProgress*9));
