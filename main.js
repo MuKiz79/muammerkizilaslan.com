@@ -1,7 +1,7 @@
 (()=>{'use strict';
 history.scrollRestoration='manual';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const hero=$('.hero'),canvas=$('#network'),ctx=canvas.getContext('2d'),grain=$('#grain'),gc=grain.getContext('2d'),field=$('#topics'),motion=$('#motion'),reduce=matchMedia('(prefers-reduced-motion: reduce)'),mobile=matchMedia('(max-width:700px)');
+const hero=$('.hero'),canvas=$('#network'),ctx=canvas.getContext('2d'),grain=$('#grain'),gc=grain.getContext('2d'),field=$('#topics'),motion=$('#motion'),reduce=matchMedia('(prefers-reduced-motion: reduce)'),mobile=matchMedia('(max-width:700px)'),directScroll=matchMedia('(max-width:700px), (pointer:coarse)');
 let width=0,height=0,dpr=1,clock=0,last=0,paused=reduce.matches,visible=true,dragX=0,dragY=0,targetXRotation=0,targetYRotation=0,fieldTop=80,hoveredTopic=-1,needsDraw=true,chapterProgress=0,modalOpen=false,chapterRunway=1,heroStylesDirty=true;
 const bridge=$('.hero-bridge'),heroScroll=$('.hero-scroll');
 const topics=window.MUAMMER_TOPICS,FX=window.HeroEffects,Space=window.KineticSpace,legend=$('.hero-legend'),selection=$('.hero-selection');
@@ -315,7 +315,9 @@ function updateJourney(dt){
   }else rail.classList.remove('is-fixed');
   targetTravel=Math.max(0,Math.min(maxTravel,y-journeyTop));
   if(y===lastScroll&&Math.abs(currentTravel-targetTravel)<.08)return;lastScroll=y;
-  currentTravel=reduce.matches?targetTravel:follow(currentTravel,targetTravel,dt,mobile.matches?.045:.065);
+  // Touch scrolling already has native momentum. A second easing layer makes
+  // chapter content keep moving after a stop or briefly oppose a reversal.
+  currentTravel=reduce.matches||directScroll.matches?targetTravel:follow(currentTravel,targetTravel,dt,.065);
   if(Math.abs(currentTravel-targetTravel)<.08)currentTravel=targetTravel;
   renderJourney();
 }
