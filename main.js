@@ -254,6 +254,7 @@ caseDialog.querySelector('.case-next').addEventListener('click',()=>{
 $$('[data-case]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openCase(a.dataset.case,a)}));
 const journey=$('#journey'),track=$('#track'),rail=$('.rail'),menu=$('#menu'),toggle=$('#menu-toggle'),scenes=$$('.journey-scene'),routeNav=$('.route-nav');
 const sceneContents=scenes.map(scene=>{const content=document.createElement('div');content.className='scene-content';while(scene.firstChild)content.append(scene.firstChild);scene.append(content);return content});
+const mobileReader=window.createMobileReader?.({scenes,contents:sceneContents,stage:$('.stage')});
 const routeIndex=document.createElement('button');routeIndex.id='route-index';routeIndex.type='button';routeIndex.setAttribute('aria-label','Kapitelübersicht öffnen');routeIndex.append($('#route-position'));routeNav.insertBefore(routeIndex,$('#route-next'));
 let maxTravel=0,journeyTop=0,currentTravel=0,targetTravel=0,panels=[],lastScroll=-1,path=null,activeScene=0,layoutWidth=0,layoutHeight=0,wasMobile=mobile.matches,paintedScene=-1,paintedFrames='',journeyGeometry='';
 function resizeJourney(){
@@ -262,7 +263,8 @@ function resizeJourney(){
   const previousStop=path?.stops[activeScene],previousProgress=previousStop?Math.max(0,Math.min(1,(scrollY-journeyTop-previousStop.start)/Math.max(1,previousStop.end-previousStop.start))):0;
   const withinJourney=scrollY>=journeyTop&&layoutWidth>0;
   document.documentElement.classList.toggle('mobile-spatial',small);
-  const newHeight=$('.stage').clientHeight;
+  mobileReader?.mode(small);
+  const newHeight=small&&mobileReader?mobileReader.height():$('.stage').clientHeight;
   const dimensions=scenes.map((scene,i)=>small?{height:sceneContents[i].scrollHeight,direction:scene.dataset.direction}:{width:scene.scrollWidth,direction:scene.dataset.direction});
   const geometry=JSON.stringify([small,reduce.matches,newWidth,newHeight,rail.offsetWidth,journey.offsetTop,dimensions]);
   // Mobile browser chrome also emits resize events. Keep the current animation
@@ -273,6 +275,7 @@ function resizeJourney(){
     track.style.transform='';
     path=window.createMobileJourneyPath(newWidth,newHeight,dimensions);
     maxTravel=path.total;journey.style.height=(maxTravel+newHeight)+'px';
+    mobileReader?.layout(path,newHeight);
     renderMobileNav();
   }else{
     sceneContents.forEach(content=>content.style.transform='');
@@ -290,9 +293,12 @@ function resizeJourney(){
 }
 function renderJourney(){
   const state=path.sample(currentTravel,reduce.matches),visibleScenes=new Set(state.frames.map(f=>f.index));
-  const frameKey=state.frames.map(f=>f.index).join(':');
-  if(frameKey!==paintedFrames){scenes.forEach((scene,i)=>{scene.style.visibility=visibleScenes.has(i)?'visible':'hidden'});paintedFrames=frameKey}
-  for(const frame of state.frames){const scene=scenes[frame.index];scene.style.transform=`translate3d(${frame.x}px,${frame.y}px,0)`;scene.style.opacity=String(frame.opacity);if(mobile.matches)sceneContents[frame.index].style.transform=`translate3d(0,${frame.contentY}px,0)`}
+  if(mobile.matches&&mobileReader)mobileReader.render(state);
+  else{
+    const frameKey=state.frames.map(f=>f.index).join(':');
+    if(frameKey!==paintedFrames){scenes.forEach((scene,i)=>{scene.style.visibility=visibleScenes.has(i)?'visible':'hidden'});paintedFrames=frameKey}
+    for(const frame of state.frames){const scene=scenes[frame.index];scene.style.transform=`translate3d(${frame.x}px,${frame.y}px,0)`;scene.style.opacity=String(frame.opacity);if(mobile.matches)sceneContents[frame.index].style.transform=`translate3d(0,${frame.contentY}px,0)`}
+  }
   activeScene=state.index;
   if(mobile.matches)routeNav.style.setProperty('--route-progress',String(maxTravel?currentTravel/maxTravel:0));
   if(paintedScene===activeScene)return;

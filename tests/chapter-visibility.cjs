@@ -9,7 +9,7 @@ for(const language of ['','en/']){
     const path=createPath(390,844,[1300,1800,1500,2600,1700,1900,2000,1100].map((height,i)=>({height,direction:['right','down','right','up','down','right','up','right'][i]})));
     // Start with the unsafe visibility left by a failed native-animation setup.
     const scenes=path.stops.map(()=>({style:{visibility:'visible'},querySelector:()=>({classList:{contains:()=>false}})}));
-    const context={path,scenes,sceneContents:scenes.map(()=>({style:{}})),currentTravel:0,maxTravel:path.total,
+    const context={mobileReader:null,path,scenes,sceneContents:scenes.map(()=>({style:{}})),currentTravel:0,maxTravel:path.total,
       reduce:{matches:reduced},mobile:{matches:true},paintedFrames:'',paintedScene:-1,activeScene:0,
       rail:{classList:{toggle(){}}},routeNav:{style:{setProperty(){}},classList:{toggle(){}}},panels:[],renderMobileNav(){}};
     vm.createContext(context);

@@ -15,6 +15,7 @@ function fixture(file, width = 390, height = 760) {
   const scenes = ['right', 'down', 'up'].map(direction => ({dataset: {direction}, scrollWidth: 1300}));
   const calls = {builds: 0, paints: 0, scrolls: 0};
   const context = {
+    mobileReader: null,
     innerWidth: width, innerHeight: height, scrollY: 1300,
     mobile: {matches: small}, directScroll: {matches: small}, reduce: {matches: false},
     journey: {offsetTop: 1300, style: {}}, track: {style: {}},
