@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Mobile journey browser regression</title>
+<style>body{font:14px system-ui;margin:16px}button{padding:12px}pre{white-space:pre-wrap}iframe{display:block;border:1px solid #888;max-width:none}</style>
+<h1>Mobile journey browser regression</h1>
+<button id="run">Run browser checks</button><pre id="result" aria-live="polite">Ready</pre>
+<iframe id="site" title="Local site under test" width="390" height="844"></iframe>
+<script>
+const frame=document.querySelector('#site'),result=document.querySelector('#result');
+const log=text=>result.textContent+='\n'+text;
+const assert=(condition,message)=>{if(!condition)throw new Error(message)};
+const settle=async(win,n=4)=>{for(let i=0;i<n;i++)await new Promise(resolve=>win.requestAnimationFrame(resolve))};
+const close=(a,b,label)=>assert(Math.abs(a-b)<.08,label+': '+a+' != '+b);
+function geometry(win){
+  const doc=win.document,scenes=[...doc.querySelectorAll('.journey-scene')];
+  const contents=scenes.map(scene=>scene.querySelector('.scene-content'));
+  const path=win.createMobileJourneyPath(win.innerWidth,doc.querySelector('.stage').clientHeight,scenes.map((scene,i)=>({height:contents[i].scrollHeight,direction:scene.dataset.direction})));
+  return{doc,scenes,contents,path,top:doc.querySelector('#journey').offsetTop};
+}
+async function checkPosition(win,position){
+  const {scenes,contents,path,top}=geometry(win);
+  win.scrollTo({top:top+position,behavior:'instant'});await settle(win);
+  const state=path.sample(win.scrollY-top,win.matchMedia('(prefers-reduced-motion:reduce)').matches);
+  for(const expected of state.frames){
+    const scene=new win.DOMMatrix(win.getComputedStyle(scenes[expected.index]).transform);
+    const content=new win.DOMMatrix(win.getComputedStyle(contents[expected.index]).transform);
+    close(scene.m41,expected.x,'scene x');close(scene.m42,expected.y,'scene y');close(content.m42,expected.contentY,'reading y');
+    close(Number(win.getComputedStyle(scenes[expected.index]).opacity),expected.opacity,'opacity');
+  }
+  assert(scenes[state.index].inert===false,'active chapter is accessible');
+  assert(scenes.every((scene,i)=>i===state.index||scene.inert),'other chapters are inert');
+}
+document.querySelector('#run').onclick=async()=>{
+  const button=document.querySelector('#run');button.disabled=true;result.textContent='Running';
+  let checks=0;
+  try{
+    for(const language of ['','en/']){
+      await new Promise(resolve=>{frame.onload=resolve;frame.src='../'+language});
+      const win=frame.contentWindow;win.document.querySelector('.intro-skip')?.click();
+      await win.document.fonts.ready;await settle(win,10);
+      assert(win.ScrollTimeline,'This browser lacks ScrollTimeline; use the Node fallback checks.');
+      for(const [width,height] of [[390,844],[320,568],[430,932],[700,900]]){
+        frame.width=width;frame.height=height;await settle(win,10);
+        const {path,scenes,contents}=geometry(win);
+        assert(scenes.every(scene=>scene.getAnimations().some(a=>a.timeline instanceof win.ScrollTimeline)),'native scene timelines attached');
+        assert(contents.every(content=>content.getAnimations().some(a=>a.timeline instanceof win.ScrollTimeline)),'native reading timelines attached');
+        let writes=0;
+        const observer=new win.MutationObserver(records=>writes+=records.length);
+        [...scenes,...contents].forEach(el=>observer.observe(el,{attributes:true,attributeFilter:['style']}));
+        const positions=path.stops.flatMap(s=>[s.start,s.start+s.pan/2,s.turnStart,s.turnStart+s.distance*.37,s.end]);
+        for(const position of positions){await checkPosition(win,position);checks++;}
+        for(const position of positions.reverse().filter((_,i)=>i%3===0)){await checkPosition(win,position);checks++;}
+        observer.disconnect();assert(writes===0,'JS wrote '+writes+' motion styles during native scrolling');
+        assert(win.document.documentElement.scrollWidth===width,'no horizontal page overflow');
+        log('PASS '+(language||'de/')+' '+width+'×'+height+': route, reverse, accessibility; 0 JS motion writes');
+      }
+      frame.width=390;frame.height=844;await settle(win,10);
+      win.ProfileNavigation.go('#experience',true);await settle(win);
+      const before=geometry(win).path.total;
+      win.document.querySelector('#experience details:last-child summary').click();await settle(win,10);
+      const after=geometry(win);
+      assert(after.path.total>before,'disclosure expanded the reading range');
+      const stop=after.path.stops[5];await checkPosition(win,stop.start+stop.pan);checks++;
+      log('PASS '+(language||'de/')+': disclosure rebuild, final lines reachable');
+      // Exercise actual runtime fallback and teardown when the API is unavailable.
+      const Timeline=win.ScrollTimeline;win.ScrollTimeline=undefined;
+      frame.width=391;await settle(win,10);
+      assert(geometry(win).scenes.every(scene=>scene.getAnimations().length===0),'native animations canceled for fallback');
+      for(const s of geometry(win).path.stops){await checkPosition(win,s.start+s.pan/2);await checkPosition(win,s.turnStart+s.distance*.37);checks+=2;}
+      win.ScrollTimeline=Timeline;
+      frame.width=390;await settle(win,10);
+      assert(geometry(win).scenes.every(scene=>scene.getAnimations().length===1),'native animation restored');
+      frame.width=844;frame.height=390;await settle(win,10);
+      assert(!win.document.documentElement.classList.contains('mobile-spatial'),'desktop layout restored');
+      assert([...win.document.querySelectorAll('.journey-scene,.scene-content')].every(el=>el.getAnimations().length===0),'desktop has no mobile animations');
+      log('PASS '+(language||'de/')+': fallback route, recovery and landscape teardown');
+    }
+    log('PASS ALL: '+checks+' browser positions checked');
+  }catch(error){log('FAIL: '+error.message);console.error(error)}
+  finally{button.disabled=false}
+};
+</script>
+</html>
