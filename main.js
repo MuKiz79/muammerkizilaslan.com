@@ -255,7 +255,7 @@ $$('[data-case]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();e
 const journey=$('#journey'),track=$('#track'),rail=$('.rail'),menu=$('#menu'),toggle=$('#menu-toggle'),scenes=$$('.journey-scene'),routeNav=$('.route-nav');
 const sceneContents=scenes.map(scene=>{const content=document.createElement('div');content.className='scene-content';while(scene.firstChild)content.append(scene.firstChild);scene.append(content);return content});
 const routeIndex=document.createElement('button');routeIndex.id='route-index';routeIndex.type='button';routeIndex.setAttribute('aria-label','Kapitelübersicht öffnen');routeIndex.append($('#route-position'));routeNav.insertBefore(routeIndex,$('#route-next'));
-let maxTravel=0,journeyTop=0,currentTravel=0,targetTravel=0,panels=[],lastScroll=-1,path=null,activeScene=0,layoutWidth=0,layoutHeight=0,wasMobile=mobile.matches,paintedScene=-1,paintedFrames='';
+let maxTravel=0,journeyTop=0,currentTravel=0,targetTravel=0,panels=[],lastScroll=-1,path=null,activeScene=0,layoutWidth=0,layoutHeight=0,wasMobile=mobile.matches,paintedScene=-1,paintedFrames='',journeyGeometry='';
 function resizeJourney(){
   panels=$$('.panel');
   const small=mobile.matches,newWidth=innerWidth;
@@ -263,16 +263,21 @@ function resizeJourney(){
   const withinJourney=scrollY>=journeyTop&&layoutWidth>0;
   document.documentElement.classList.toggle('mobile-spatial',small);
   const newHeight=$('.stage').clientHeight;
+  const dimensions=scenes.map((scene,i)=>small?{height:sceneContents[i].scrollHeight,direction:scene.dataset.direction}:{width:scene.scrollWidth,direction:scene.dataset.direction});
+  const geometry=JSON.stringify([small,reduce.matches,newWidth,newHeight,rail.offsetWidth,journey.offsetTop,dimensions]);
+  // Mobile browser chrome also emits resize events. Keep the current animation
+  // position when the actual scene geometry has not changed.
+  if(path&&geometry===journeyGeometry)return;
   const changed=layoutWidth!==newWidth||(!small&&layoutHeight!==newHeight)||wasMobile!==small;
   if(small){
     track.style.transform='';
-    path=window.createMobileJourneyPath(newWidth,newHeight,scenes.map((scene,i)=>({height:sceneContents[i].scrollHeight,direction:scene.dataset.direction})));
+    path=window.createMobileJourneyPath(newWidth,newHeight,dimensions);
     maxTravel=path.total;journey.style.height=(maxTravel+newHeight)+'px';
     renderMobileNav();
   }else{
     sceneContents.forEach(content=>content.style.transform='');
     const viewportWidth=newWidth-rail.offsetWidth;
-    path=window.createJourneyPath(viewportWidth,newHeight,scenes.map(scene=>({width:scene.scrollWidth,direction:scene.dataset.direction})));
+    path=window.createJourneyPath(viewportWidth,newHeight,dimensions);
     maxTravel=path.total;journey.style.height=(maxTravel+newHeight)+'px';
   }
   journeyTop=journey.offsetTop;
@@ -281,7 +286,7 @@ function resizeJourney(){
     window.scrollTo({top:Math.max(0,destination),behavior:'instant'});
   }
   paintedScene=-1;paintedFrames='';currentTravel=targetTravel=Math.max(0,Math.min(maxTravel,scrollY-journeyTop));renderJourney();
-  layoutWidth=newWidth;layoutHeight=newHeight;wasMobile=small;lastScroll=-1;
+  layoutWidth=newWidth;layoutHeight=newHeight;wasMobile=small;journeyGeometry=geometry;lastScroll=-1;
 }
 function renderJourney(){
   const state=path.sample(currentTravel,reduce.matches),visibleScenes=new Set(state.frames.map(f=>f.index));
