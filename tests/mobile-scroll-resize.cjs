@@ -16,7 +16,7 @@ function fixture(file, width = 390, height = 760) {
   const calls = {builds: 0, paints: 0, scrolls: 0};
   const context = {
     innerWidth: width, innerHeight: height, scrollY: 1300,
-    mobile: {matches: small}, reduce: {matches: false},
+    mobile: {matches: small}, directScroll: {matches: small}, reduce: {matches: false},
     journey: {offsetTop: 1300, style: {}}, track: {style: {}},
     rail: {offsetWidth: small ? 0 : 56, classList: {toggle() {}, remove() {}}},
     scenes, sceneContents: contents,
@@ -41,7 +41,7 @@ function fixture(file, width = 390, height = 760) {
 
 for (const file of ['main.js', 'en/main.js']) {
   const f = fixture(file);
-  f.run('scrollY=1660;currentTravel=300;targetTravel=360;updateJourney(1/60)');
+  f.run('scrollY=1660;currentTravel=300;targetTravel=360');
   const before = f.run('currentTravel');
   const paints = f.calls.paints;
   // Browser chrome can change innerHeight without changing a 100svh stage.
@@ -54,7 +54,7 @@ for (const file of ['main.js', 'en/main.js']) {
   assert.equal(f.calls.paints, paints, file + ': no extra paint on unchanged geometry');
   assert.equal(f.calls.scrolls, 0);
   f.run('updateJourney(1/60)');
-  assert.ok(f.run('currentTravel') > before && f.run('currentTravel') < 360, 'normal interpolation continues');
+  assert.equal(f.run('currentTravel'), 360, 'the next mobile frame follows native scroll directly');
 
   // Disclosures and late images still expand the reading range.
   const oldTravel = f.run('maxTravel');
@@ -78,6 +78,7 @@ for (const file of ['main.js', 'en/main.js']) {
   // Orientation and breakpoint changes must not be swallowed by the no-op check.
   f.context.innerWidth = 844;
   f.context.mobile.matches = false;
+  f.context.directScroll.matches = false;
   f.context.rail.offsetWidth = 56;
   f.run('resizeJourney()');
   assert.equal(f.calls.builds, 6);
