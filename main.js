@@ -255,7 +255,7 @@ $$('[data-case]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();e
 const journey=$('#journey'),track=$('#track'),rail=$('.rail'),menu=$('#menu'),toggle=$('#menu-toggle'),scenes=$$('.journey-scene'),routeNav=$('.route-nav');
 const sceneContents=scenes.map(scene=>{const content=document.createElement('div');content.className='scene-content';while(scene.firstChild)content.append(scene.firstChild);scene.append(content);return content});
 const routeIndex=document.createElement('button');routeIndex.id='route-index';routeIndex.type='button';routeIndex.setAttribute('aria-label','Kapitelübersicht öffnen');routeIndex.append($('#route-position'));routeNav.insertBefore(routeIndex,$('#route-next'));
-let maxTravel=0,journeyTop=0,currentTravel=0,targetTravel=0,panels=[],lastScroll=-1,path=null,activeScene=0,layoutWidth=0,layoutHeight=0,wasMobile=mobile.matches,paintedScene=-1,paintedFrames='',journeyGeometry='',nativeJourney=null;
+let maxTravel=0,journeyTop=0,currentTravel=0,targetTravel=0,panels=[],lastScroll=-1,path=null,activeScene=0,layoutWidth=0,layoutHeight=0,wasMobile=mobile.matches,paintedScene=-1,paintedFrames='',journeyGeometry='';
 function resizeJourney(){
   panels=$$('.panel');
   const small=mobile.matches,newWidth=innerWidth;
@@ -281,9 +281,6 @@ function resizeJourney(){
     maxTravel=path.total;journey.style.height=(maxTravel+newHeight)+'px';
   }
   journeyTop=journey.offsetTop;
-  nativeJourney?.cancel();
-  nativeJourney=small?window.JourneyScroll?.create({path,width:newWidth,height:newHeight,top:journeyTop,scenes,contents:sceneContents,reduced:reduce.matches}):null;
-  if(nativeJourney)scenes.forEach(scene=>scene.style.visibility='visible');
   if(changed&&withinJourney){
     const destination=journeyTop+path.stops[activeScene].start+(wasMobile===small?previousProgress*(path.stops[activeScene].end-path.stops[activeScene].start):0);
     window.scrollTo({top:Math.max(0,destination),behavior:'instant'});
@@ -293,13 +290,9 @@ function resizeJourney(){
 }
 function renderJourney(){
   const state=path.sample(currentTravel,reduce.matches),visibleScenes=new Set(state.frames.map(f=>f.index));
-  // The browser owns every motion property on supported phones. JavaScript only
-  // updates chapter navigation and accessibility; it must not repaint the motion.
-  if(!nativeJourney){
-    const frameKey=state.frames.map(f=>f.index).join(':');
-    if(frameKey!==paintedFrames){scenes.forEach((scene,i)=>{scene.style.visibility=visibleScenes.has(i)?'visible':'hidden'});paintedFrames=frameKey}
-    for(const frame of state.frames){const scene=scenes[frame.index];scene.style.transform=`translate3d(${frame.x}px,${frame.y}px,0)`;scene.style.opacity=String(frame.opacity);if(mobile.matches)sceneContents[frame.index].style.transform=`translate3d(0,${frame.contentY}px,0)`}
-  }
+  const frameKey=state.frames.map(f=>f.index).join(':');
+  if(frameKey!==paintedFrames){scenes.forEach((scene,i)=>{scene.style.visibility=visibleScenes.has(i)?'visible':'hidden'});paintedFrames=frameKey}
+  for(const frame of state.frames){const scene=scenes[frame.index];scene.style.transform=`translate3d(${frame.x}px,${frame.y}px,0)`;scene.style.opacity=String(frame.opacity);if(mobile.matches)sceneContents[frame.index].style.transform=`translate3d(0,${frame.contentY}px,0)`}
   activeScene=state.index;
   if(mobile.matches)routeNav.style.setProperty('--route-progress',String(maxTravel?currentTravel/maxTravel:0));
   if(paintedScene===activeScene)return;
