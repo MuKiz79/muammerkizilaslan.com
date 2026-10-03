@@ -1,0 +1,13 @@
+{
+  "name": "muammerkizilaslan-site",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.cjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "postcss": "8.5.28",
+    "prettier": "3.9.9"
+  }
+}
