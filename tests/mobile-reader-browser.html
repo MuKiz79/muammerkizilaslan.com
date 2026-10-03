@@ -1,77 +1,228 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><title>Native reading regression</title>
-<style>body{font:14px system-ui;margin:16px}button{padding:12px}pre{white-space:pre-wrap}iframe{display:block;border:1px solid #888;max-width:none}</style>
-<h1>Native reading regression</h1><button id="run">Run browser checks</button><strong id="status">Ready</strong><pre id="result"></pre>
-<iframe id="site" title="Local site under test" width="390" height="844"></iframe>
-<script>
-const frame=document.querySelector('#site'),result=document.querySelector('#result'),status=document.querySelector('#status');
-const log=text=>result.textContent+=text+'\n';
-const assert=(condition,message)=>{if(!condition)throw new Error(message)};
-const near=(a,b,label)=>assert(Math.abs(a-b)<.6,label+': '+a+' != '+b);
-const settle=async(win,n=4)=>{for(let i=0;i<n;i++)await new Promise(resolve=>win.requestAnimationFrame(resolve))};
-function geometry(win){
-  const doc=win.document,scenes=[...doc.querySelectorAll('.journey-scene')],contents=scenes.map(scene=>scene.querySelector('.scene-content'));
-  const height=doc.querySelector('.reader-viewport').clientHeight;
-  const path=win.createMobileJourneyPath(win.innerWidth,height,scenes.map((scene,i)=>({height:contents[i].scrollHeight,direction:scene.dataset.direction})));
-  return{doc,scenes,contents,path,height,top:doc.querySelector('#journey').offsetTop};
-}
-async function at(win,position){
-  const {scenes,contents,path,top}=geometry(win);
-  win.scrollTo({top:top+position,behavior:'instant'});await settle(win);
-  const state=path.sample(win.scrollY-top,win.matchMedia('(prefers-reduced-motion:reduce)').matches);
-  for(const [i,scene] of scenes.entries()){
-    const expected=state.frames.find(f=>f.index===i),visible=win.getComputedStyle(scene).visibility;
-    assert(visible===(expected?'visible':'hidden'),'unrelated chapter '+i+' must stay hidden');
-    assert(scene.inert===(i!==state.index),'active chapter accessibility');
-    if(!expected)continue;
-    const surface=scene.querySelector('.scene-surface'),rect=contents[i].getBoundingClientRect();
-    near(rect.x,expected.x,'chapter '+i+' x');near(rect.y,expected.y+expected.contentY,'chapter '+i+' reading y');
-    if(state.frames.length===1){
-      assert(win.getComputedStyle(contents[i]).transform==='none','native reading does not transform content');
-      assert(win.getComputedStyle(surface).position==='sticky','native reading uses the document scroll surface');
-    }else assert(win.getComputedStyle(surface).position==='fixed','turns are independent of scrolling ancestors');
-  }
-}
-document.querySelector('#run').onclick=async()=>{
-  const button=document.querySelector('#run');button.disabled=true;result.textContent='';status.textContent='Running';let count=0;
-  try{
-    for(const language of ['','en/']){
-      await new Promise(resolve=>{frame.onload=resolve;frame.src='../'+language});
-      const win=frame.contentWindow;win.document.querySelector('.intro-skip')?.click();await win.document.fonts.ready;await settle(win,10);
-      // No ScrollTimeline support is available in this test, including during resizes.
-      win.ScrollTimeline=undefined;
-      for(const [width,height] of [[390,844],[320,568],[430,932],[700,900]]){
-        frame.width=width;frame.height=height;await settle(win,10);
-        const g=geometry(win);assert(g.doc.documentElement.classList.contains('native-reading'),'native layout enabled');
-        const positions=g.path.stops.flatMap(s=>[s.start,s.start+s.pan*.17,s.start+s.pan*.75,s.turnStart,s.turnStart+s.distance*.15,s.turnStart+s.distance*.55,s.end]);
-        for(const position of positions){await at(win,position);count++;}
-        for(const position of positions.reverse().filter((_,i)=>i%2===0)){await at(win,position);count++;}
-        // Small gestures in a reading range must move naturally with no DOM position writes.
-        await at(win,g.path.stops[0].pan*.4);let writes=0;
-        const observer=new win.MutationObserver(records=>writes+=records.length);
-        g.scenes.forEach(scene=>observer.observe(scene,{subtree:true,attributes:true,attributeFilter:['style']}));
-        for(const delta of [1,1,.5,-.5,-1,-1]){win.scrollBy({top:delta,behavior:'instant'});await settle(win);}
-        observer.disconnect();assert(writes===0,'reading produced '+writes+' style writes');
-        assert(g.doc.documentElement.scrollWidth===width,'no horizontal overflow');
-        log('PASS '+(language||'de/')+' '+width+'×'+height+': reading, turns, reverse, order; zero reading writes');
-      }
-      frame.width=390;frame.height=844;await settle(win,10);
-      win.ProfileNavigation.go('#experience',true);await settle(win);
-      const before=geometry(win).path.total;
-      win.document.querySelector('#experience details:last-child summary').click();await settle(win,10);
-      let g=geometry(win);assert(g.path.total>before,'disclosure expands reading range');await at(win,g.path.stops[5].start+g.path.stops[5].pan);count++;
-      win.document.querySelector('#experience details:last-child summary').click();await settle(win,10);
-      assert(geometry(win).path.total<g.path.total,'disclosure shrinks again');
-      win.ProfileNavigation.go('#about',true);await settle(win);await at(win,0);count++;
-      win.document.querySelector('#menu-toggle').click();await settle(win);
-      assert(!win.document.querySelector('#menu').hidden,'chapter menu opens');
-      win.document.querySelector('#menu-close').click();await settle(win);await at(win,0);count++;
-      frame.width=844;frame.height=390;await settle(win,10);
-      assert(!win.document.documentElement.classList.contains('native-reading'),'desktop restored');
-      assert([...win.document.querySelectorAll('.scene-surface')].every(el=>win.getComputedStyle(el).display==='contents'),'desktop wrappers do not alter layout');
-      frame.width=390;frame.height=844;await settle(win,10);await at(win,0);count++;
-      log('PASS '+(language||'de/')+': disclosures expand/shrink, menu, return to start and orientation');
+<!doctype html>
+<html lang="en"
+  ><meta charset="utf-8" /><title>Native reading regression</title>
+  <style>
+    body {
+      font: 14px system-ui;
+      margin: 16px;
     }
-    status.textContent='PASS ALL: '+count+' browser positions checked without ScrollTimeline';
-  }catch(error){status.textContent='FAIL: '+error.message;console.error(error)}finally{button.disabled=false}
-};
-</script></html>
+    button {
+      padding: 12px;
+    }
+    pre {
+      white-space: pre-wrap;
+    }
+    iframe {
+      display: block;
+      border: 1px solid #888;
+      max-width: none;
+    }
+  </style>
+  <h1>Native reading regression</h1
+  ><button id="run">Run browser checks</button
+  ><strong id="status">Ready</strong
+  ><pre id="result"></pre>
+  <iframe id="site" title="Local site under test" width="390" height="844"></iframe>
+  <script>
+    const frame = document.querySelector('#site'),
+      result = document.querySelector('#result'),
+      status = document.querySelector('#status');
+    const log = (text) => (result.textContent += text + '\n');
+    const assert = (condition, message) => {
+      if (!condition) throw new Error(message);
+    };
+    const near = (a, b, label) => assert(Math.abs(a - b) < 0.6, label + ': ' + a + ' != ' + b);
+    const settle = async (win, n = 4) => {
+      for (let i = 0; i < n; i++)
+        await new Promise((resolve) => win.requestAnimationFrame(resolve));
+    };
+    function geometry(win) {
+      const doc = win.document,
+        scenes = [...doc.querySelectorAll('.journey-scene')],
+        contents = scenes.map((scene) => scene.querySelector('.scene-content'));
+      const height = doc.querySelector('.reader-viewport').clientHeight;
+      const path = win.createMobileJourneyPath(
+        win.innerWidth,
+        height,
+        scenes.map((scene, i) => ({
+          height: contents[i].scrollHeight,
+          direction: scene.dataset.direction,
+        })),
+      );
+      return { doc, scenes, contents, path, height, top: doc.querySelector('#journey').offsetTop };
+    }
+    async function at(win, position) {
+      const { scenes, contents, path, top } = geometry(win);
+      win.scrollTo({ top: top + position, behavior: 'instant' });
+      await settle(win);
+      const state = path.sample(
+        win.scrollY - top,
+        win.matchMedia('(prefers-reduced-motion:reduce)').matches,
+      );
+      for (const [i, scene] of scenes.entries()) {
+        const expected = state.frames.find((f) => f.index === i),
+          visible = win.getComputedStyle(scene).visibility;
+        assert(
+          visible === (expected ? 'visible' : 'hidden'),
+          'unrelated chapter ' + i + ' must stay hidden',
+        );
+        assert(scene.inert === (i !== state.index), 'active chapter accessibility');
+        if (!expected) continue;
+        const surface = scene.querySelector('.scene-surface'),
+          rect = contents[i].getBoundingClientRect();
+        near(rect.x, expected.x, 'chapter ' + i + ' x');
+        near(rect.y, expected.y + expected.contentY, 'chapter ' + i + ' reading y');
+        if (state.frames.length === 1) {
+          assert(
+            win.getComputedStyle(contents[i]).transform === 'none',
+            'native reading does not transform content',
+          );
+          assert(
+            win.getComputedStyle(surface).position === 'sticky',
+            'native reading uses the document scroll surface',
+          );
+        } else
+          assert(
+            win.getComputedStyle(surface).position === 'fixed',
+            'turns are independent of scrolling ancestors',
+          );
+      }
+    }
+    document.querySelector('#run').onclick = async () => {
+      const button = document.querySelector('#run');
+      button.disabled = true;
+      result.textContent = '';
+      status.textContent = 'Running';
+      let count = 0;
+      try {
+        for (const language of ['', 'en/']) {
+          await new Promise((resolve) => {
+            frame.onload = resolve;
+            frame.src = '../' + language;
+          });
+          const win = frame.contentWindow;
+          win.document.querySelector('.intro-skip')?.click();
+          await win.document.fonts.ready;
+          await settle(win, 10);
+          // No ScrollTimeline support is available in this test, including during resizes.
+          win.ScrollTimeline = undefined;
+          for (const [width, height] of [
+            [390, 844],
+            [320, 568],
+            [430, 932],
+            [700, 900],
+          ]) {
+            frame.width = width;
+            frame.height = height;
+            await settle(win, 10);
+            const g = geometry(win);
+            assert(
+              g.doc.documentElement.classList.contains('native-reading'),
+              'native layout enabled',
+            );
+            const positions = g.path.stops.flatMap((s) => [
+              s.start,
+              s.start + s.pan * 0.17,
+              s.start + s.pan * 0.75,
+              s.turnStart,
+              s.turnStart + s.distance * 0.15,
+              s.turnStart + s.distance * 0.55,
+              s.end,
+            ]);
+            for (const position of positions) {
+              await at(win, position);
+              count++;
+            }
+            for (const position of positions.reverse().filter((_, i) => i % 2 === 0)) {
+              await at(win, position);
+              count++;
+            }
+            // Small gestures in a reading range must move naturally with no DOM position writes.
+            await at(win, g.path.stops[0].pan * 0.4);
+            let writes = 0;
+            const observer = new win.MutationObserver((records) => (writes += records.length));
+            g.scenes.forEach((scene) =>
+              observer.observe(scene, {
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['style'],
+              }),
+            );
+            for (const delta of [1, 1, 0.5, -0.5, -1, -1]) {
+              win.scrollBy({ top: delta, behavior: 'instant' });
+              await settle(win);
+            }
+            observer.disconnect();
+            assert(writes === 0, 'reading produced ' + writes + ' style writes');
+            assert(g.doc.documentElement.scrollWidth === width, 'no horizontal overflow');
+            log(
+              'PASS ' +
+                (language || 'de/') +
+                ' ' +
+                width +
+                '×' +
+                height +
+                ': reading, turns, reverse, order; zero reading writes',
+            );
+          }
+          frame.width = 390;
+          frame.height = 844;
+          await settle(win, 10);
+          win.ProfileNavigation.go('#experience', true);
+          await settle(win);
+          const before = geometry(win).path.total;
+          win.document.querySelector('#experience details:last-child summary').click();
+          await settle(win, 10);
+          let g = geometry(win);
+          assert(g.path.total > before, 'disclosure expands reading range');
+          await at(win, g.path.stops[5].start + g.path.stops[5].pan);
+          count++;
+          win.document.querySelector('#experience details:last-child summary').click();
+          await settle(win, 10);
+          assert(geometry(win).path.total < g.path.total, 'disclosure shrinks again');
+          win.ProfileNavigation.go('#about', true);
+          await settle(win);
+          await at(win, 0);
+          count++;
+          win.document.querySelector('#menu-toggle').click();
+          await settle(win);
+          assert(!win.document.querySelector('#menu').hidden, 'chapter menu opens');
+          win.document.querySelector('#menu-close').click();
+          await settle(win);
+          await at(win, 0);
+          count++;
+          frame.width = 844;
+          frame.height = 390;
+          await settle(win, 10);
+          assert(
+            !win.document.documentElement.classList.contains('native-reading'),
+            'desktop restored',
+          );
+          assert(
+            [...win.document.querySelectorAll('.scene-surface')].every(
+              (el) => win.getComputedStyle(el).display === 'contents',
+            ),
+            'desktop wrappers do not alter layout',
+          );
+          frame.width = 390;
+          frame.height = 844;
+          await settle(win, 10);
+          await at(win, 0);
+          count++;
+          log(
+            'PASS ' +
+              (language || 'de/') +
+              ': disclosures expand/shrink, menu, return to start and orientation',
+          );
+        }
+        status.textContent =
+          'PASS ALL: ' + count + ' browser positions checked without ScrollTimeline';
+      } catch (error) {
+        status.textContent = 'FAIL: ' + error.message;
+        console.error(error);
+      } finally {
+        button.disabled = false;
+      }
+    };
+  </script></html
+>
