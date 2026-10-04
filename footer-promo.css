@@ -1,76 +1,158 @@
+/* A personal invitation, using the typography and brass accent of the contact chapter. */
 #contact .footer-promo {
   flex: 0 0 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding-bottom: 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 24px 6%;
+  padding: 4px 0 24px;
   margin-bottom: 8px;
   border-bottom: 1px solid #a9b9b030;
   letter-spacing: normal;
 }
-#contact .footer-promo-copy {
-  min-width: 0;
+#contact .footer-promo-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+  color: #c9c4b8;
+  font: 10px/1.4 var(--mono);
+  letter-spacing: 0.09em;
+}
+#contact .footer-promo-mark {
+  color: #e2c178;
+  font: 400 24px/1 var(--serif);
+  letter-spacing: -0.07em;
 }
 #contact .footer-promo-title {
   margin: 0;
   color: #f6f2e8;
-  font-size: clamp(18px, 1.6vw, 23px);
-  line-height: 1.25;
-  letter-spacing: -0.025em;
+  font: 400 clamp(28px, 2.8vw, 42px)/1.06 var(--serif);
+  font-variation-settings: 'opsz' 48;
+  letter-spacing: -0.04em;
+}
+#contact .footer-promo-title em {
+  color: #e2c178;
+  font-style: normal;
 }
 #contact .footer-promo-description {
-  max-width: 65ch;
-  margin: 7px 0 0;
-  color: #c2cbc7;
-  font-size: 13px;
-  line-height: 1.5;
+  max-width: 52ch;
+  margin: 0;
+  color: #cbd1cc;
+  font: 14px/1.55 var(--sans);
+}
+#contact .footer-promo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 22px;
+  margin-top: 14px;
 }
 #contact .footer-promo-link {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  flex-shrink: 0;
-  min-height: 44px;
+  gap: 24px;
+  min-height: 48px;
   padding: 0 16px;
-  border: 1px solid #e2c17880;
-  color: #e2c178;
-  font-size: 13px;
-  line-height: 1.4;
+  background: #e2c178;
+  color: #262930;
+  font: 500 13px/1.4 var(--sans);
   text-decoration: none;
+  transition: background 160ms ease;
+}
+#contact .footer-promo-arrow {
+  font-size: 21px;
+  transition: transform 160ms ease;
 }
 #contact .footer-promo-link:hover {
-  background: #e2c178;
-  border-color: #e2c178;
-  color: #262930;
+  background: #f0d799;
 }
-#contact .footer-promo-link:focus-visible {
-  outline: 2px solid #e2c178;
-  outline-offset: 4px;
+#contact .footer-promo-link:hover .footer-promo-arrow {
+  transform: translate(2px, -2px);
+}
+#contact .footer-promo-more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #d8d9d2;
+  font: 12px/1.4 var(--sans);
+  text-underline-offset: 4px;
+  text-decoration: underline;
+  text-decoration-color: #d8d9d260;
+}
+#contact .footer-promo-more:hover {
+  color: #e2c178;
+  text-decoration-color: currentColor;
+}
+#contact .footer-promo a:focus-visible {
+  outline: 2px solid #f6f2e8;
+  outline-offset: 5px;
 }
 @media (min-width: 701px) and (max-height: 800px) {
   #contact h2 {
-    font-size: clamp(64px, 13vh, 104px);
-    margin-top: 24px;
-  }
-  #contact footer {
+    font-size: clamp(58px, 11vh, 88px);
     margin-top: 20px;
   }
+  #contact footer {
+    margin-top: 18px;
+  }
   #contact .footer-promo {
-    padding-bottom: 14px;
+    padding-bottom: 16px;
     margin-bottom: 4px;
+  }
+  #contact .footer-promo-title {
+    font-size: 30px;
+  }
+}
+@media (max-width: 1000px) and (min-width: 701px) {
+  #contact .footer-promo {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    column-gap: 24px;
+  }
+  #contact .footer-promo-actions {
+    column-gap: 14px;
   }
 }
 @media (max-width: 700px) {
   #contact .footer-promo {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    padding-bottom: 24px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    padding: 8px 0 28px;
+    margin-bottom: 6px;
+  }
+  #contact .footer-promo-label {
+    margin-bottom: 16px;
+    font-size: 10px;
+  }
+  #contact .footer-promo-title {
+    font-size: clamp(31px, 8.4vw, 44px);
+    line-height: 1.1;
   }
   #contact .footer-promo-description {
-    max-width: 42ch;
+    max-width: 40ch;
     font-size: 14px;
+    line-height: 1.65;
+  }
+  #contact .footer-promo-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 20px;
+  }
+  #contact .footer-promo-link {
+    width: 100%;
+    min-height: 52px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #contact .footer-promo-link,
+  #contact .footer-promo-arrow {
+    transition: none;
+  }
+  #contact .footer-promo-link:hover .footer-promo-arrow {
+    transform: none;
   }
 }
