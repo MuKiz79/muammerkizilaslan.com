@@ -712,7 +712,10 @@
     );
     animate(
       dialog,
-      [{ backgroundColor: 'rgba(231,231,231,0)' }, { backgroundColor: 'rgba(231,231,231,.97)' }],
+      [
+        { backgroundColor: 'transparent' },
+        { backgroundColor: getComputedStyle(dialog).backgroundColor },
+      ],
       550,
     );
     animate(

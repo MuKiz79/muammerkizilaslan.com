@@ -13,7 +13,7 @@
   }
   99%,
   100% {
-    background: #f0efeb;
+    background: var(--surface-main, #f7f6f2);
   }
 }
 .signature-intro .intro-brand {
@@ -246,11 +246,11 @@
 @media (prefers-reduced-motion: reduce) {
   .intro-active .hero {
     animation: none;
-    background: #f0efeb;
+    background: var(--surface-main, #f7f6f2);
   }
   .signature-intro {
     color: #30352f;
-    background: #f0efeb;
+    background: var(--surface-main, #f7f6f2);
   }
   .signature-intro.is-playing,
   .signature-intro.is-playing .motto-start,

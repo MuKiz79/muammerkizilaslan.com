@@ -10,6 +10,7 @@ Static website served by GitHub Pages. No build step or runtime package installa
 - `topics.js`, `topic-evidence.js`, `cases.js` and `experience-data.js` contain content. Their English versions live in `en/`.
 - CSS files are loaded in the order specified in each page. Preserve that order when editing the cascade.
 - `typography.css` is the final type layer for both languages: Manrope for reading and clear headings, real Bodoni Moda italics for selected accents, Space Grotesk for labels. The body, lead, heading and caption scales are shared; compact desktop and mobile sizes are defined there. Font files, including italic Latin and Latin Extended subsets, are self-hosted.
+- `palette.css` defines the shared surfaces: warm white for the home/about/workshop chapters, soft grey-green for selected work/atlas/experience, and blue-grey for dark chapters. Navigation and mobile scene backgrounds follow the chapter; petrol, gold and terracotta remain accents. The palette also covers cards, dialogs and legal pages.
 - `world-land.js` contains local map geometry; fonts are hosted locally.
 
 ## Development

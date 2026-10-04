@@ -1,0 +1,96 @@
+/* Shared surface palette. Load after the chapter styles in both languages. */
+:root {
+  --surface-main: #f7f6f2;
+  --surface-alt: #ecefec;
+  --surface-dark: #272b35;
+  --surface-line: #c8cec8;
+  --surface-dark-line: #4d535c;
+  --paper: var(--surface-main);
+  --ivory: var(--surface-main);
+  --sage-paper: var(--surface-alt);
+  --blue-paper: var(--surface-alt);
+  --dark: var(--surface-dark);
+  --craft-paper: var(--surface-alt);
+  --craft-night: var(--surface-dark);
+}
+
+body,
+.hero,
+.hero-scroll,
+.hero-selection,
+.intro-active .hero,
+#about,
+#workshop,
+.legal-page {
+  background: var(--surface-main);
+}
+
+#selected-work,
+#career-map,
+#experience {
+  background: var(--surface-alt);
+}
+
+#work,
+#expertise,
+#contact,
+.panel.expertise-card[data-title] {
+  background: var(--surface-dark);
+}
+
+/* Frames follow their chapter, including mobile scroll/transition surfaces. */
+body .rail {
+  background: var(--surface-main);
+  border-color: var(--surface-line);
+}
+.rail button {
+  border-color: var(--surface-line);
+}
+body:has(:is(#selected-work, #career-map, #experience).is-current) :is(.rail, .route-nav) {
+  background: var(--surface-alt);
+}
+body .rail.is-dark,
+body .route-nav.is-dark {
+  background: var(--surface-dark);
+  border-color: var(--surface-dark-line);
+}
+.rail.is-dark button {
+  border-color: var(--surface-dark-line);
+}
+.mobile-spatial .journey-scene:has(:is(#selected-work, #career-map, #experience)) .scene-content {
+  background: var(--surface-alt);
+}
+.mobile-spatial .journey-scene:has(.dark) .scene-content {
+  background: var(--surface-dark);
+}
+
+/* Light cards use the same two surfaces; active states retain petrol and gold. */
+#about .portrait-frame {
+  background: var(--surface-alt);
+}
+#career-map .atlas-locations button:not([aria-pressed='true']),
+#career-map .atlas-city-roles button:not([aria-pressed='true']),
+#contact .contact-card,
+#workshop .product-preview,
+.route-preview,
+.perspective-guide,
+.privacy-choice {
+  background: var(--surface-main);
+}
+#contact .contact-card,
+#career-map .atlas-locations button:not([aria-pressed='true']) {
+  border-color: var(--surface-line);
+}
+.privacy-choice-actions button:hover {
+  background: var(--surface-alt);
+}
+#topic-dialog {
+  background: var(--surface-main);
+}
+
+@media (max-width: 700px) {
+  .route-nav {
+    background: var(--surface-main);
+    border-color: var(--surface-line);
+  }
+}
