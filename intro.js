@@ -68,12 +68,33 @@
   };
 
   screen.querySelector('.intro-skip').addEventListener('click', finish);
+  const languages = screen.querySelector('.intro-language');
+  languages?.addEventListener('focusin', pause);
+  languages?.addEventListener('focusout', (event) => {
+    if (!languages.contains(event.relatedTarget)) resume();
+  });
   screen.addEventListener('pointerdown', (event) => {
+    if (event.target.closest('.intro-language')) return;
     event.stopPropagation();
     finish();
   });
   window.addEventListener('wheel', finish, { passive: true });
-  window.addEventListener('keydown', finish, true);
+  // Native fragment restoration must not move a deep-linked chapter behind the opening.
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (playing && window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'instant' });
+    },
+    { passive: true },
+  );
+  window.addEventListener(
+    'keydown',
+    (event) => {
+      if (event.key === 'Tab' || event.target.closest?.('.intro-language')) return;
+      finish();
+    },
+    true,
+  );
   window.addEventListener('pagehide', finish);
   window.addEventListener('pageshow', (event) => {
     if (event.persisted) show();

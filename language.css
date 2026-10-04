@@ -43,7 +43,33 @@
   outline: 2px solid #b54632;
   outline-offset: 4px;
 }
+.signature-intro .intro-language {
+  position: absolute;
+  top: 18px;
+  right: 5vw;
+  z-index: 2;
+  gap: 4px;
+  color: inherit;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.signature-intro .intro-language a {
+  min-width: 40px;
+  min-height: 44px;
+  opacity: 0.85;
+}
+.signature-intro .intro-language a[aria-current] {
+  opacity: 1;
+  text-decoration-color: var(--signature-light);
+}
+.signature-intro .intro-language a:focus-visible {
+  outline-color: currentColor;
+}
 @media (max-width: 700px) {
+  .signature-intro .intro-language {
+    top: 10px;
+    right: 20px;
+  }
   .hero-actions {
     grid-column: 2;
     grid-row: 1;

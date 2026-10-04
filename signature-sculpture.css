@@ -278,6 +278,7 @@
 /* The Karriaro showcase can pause the actual page without replacing it with a recording. */
 .signature-intro.is-paused,
 .signature-intro.is-paused *,
+body:has(.signature-intro.is-paused) .hero,
 html.karriaro-preview-paused * {
   animation-play-state: paused !important;
 }
