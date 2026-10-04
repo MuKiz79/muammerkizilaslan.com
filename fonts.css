@@ -1,4 +1,4 @@
-/* Self-hosted Google Fonts (OFL): Bodoni Moda, Manrope, Space Grotesk — variable woff2, latin + latin-ext subsets, downloaded 20 September 2026 from fonts.gstatic.com. No request leaves this origin. */
+/* Self-hosted Bodoni Moda, Manrope and Space Grotesk. SIL Open Font License files are in fonts/. */
 @font-face {
   font-family: 'Bodoni Moda';
   font-style: normal;
@@ -63,7 +63,7 @@
     U+A720-A7FF;
 }
 
-/* Genuine variable italic; same self-hosted Bodoni family, licensed under OFL. */
+/* Bodoni Moda variable italic. */
 @font-face {
   font-family: 'Bodoni Moda';
   font-style: italic;

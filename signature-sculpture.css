@@ -1,4 +1,4 @@
-/* A short film in one continuous space. No new loading gate. */
+/* Intro animation. */
 .signature-intro {
   color: #f4f0e6;
   background: transparent;
@@ -275,7 +275,7 @@
   }
 }
 
-/* The Karriaro showcase can pause the actual page without replacing it with a recording. */
+/* Pause the page when embedded in the Karriaro showcase. */
 .signature-intro.is-paused,
 .signature-intro.is-paused *,
 body:has(.signature-intro.is-paused) .hero,

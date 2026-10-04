@@ -1,5 +1,4 @@
-/* A neural cosmos: branching cells, connected signals and a continuous handoff.
-   Procedural geometry is seeded once; the same scene replays without loading media. */
+/* Seeded geometry shared by the intro and hero transition. */
 (function (root) {
   'use strict';
   const TAU = Math.PI * 2,
@@ -15,7 +14,7 @@
     [174, 159, 223],
   ];
   const cache = new Map();
-  // The second thought travels through the same graph, leaving silver behind it.
+  // Reuse the graph for the second signal sweep.
   const silverStart = 2.15,
     silverTravel = 0.5,
     silverSettle = 0.2;
@@ -55,7 +54,7 @@
       branches = [],
       dust = [],
       stars = [];
-    // An irregular volume, with a recognisable central cell; never concentric wire rings.
+    // Seed an irregular volume around the central cell.
     for (let i = 0; i < count; i++) {
       const a = i * 2.39996323,
         r = i === 0 ? 0 : 0.28 + Math.sqrt(i / (count - 1)) * 1.05;
@@ -88,7 +87,7 @@
       neighbors[a].push(b);
       neighbors[b].push(a);
     }
-    // Every cell reaches an earlier cell, then two spatial neighbours: no isolated islands.
+    // Connect each cell to an earlier cell and two nearest neighbours.
     for (let i = 1; i < count; i++) {
       const near = cells
         .map((n, j) => ({ j, d: Math.hypot(n.x - cells[i].x, n.y - cells[i].y, n.z - cells[i].z) }))
@@ -212,7 +211,7 @@
           (rand() - 0.5) * 1.5,
           0,
         );
-      // A diffuse cloud around each soma gives the structure volume without a flat glow disc.
+      // Sample a diffuse cloud around each cell.
       for (let j = 0; j < 50; j++) {
         const angle = rand() * TAU,
           r = Math.pow(rand(), 1.8) * 0.19;
@@ -278,7 +277,7 @@
       scale,
     };
   }
-  // Retain the exact handoff to the existing, live topic network.
+  // Match the final frame to the live topic positions.
   function project(cell, f, target) {
     const p = space(cell, f);
     return { ...p, x: mix(p.x, target.x, f.handoff), y: mix(p.y, target.y, f.handoff) };
@@ -339,7 +338,7 @@
     ctx.fillRect(0, 0, width, height);
     ctx.globalCompositeOperation = 'screen';
     if (fade > 0.001) {
-      // Vast, quiet distance behind the near-field synapses.
+      // Background particles.
       for (const s of model.stars) {
         const x = (s.x * width + (f.t - 2) * s.depth * 3 + width) % width,
           y = (s.y * height + (f.t - 2) * s.depth + height) % height;
@@ -442,7 +441,7 @@
           branch.silverEnd,
         );
       }
-      // Fine luminous matter follows the actual cells and filaments, never a random dot mesh.
+      // Place particles along the cells and connections.
       for (let i = 0; i < model.dust.length; i += f.small ? 2 : 1) {
         const d = model.dust[i],
           p = space(d, f);
@@ -477,7 +476,7 @@
       }
     }
     ctx.globalCompositeOperation = 'source-over';
-    // The cosmos resolves into the real topics rather than ending on a separate title card.
+    // Blend into the interactive topic field.
     if (f.handoff > 0) {
       const nodes = model.cells.map((cell, i) => project(cell, f, points[i])),
         a = Math.sin(f.handoff * Math.PI) * 0.7;

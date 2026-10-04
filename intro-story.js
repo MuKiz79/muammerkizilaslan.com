@@ -1,4 +1,4 @@
-/* One six-second story controls both the opening words and the neural volume. */
+/* Shared timing for the intro text and scene. */
 (function (root) {
   const duration = 6600;
   function growth(seconds) {

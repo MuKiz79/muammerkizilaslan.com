@@ -1,4 +1,4 @@
-/* A narrow, origin-checked playback bridge for the live Karriaro portfolio. */
+/* Origin-checked playback controls for the Karriaro showcase. */
 (() => {
   'use strict';
   if (

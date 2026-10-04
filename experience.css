@@ -1,4 +1,4 @@
-/* A shared, restrained language for the three ways into the profile. */
+/* Profile routes. */
 .hero-routes {
   position: absolute;
   top: 105px;
@@ -839,7 +839,7 @@
   }
 }
 
-/* Keep the navigation marker above the menu, without intercepting input. */
+/* Keep the navigation marker above the menu without intercepting input. */
 .traveling-signature.on-navigation {
   z-index: 45;
 }

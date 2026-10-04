@@ -1,10 +1,10 @@
-/* Personal positioning and the interactive topics share the first screen. */
+/* Hero text and topic field. */
 .hero-positioning {
   position: absolute;
   z-index: 4;
   left: 40px;
   top: clamp(125px, 20svh, 200px);
-  width: calc(47% - 40px);
+  width: calc(52% - 40px);
   color: #30352f;
 }
 .hero-positioning h1 {
@@ -57,6 +57,13 @@
   visibility: hidden;
 }
 @media (max-width: 700px) {
+  .hero {
+    --hero-min-height: 54rem;
+    min-height: var(--hero-min-height);
+  }
+  .hero-scroll .hero {
+    top: min(0px, calc(100svh - var(--hero-min-height)));
+  }
   .hero-positioning {
     left: 20px;
     right: 20px;

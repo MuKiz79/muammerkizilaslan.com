@@ -190,7 +190,7 @@
   ];
   const products = {
     presence: {
-      image: '/images/karriaro-webdesign-current.png',
+      image: '/images/karriaro-webdesign-current.jpg',
       imageAlt: 'Current Karriaro Webdesign homepage: websites with personality',
       imageCaption: 'Karriaro Webdesign · Current website',
       name: 'Karriaro-Webdesign',

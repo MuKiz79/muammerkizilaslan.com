@@ -57,7 +57,7 @@
     }
     return { weights, edgeWeight: (a, b) => edges.get(a + ':' + b) || 0 };
   }
-  // One complete thought at a time. Interaction chooses the next path, never adds waves.
+  // Queue interaction changes until the active signal finishes.
   function createSequence() {
     const seeds = [16, 8, 2, 7];
     let cycle = -1,

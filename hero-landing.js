@@ -1,4 +1,4 @@
-/* The story ends once. Give the live controls a short entrance, never another text sequence. */
+/* Reveal hero controls after the intro. */
 (function () {
   'use strict';
   const hero = document.querySelector('.hero');

@@ -1,4 +1,4 @@
-/* Curated journeys and factual stations; the product compass is deliberately local. */
+/* Career stations and product data. */
 (function (root) {
   const journeys = {
     ai: {
@@ -194,7 +194,7 @@
   ];
   const products = {
     presence: {
-      image: 'images/karriaro-webdesign-current.png',
+      image: 'images/karriaro-webdesign-current.jpg',
       imageAlt: 'Aktuelle Karriaro-Webdesign-Startseite: Websites mit Persönlichkeit',
       imageCaption: 'Karriaro-Webdesign · Aktuelle Website',
       name: 'Karriaro-Webdesign',

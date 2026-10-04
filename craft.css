@@ -1,4 +1,4 @@
-/* Finishing layer: the same materials, readable controls and considered details across every chapter. */
+/* Chapter details. */
 :root {
   --craft-petrol: #285c63;
   --craft-ochre: #c7a04a;
@@ -47,7 +47,7 @@ select:focus-visible {
     text-decoration-color 0.2s ease;
 }
 
-/* Navigation fits a full desktop viewport and records the current part of the journey. */
+/* Desktop navigation. */
 #menu {
   background: var(--craft-night);
   color: #f6f2e8;
@@ -101,7 +101,7 @@ select:focus-visible {
   margin-left: max(0px, calc((100% - 1040px) / 2));
 }
 
-/* The portrait and founder note read as one personal spread. */
+/* About. */
 #about .about-intro {
   color: #4c5650;
 }
@@ -128,7 +128,7 @@ select:focus-visible {
   font-size: 11px;
 }
 
-/* Four hand-drawn network structures make each area of expertise identifiable. */
+/* Expertise illustrations. */
 #expertise {
   background: var(--craft-night);
 }
@@ -205,7 +205,7 @@ body:has(.expertise-card.is-current) .rail {
   border-top: 1px solid #a2b9b530;
 }
 
-/* Map controls and dated stations use the same active-state language. */
+/* Atlas controls. */
 #career-map {
   background: #e8eeea;
 }
@@ -276,7 +276,7 @@ body:has(.expertise-card.is-current) .rail {
   line-height: 1.6;
 }
 
-/* A stable, legible product selector; the status is part of the product, not decoration. */
+/* Product selector. */
 #workshop {
   background: #f8f3e9;
 }
@@ -351,7 +351,7 @@ body:has(.expertise-card.is-current) .rail {
   font-size: 11px;
 }
 
-/* A physical contact card closes the site, carrying the same light paper and ochre. */
+/* Contact. */
 #contact {
   background: var(--craft-night);
 }
@@ -655,7 +655,7 @@ body:has(#contact.is-current) .route-nav {
   }
 }
 
-/* Typography and proportion: expressive display, readable content, precise notation. */
+/* Typography. */
 :root {
   --type-display: clamp(48px, 4.65vw, 72px);
   --type-body: clamp(16px, 1.2vw, 18px);
@@ -1243,7 +1243,7 @@ body:has(#contact.is-current) .route-nav {
   }
 }
 
-/* A personal atlas: illuminated geography, visible places, generous reading sizes. */
+/* Atlas typography. */
 #career-map {
   background: #eeeede;
 }
@@ -1397,7 +1397,7 @@ body:has(#contact.is-current) .route-nav {
 #career-map .atlas-footer label {
   font-size: 11px;
 }
-/* Supporting text deserves the same care outside the map. */
+/* Supporting text. */
 #about .about-note .eyebrow,
 #experience .founder-aside .eyebrow {
   font-size: 12px;
@@ -1638,7 +1638,7 @@ body:has(#contact.is-current) .route-nav {
   }
 }
 
-/* Reading hierarchy: generous editorial titles, substantive body copy, quiet notation. */
+/* Heading scale. */
 :root {
   --type-body: clamp(18px, 1.3vw, 20px);
   --type-lead: clamp(20px, 1.6vw, 24px);

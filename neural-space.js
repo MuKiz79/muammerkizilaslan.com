@@ -1,4 +1,4 @@
-/* Layered neural signal field. Decorative and driven by the hero's shared clock. */
+/* Decorative signal field using the hero animation clock. */
 (function (root) {
   'use strict';
   const Flow =
@@ -71,7 +71,7 @@
         }
     return result;
   }
-  // All axes use the same camera scale. Nodes occupy a volume, not a flat card.
+  // Apply the camera scale uniformly to all axes.
   function geometry(layout, small, time, yaw, pitch, reduced = false) {
     return layout.nodes.map((n) => {
       const across = (n.layer / (layout.layers - 1)) * 2 - 1,

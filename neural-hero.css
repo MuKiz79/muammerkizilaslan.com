@@ -376,7 +376,7 @@
   }
 }
 
-/* Shared navigation details: natural name casing, a real logo tether and left-hand return. */
+/* Navigation. */
 .name,
 .rail-name,
 .intro-brand,
@@ -485,7 +485,7 @@
   }
 }
 
-/* A quiet handover: network first, then its topics, context and optional perspectives. Interaction cancels the entrance. */
+/* Stagger the hero entrance; interaction cancels it. */
 .hero.is-arriving #topics {
   animation: hero-arrive 0.65s both;
 }
@@ -515,7 +515,7 @@
   }
 }
 
-/* Keep the tilted work montage inside a deliberate frame, including its first card's attribution. */
+/* Work montage frame. */
 @media (min-width: 701px) {
   .work-montage {
     padding: 54px 3vw 30px;
@@ -602,7 +602,7 @@
   }
 }
 
-/* Native finger scrolling drives a viewport journey, including long chapters. No touch interception. */
+/* Native touch scrolling. */
 @media (max-width: 700px) {
   .mobile-spatial .stage {
     position: sticky;
@@ -747,7 +747,7 @@
   }
 }
 
-/* Every disclosure uses a state mark; links use typography, never arrow glyphs. */
+/* Disclosure state indicators. */
 .row-symbol {
   font-size: 0;
   transform: none !important;
@@ -783,7 +783,7 @@ details[open] .row-symbol::after {
   }
 }
 
-/* The positioning pairs the leadership role with the founder's own products. */
+/* Hero positioning. */
 .hero-bottom {
   grid-template-columns: minmax(0, 460px) auto 1fr;
 }
@@ -828,7 +828,7 @@ details[open] .row-symbol::after {
   }
 }
 
-/* Contrasting work chapters: dark portfolio, warm editorial detail. */
+/* Work chapter surfaces. */
 #work {
   background: #272b35;
   color: #f8f2e8;
@@ -1230,7 +1230,7 @@ body:has(#work.is-current) .route-nav {
   .hero-header .hero-contact {
     padding-block: 5px;
     margin-block: -5px;
-  } /* hit area grows, line geometry stays: the nav sits right above the perspectives eyebrow */
+  } /* Extend the navigation hit area without moving the line. */
   .hero-bottom > a {
     font-size: 11px;
     padding-block: 5px;
@@ -1333,7 +1333,7 @@ body:has(#work.is-current) .route-nav {
   #contact {
     padding-bottom: calc(112px + env(safe-area-inset-bottom));
   }
-  /* Scroll reveal: only under html.reveal-armed, which the script sets after it could create an observer — without JavaScript or under reduced motion nothing is ever hidden. */
+  /* Reveal content only after the observer is ready. Reduced-motion and no-JavaScript views remain visible. */
   html.reveal-armed .panel > [data-reveal] {
     opacity: 0;
     transform: translateY(12px);
@@ -1381,7 +1381,7 @@ body:has(#work.is-current) .route-nav {
     content: '';
     position: absolute;
     inset: 0 -12px;
-  } /* invisible hit area: the signature line stays exactly under the word */
+  } /* Extend the wordmark hit area without moving its underline. */
   .route-choices button[aria-pressed='true'],
   .route-choices button:active {
     border-bottom-color: var(--signature);

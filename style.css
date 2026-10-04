@@ -1225,7 +1225,7 @@ dialog h2 {
   line-height: 1;
 }
 
-/* Reserve top/bottom strips for normal page scrolling on touch devices. */
+/* Reserve top and bottom strips for native touch scrolling. */
 #topics {
   inset: 80px 0 105px;
   touch-action: none;
@@ -1276,7 +1276,7 @@ dialog h2 {
   text-underline-offset: 5px;
 }
 
-/* A short, native-scroll bridge turns the spatial network into a chapter rule. */
+/* Hero-to-chapter transition. */
 .hero-scroll {
   position: relative;
   height: 152svh;
@@ -1614,7 +1614,7 @@ dialog h2 {
   overflow-wrap: anywhere;
 }
 
-/* Chapters share a viewport but enter along a deliberate, reversible route. */
+/* Chapter positions. */
 @media (min-width: 701px) {
   .track {
     position: absolute;
@@ -1700,7 +1700,7 @@ dialog h2 {
   overflow-anchor: none;
 }
 
-/* Topic controls and the transition into the editorial chapters. */
+/* Topic controls. */
 .hero-legend {
   position: absolute;
   z-index: 4;
@@ -1790,7 +1790,7 @@ dialog h2 {
   }
 }
 
-/* A quiet, warm exhibition space for the kinetic topic sculpture. */
+/* Hero surface. */
 .hero {
   background: radial-gradient(ellipse at 47% 42%, #f3f1ed 0%, #eae8e4 50%, #e3e2df 100%);
 }
@@ -1810,7 +1810,7 @@ dialog h2 {
   }
 }
 
-/* A lighter paper surface keeps the spatial topics in focus. */
+/* Hero surface details. */
 .hero {
   background: radial-gradient(ellipse at 49% 35%, #f8f7f3 0%, #f0efea 64%, #eae9e4 100%);
 }
@@ -1818,7 +1818,7 @@ dialog h2 {
   opacity: 0.065;
 }
 
-/* Full-name wordmark; the neural field has no central logo or hub. */
+/* Wordmark. */
 .name {
   font-family: var(--sans);
   font-weight: 500;
@@ -1909,7 +1909,7 @@ dialog h2 {
   }
 }
 
-/* Warm vermilion punctuation: a quiet signature across the editorial layout. */
+/* Accent colours. */
 :root {
   --signature: #c34632;
   --signature-light: #ef806b;
@@ -2212,7 +2212,7 @@ dialog h2 {
   }
 }
 
-/* Paper tones and restrained marks link the neural opening to the editorial chapters. */
+/* Chapter surfaces. */
 :root {
   --ivory: #faf7f0;
   --sage-paper: #edf0e8;
@@ -2351,7 +2351,7 @@ dialog h2 {
   }
 }
 
-/* A perspective field grows into the neural hero in five seconds. */
+/* Hero entrance. */
 .signature-intro {
   position: fixed;
   inset: 0;
@@ -2507,7 +2507,7 @@ dialog h2 {
   font-size: 10px;
   letter-spacing: 0.03em;
 }
-/* CV evidence inside the topic dialog: station label from the atlas, sentence from the CV. */
+/* Topic evidence. */
 .topic-evidence {
   max-width: 820px;
   margin: 0 0 48px;

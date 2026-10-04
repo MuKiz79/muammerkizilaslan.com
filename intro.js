@@ -1,4 +1,4 @@
-/* Replay the signature on every visit and every return to the start. */
+/* Intro playback and replay controls. */
 (() => {
   'use strict';
   const screen = document.getElementById('signature-intro');

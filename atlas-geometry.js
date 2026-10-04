@@ -1,4 +1,4 @@
-/* Small, deterministic geometry helpers shared by the interactive atlas and its tests. */
+/* Deterministic atlas geometry. */
 (function (root) {
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   function project(point, camera, width, height) {

@@ -1,5 +1,4 @@
-/* Final type system: calm Manrope, real Bodoni italics, Space Grotesk notation.
-   Keep this stylesheet last. Font sizes use rem so browser text preferences remain effective. */
+/* Shared type scale. Rem units respect browser font-size preferences. */
 :root {
   --type-caption: 0.75rem;
   --type-ui: 0.875rem;
@@ -42,8 +41,9 @@ body {
   font-variation-settings: normal;
 }
 .hero-positioning h1 {
-  font-size: clamp(1.875rem, 1rem + 1.8vw, 2.75rem);
-  line-height: 1.18;
+  font-size: clamp(2.75rem, 0.5rem + 3.75vw, 4.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
 }
 .hero-positioning h1 span:last-child {
   margin-top: 0.2em;
@@ -290,8 +290,8 @@ body {
     --type-card: clamp(1.5rem, 6.2vw, 1.875rem);
   }
   .hero-positioning h1 {
-    font-size: clamp(1.625rem, 6.8vw, 2.125rem);
-    line-height: 1.2;
+    font-size: clamp(1.875rem, 8.4vw, 2.625rem);
+    line-height: 1.1;
     letter-spacing: -0.035em;
   }
   .hero-positioning .hero-description {
@@ -331,6 +331,11 @@ body {
   #contact .footer-promo-description {
     font-size: 1rem;
     line-height: 1.6;
+  }
+}
+@media (min-width: 701px) and (max-height: 700px) {
+  .hero-positioning h1 {
+    font-size: clamp(2.375rem, 4.8vh + 0.5rem, 3rem);
   }
 }
 @media (max-width: 380px) {
