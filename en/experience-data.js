@@ -197,7 +197,7 @@
       status: 'Live',
       number: '01',
       reason:
-        'You want to make your business visible. Here, I design and build individual websites and online shops.',
+        'You want to make your business visible. Here, we design and build individual websites and online shops.',
       url: 'https://karriaro-webdesign.de/en',
       cta: 'Explore web design',
       tags: ['Website', 'Visibility', 'AI tools'],

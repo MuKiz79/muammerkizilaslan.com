@@ -201,7 +201,7 @@
       status: 'Live',
       number: '01',
       reason:
-        'Sie möchten als Unternehmen sichtbar werden. Hier gestalte und entwickle ich individuelle Websites und Onlineshops.',
+        'Sie möchten als Unternehmen sichtbar werden. Hier gestalten und entwickeln wir individuelle Websites und Onlineshops.',
       url: 'https://karriaro-webdesign.de/',
       cta: 'Webdesign entdecken',
       tags: ['Website', 'Sichtbarkeit', 'KI-Werkzeuge'],

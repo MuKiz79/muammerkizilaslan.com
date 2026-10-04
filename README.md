@@ -9,6 +9,7 @@ Static website served by GitHub Pages. No build step or runtime package installa
 - `ui-text.js` selects interface labels using the page's `lang` attribute.
 - `topics.js`, `topic-evidence.js`, `cases.js` and `experience-data.js` contain content. Their English versions live in `en/`.
 - CSS files are loaded in the order specified in each page. Preserve that order when editing the cascade.
+- `typography.css` is the final type layer for both languages: Manrope for reading and clear headings, real Bodoni Moda italics for selected accents, Space Grotesk for labels. The body, lead, heading and caption scales are shared; compact desktop and mobile sizes are defined there. Font files, including italic Latin and Latin Extended subsets, are self-hosted.
 - `world-land.js` contains local map geometry; fonts are hosted locally.
 
 ## Development

@@ -1,0 +1,345 @@
+/* Final type system: calm Manrope, real Bodoni italics, Space Grotesk notation.
+   Keep this stylesheet last. Font sizes use rem so browser text preferences remain effective. */
+:root {
+  --type-caption: 0.75rem;
+  --type-ui: 0.875rem;
+  --type-small: 1rem;
+  --type-body: clamp(1.0625rem, 0.9375rem + 0.2vw, 1.1875rem);
+  --type-lead: clamp(1.1875rem, 1.05rem + 0.45vw, 1.4375rem);
+  --type-display: clamp(2.75rem, 1.5rem + 2.8vw, 4.25rem);
+  --type-card: clamp(1.625rem, 1rem + 1.2vw, 2.25rem);
+}
+body {
+  font-family: var(--sans, 'Manrope'), Arial, sans-serif;
+  font-kerning: normal;
+}
+.hero-positioning h1,
+#about h2,
+#selected-work .work-introduction,
+#expertise h2,
+#career-map h2,
+#workshop .workshop-heading h2 {
+  font-family: var(--sans);
+  font-weight: 550;
+  font-size: var(--type-display);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  font-variation-settings: normal;
+  text-wrap: balance;
+}
+#about h2 em,
+#selected-work h2 em,
+#career-map h2 em,
+#workshop h2 em,
+.hero-positioning h1 span:last-child {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 450;
+  font-size: 1.1em;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  font-optical-sizing: auto;
+  font-variation-settings: normal;
+}
+.hero-positioning h1 {
+  font-size: clamp(1.875rem, 1rem + 1.8vw, 2.75rem);
+  line-height: 1.18;
+}
+.hero-positioning h1 span:last-child {
+  margin-top: 0.2em;
+}
+.hero-positioning .hero-description {
+  font-size: var(--type-small);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+.hero-positioning .hero-roles {
+  margin-top: 24px;
+}
+.hero .route-choices button,
+.hero-header nav,
+.hero-header .hero-contact,
+.hero-bottom > a,
+.route-nav #route-prev,
+.route-nav #route-next {
+  font-size: var(--type-ui);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.hero .hero-routes > p,
+.hero .hero-legend,
+.hero .orbit-hint,
+.intro-skip,
+.chapter,
+.career-map > .chapter,
+.workshop > .chapter,
+.eyebrow {
+  font-size: var(--type-caption);
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+}
+#about .about-intro,
+.case-intro {
+  font-size: var(--type-lead);
+  line-height: 1.55;
+  letter-spacing: -0.012em;
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+#about .about-note p:not(.eyebrow),
+#experience .founder-aside > p:not(.eyebrow),
+#selected-work .row-detail p,
+.expertise-card p,
+#experience details p,
+#workshop .workshop-heading > p,
+#workshop .product-reason,
+.case-story section p:not(.eyebrow),
+.topic-copy,
+.topic-evidence-list li {
+  font-size: var(--type-body);
+  line-height: 1.6;
+  letter-spacing: -0.008em;
+  text-wrap: pretty;
+}
+#selected-work .work-rows summary,
+#selected-work .work-rows details[open] > summary,
+.expertise-card h3,
+#career-map .atlas-readout h3,
+#workshop .product-result h3 {
+  font-family: var(--sans);
+  font-size: var(--type-card);
+  font-weight: 550;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+#selected-work .work-rows summary {
+  padding-block: 20px;
+}
+#selected-work .evidence-link,
+#about .about-foot span,
+#work .cover-meta,
+#work .cover-bottom,
+#experience summary > small,
+#experience .experience-footer {
+  font-size: var(--type-caption);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+#about .about-foot strong,
+#career-map .atlas-years,
+.expertise-number {
+  font-optical-sizing: auto;
+  font-variation-settings: normal;
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: -0.025em;
+}
+#work .work-word {
+  letter-spacing: -0.035em;
+}
+#career-map .atlas-focus,
+#career-map .atlas-company,
+#career-map .atlas-city-roles,
+#experience ul,
+#workshop .product-choices button,
+#workshop .product-link {
+  font-size: var(--type-small);
+  line-height: 1.55;
+  letter-spacing: -0.008em;
+}
+#experience details p:first-child {
+  font-size: var(--type-lead);
+  font-weight: 500;
+  line-height: 1.4;
+}
+#experience summary > span {
+  letter-spacing: -0.025em;
+  font-optical-sizing: auto;
+  font-variation-settings: normal;
+}
+#contact h2 {
+  font-family: var(--sans);
+  font-size: clamp(4rem, 7vw, 7rem);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+  font-variation-settings: normal;
+  margin-top: 32px;
+}
+#contact .contact-emphasis {
+  font-family: var(--serif);
+  font-size: 1.12em;
+  font-style: italic;
+  font-weight: 450;
+  letter-spacing: -0.035em;
+  font-optical-sizing: auto;
+}
+#contact .contact-profile > p,
+#contact .contact-profile > a {
+  font-size: var(--type-small);
+  line-height: 1.55;
+}
+#contact .contact-mail {
+  letter-spacing: -0.025em;
+}
+#contact .footer-promo-title {
+  font-family: var(--sans);
+  font-size: clamp(1.5rem, 1.1rem + 0.85vw, 2rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  font-variation-settings: normal;
+}
+#contact .footer-promo-title em {
+  font-family: var(--serif);
+  font-size: 1.18em;
+  font-style: italic;
+  font-weight: 450;
+  line-height: 1.15;
+  font-optical-sizing: auto;
+}
+#contact .footer-promo-description {
+  font-size: var(--type-small);
+  line-height: 1.55;
+  letter-spacing: -0.008em;
+}
+#contact .footer-promo-link,
+#contact .footer-promo-more {
+  font-size: var(--type-ui);
+}
+#contact .footer-promo-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+}
+#contact footer,
+#contact footer .kr-privacy-settings {
+  font-size: var(--type-caption);
+  line-height: 1.5;
+}
+#topic-title {
+  font-family: var(--sans);
+  font-size: clamp(2.25rem, 6vw, 5.25rem);
+  font-weight: 550;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+.case-heading h2 {
+  font-size: clamp(2.75rem, 5.5vw, 5.5rem);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  font-optical-sizing: auto;
+  font-variation-settings: normal;
+}
+.case-story h3 {
+  font-size: clamp(1.875rem, 2.6vw, 2.75rem);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  font-optical-sizing: auto;
+  font-variation-settings: normal;
+}
+.case-close,
+.dialog-close,
+#menu .menu-mail {
+  font-size: var(--type-ui);
+}
+.legal-page {
+  font:
+    1.0625rem/1.7 'Manrope',
+    Arial,
+    sans-serif;
+}
+.legal-page h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 550;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+.legal-page h2 {
+  font-size: 1.375rem;
+  font-weight: 550;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+@media (min-width: 701px) and (max-height: 800px) {
+  :root {
+    --type-display: clamp(2.5rem, 4vw, 3.375rem);
+    --type-body: 1.0625rem;
+    --type-lead: 1.1875rem;
+    --type-card: clamp(1.625rem, 2vw, 1.875rem);
+  }
+  #contact h2 {
+    font-size: clamp(3.25rem, 8.5vh, 4.25rem);
+    margin-top: 18px;
+  }
+  #contact .footer-promo {
+    padding-top: 0;
+    padding-bottom: 14px;
+  }
+  #contact .footer-promo-actions {
+    margin-top: 10px;
+  }
+  #selected-work .work-rows summary {
+    padding-block: 16px;
+  }
+}
+@media (max-width: 700px) {
+  :root {
+    --type-display: clamp(2rem, 8.5vw, 2.75rem);
+    --type-body: 1.0625rem;
+    --type-lead: 1.1875rem;
+    --type-card: clamp(1.5rem, 6.2vw, 1.875rem);
+  }
+  .hero-positioning h1 {
+    font-size: clamp(1.625rem, 6.8vw, 2.125rem);
+    line-height: 1.2;
+    letter-spacing: -0.035em;
+  }
+  .hero-positioning .hero-description {
+    font-size: 0.9375rem;
+  }
+  .hero-positioning .hero-roles,
+  .hero-positioning .hero-routes {
+    margin-top: 18px;
+  }
+  .hero .hero-routes > p,
+  .hero .hero-legend,
+  .hero .orbit-hint {
+    font-size: 0.6875rem;
+  }
+  #about h2,
+  #selected-work .work-introduction {
+    margin-bottom: 28px;
+  }
+  #about .about-note p:not(.eyebrow) {
+    max-width: 34ch;
+  }
+  #selected-work .work-rows summary {
+    padding-block: 18px;
+    letter-spacing: -0.025em;
+  }
+  #contact h2 {
+    font-size: clamp(3rem, 12vw, 4.5rem);
+    margin: 48px 0 40px;
+  }
+  #contact .contact-mail {
+    font-size: clamp(1.0625rem, 4.8vw, 1.625rem);
+  }
+  #contact .footer-promo-title {
+    font-size: clamp(1.5rem, 6.4vw, 1.875rem);
+    line-height: 1.2;
+  }
+  #contact .footer-promo-description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+@media (max-width: 380px) {
+  #workshop .product-choices {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+  #workshop .product-choices button {
+    min-height: 64px;
+    padding: 14px;
+  }
+}
