@@ -194,9 +194,10 @@
   ];
   const products = {
     presence: {
-      image: 'images/karriaro-webdesign-current.jpg',
-      imageAlt: 'Aktuelle Karriaro-Webdesign-Startseite: Websites mit Persönlichkeit',
-      imageCaption: 'Karriaro-Webdesign · Aktuelle Website',
+      image: 'images/karriaro-webdesign-de-20261004.jpg',
+      imageAlt:
+        'Karriaro-Webdesign: Können wird erlebbar – Websites für Unternehmen und Personal Branding',
+      imageCaption: 'Karriaro-Webdesign · Website-Vorschau',
       name: 'Karriaro-Webdesign',
       status: 'Live',
       number: '01',

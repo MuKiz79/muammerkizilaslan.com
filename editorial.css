@@ -378,6 +378,9 @@
   object-fit: cover;
   object-position: top;
 }
+.product-preview img[src*='karriaro-webdesign-'] {
+  object-position: center 35%;
+}
 .product-preview > span {
   position: absolute;
   bottom: 0;

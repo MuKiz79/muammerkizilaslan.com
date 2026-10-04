@@ -190,9 +190,10 @@
   ];
   const products = {
     presence: {
-      image: '/images/karriaro-webdesign-current.jpg',
-      imageAlt: 'Current Karriaro Webdesign homepage: websites with personality',
-      imageCaption: 'Karriaro Webdesign · Current website',
+      image: '/images/karriaro-webdesign-en-20261004.jpg',
+      imageAlt:
+        'Karriaro Webdesign: Expertise you can experience – business websites and personal branding',
+      imageCaption: 'Karriaro Webdesign · Website preview',
       name: 'Karriaro-Webdesign',
       status: 'Live',
       number: '01',
