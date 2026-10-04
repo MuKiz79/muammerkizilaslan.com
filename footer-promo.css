@@ -62,7 +62,10 @@
   transition: background 160ms ease;
 }
 #contact .footer-promo-arrow {
-  font-size: 21px;
+  display: block;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
   transition: transform 160ms ease;
 }
 #contact .footer-promo-link:hover {
